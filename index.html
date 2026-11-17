@@ -269,7 +269,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
 const PANELS={
 how:`<h3>HOW TO PLAY</h3><p>Prestige: every 100 levels (100, 200 and so on up to 1000) earns a new emblem, shown next to your level. The XP needed per level starts again after each prestige. Make an account with the LOG IN button to keep your progress on any device. Log in each day for a streak bonus and finish the three daily challenges on the home page for extra coins.</p>Click PLAY, then click the screen to capture the mouse. You join the BLUE team with 10 bot allies against 10 RED bots. First team to 50 kills wins, or the most kills when 10:00 runs out. Kills earn coins for the shop. Your team helmet colour shows who is who: blue for your team, red for the enemy.<table><tr><td>WASD</td><td>Move</td></tr><tr><td>Mouse</td><td>Aim · Left click fires · Right click aims down sights</td></tr><tr><td>I</td><td>Aim down sights on or off (handy on laptops without a right-click button)</td></tr><tr><td>Space / Shift / Ctrl or C</td><td>Jump / Sprint / Crouch</td></tr><tr><td>Shift, then Ctrl or C</td><td>Slide for about 2 seconds while sprinting. Faster, lower, and bullets sometimes miss you</td></tr><tr><td>R</td><td>Reload</td></tr><tr><td>1 / 2 / 3 / 4</td><td>Primary / Secondary / Knife / Special item</td></tr><tr><td>5</td><td>Switch grenade or smoke bomb</td></tr><tr><td>Tab</td><td>Scoreboard (hold)</td></tr><tr><td>M</td><td>Big map</td></tr><tr><td>Q / E</td><td>Lean left / right</td></tr><tr><td>Shift</td><td>Sprint uses stamina; the blue bar under health</td></tr><tr><td>F</td><td>Use ammo crate</td></tr><tr><td>/</td><td>Shooting range: pick any weapon</td></tr><tr><td>Esc</td><td>Pause</td></tr></table><p><b>Touch screen:</b> drag on the left side to move (push fully forward to sprint). Drag on the right side to look. Right-side buttons: FIRE, JUMP, CROUCH (toggle), AIM (toggle). Left-side buttons: RELOAD, SWAP (cycles primary, secondary, knife, special), SCORE, CMD (command center) and II (pause). Tap the minimap for the big map.</p><p>Equip your weapons in LOADOUT AND SHOP: they stay equipped in every match. Grenades hurt enemies; smoke bombs block the bots’ view for 14 seconds. Headshots deal double damage. You respawn after 5 seconds with 3 seconds of protection. Dead bodies and blood stay on the ground until the match ends. SHOOTING RANGE (home page) lets you test every weapon and item for free. Chat will arrive with online play.</p>`,
 log:`<h3>UPDATE LOG</h3>
-<b>Update 3 \u00b7 Fire, Smoke and Real Models</b><ul><li><i>3.7</i> Online fighting: shoot other players on the other team, bots shoot you too, and kills count for blue and red. First to 50 or the 10 minute clock ends the round. Players who leave vanish from the game</li><li><i>3.6</i> Early online test: JOIN ONLINE on the home page puts you in a live room with other players. Pick blue or red, see other players move, and bots fill the empty spots. Shooting other players is coming next</li><li><i>3.5</i> Brand new solid walls with brand new brick and plaster textures. Walls, corners, window frames and roofs no longer overlap, so the flickering is gone. Sniper tower rails fixed too</li><li><i>3.4</i> Weapon skins: 33 detailed skins (three per weapon) with patterns, glowing parts and new shapes, in a new SKINS tab in the shop with CAMO now its own tab. Windows now shatter with a proper animation and leave an empty slot you can shoot through. Fixed flickering where walls overlapped</li><li><i>3.3</i> Map overhaul: sharper, smoother textures, real procedural ground, crisper shadows, thick building walls with deep window frames, thicker broken walls, two climbable sniper towers on every map (stairs up to a high platform), and extra cover</li><li><i>3.2</i> New minigun and taco models. Smoke bombs fully block the bots\u2019 shots. Fires burn you, with flames around your screen. New elimination screen. Step up onto pallets and planks, shoot through broken walls and windows, wave freeze fixed, lean moved to Q and E and ammo crates to F</li><li><i>3.1</i> Sliding: sprint, then crouch for a fast slide with a pose, a camera dip and a slightly higher jump after it. The Next Goal box updates as you level up</li><li><i>3.0</i> New home layout with a map pop-up for each mode, the I key to aim on laptops, and harder weapon unlocks (Machete level 4 up to Sniper level 20)</li></ul>
+<b>Update 3 \u00b7 Fire, Smoke and Real Models</b><ul><li><i>3.8</i> Online server list: pick a server, join mid round, make private servers with a code, see other players with their real gun and skin, chat with bubbles over heads, a real players only scoreboard, and dead players now fall as ragdolls</li><li><i>3.7</i> Online fighting: shoot other players on the other team, bots shoot you too, and kills count for blue and red. First to 50 or the 10 minute clock ends the round. Players who leave vanish from the game</li><li><i>3.6</i> Early online test: JOIN ONLINE on the home page puts you in a live room with other players. Pick blue or red, see other players move, and bots fill the empty spots. Shooting other players is coming next</li><li><i>3.5</i> Brand new solid walls with brand new brick and plaster textures. Walls, corners, window frames and roofs no longer overlap, so the flickering is gone. Sniper tower rails fixed too</li><li><i>3.4</i> Weapon skins: 33 detailed skins (three per weapon) with patterns, glowing parts and new shapes, in a new SKINS tab in the shop with CAMO now its own tab. Windows now shatter with a proper animation and leave an empty slot you can shoot through. Fixed flickering where walls overlapped</li><li><i>3.3</i> Map overhaul: sharper, smoother textures, real procedural ground, crisper shadows, thick building walls with deep window frames, thicker broken walls, two climbable sniper towers on every map (stairs up to a high platform), and extra cover</li><li><i>3.2</i> New minigun and taco models. Smoke bombs fully block the bots\u2019 shots. Fires burn you, with flames around your screen. New elimination screen. Step up onto pallets and planks, shoot through broken walls and windows, wave freeze fixed, lean moved to Q and E and ammo crates to F</li><li><i>3.1</i> Sliding: sprint, then crouch for a fast slide with a pose, a camera dip and a slightly higher jump after it. The Next Goal box updates as you level up</li><li><i>3.0</i> New home layout with a map pop-up for each mode, the I key to aim on laptops, and harder weapon unlocks (Machete level 4 up to Sniper level 20)</li></ul>
 <b>Update 2 \u00b7 Progression and Accounts</b><ul><li><i>2.3</i> Realistic muzzle flash, enemy muzzle flashes and a muzzle flash setting</li><li><i>2.2</i> Accounts and cloud saves, checked by the server so impossible progress is rejected</li><li><i>2.1</i> New home page, daily login streak, daily challenges, Next Goal tracker and mode pictures</li><li><i>2.0</i> Prestige 1 to 10 with emblems, a new level curve, double XP, Career Stats, and the Sniper one-shot rules</li></ul>
 <b>Update 1 \u00b7 The Foundations</b><ul><li><i>1.3</i> PvE modes (Campaign, Special Ops, Extraction, Wave Survival), unlimited levels, five more weapons, the Machete, sprint stamina, breakable windows and barrels, blood on walls, a shooting range and a mode menu</li><li><i>1.2</i> Smarter bots that flank, take cover and search, rebuilt maps and real building, road and prop models, a new soldier, grenades, smoke bombs, weapon slots and a command center</li><li><i>1.1</i> Three maps, a minimap, ammo crates, speed, jump and health pads, missiles and craters</li><li><i>1.0</i> First release: first-person movement, five weapons, 10 vs 10 bots, touch controls, ragdolls, upgrades and a shop</li></ul>
 <p>Coming next: online multiplayer and chat, more maps, game modes and characters.</p>`};
@@ -523,7 +523,7 @@ function findPath(sx,sz,tx,tz){const[si,sj]=nearestFree(cell(sx),cell(sz)),[ti,t
  while(open.length&&it++<5000){let bi=0;for(let k=1;k<open.length;k++)if(f[open[k]]<f[open[bi]])bi=k;const c=open[bi];open[bi]=open[open.length-1];open.pop();if(c===T)break;if(cl[c])continue;cl[c]=1;const ci=(c/NG)|0,cj=c%NG;for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++){if(!dx&&!dz)continue;const ni=ci+dx,nj=cj+dz;if(ni<0||nj<0||ni>=NG||nj>=NG)continue;const n=ni*NG+nj;if(navB[n]||cl[n])continue;if(dx&&dz&&(navB[ci*NG+nj]||navB[ni*NG+cj]))continue;const ng=g[c]+(dx&&dz?1.414:1);if(ng<g[n]){g[n]=ng;par[n]=c;f[n]=ng+h(ni,nj);open.push(n)}}}
  if(par[T]<0)return null;const pts=[];for(let c=T;c!==-1&&c!==S;c=par[c])pts.push([-49.5+((c/NG)|0),-49.5+c%NG]);pts.reverse();return smooth(sx,sz,pts)}
 function navStep(b,a,mv,dt){b.rec=Math.max(0,(b.rec||0)-dt);b.cT=(b.cT||0)-dt;if(b.cT<=0){b.cT=rnd(1.5,3);b.crW=(b.tg&&mv<1&&Math.random()<.5)?1:0}b.cr=(b.cr||0)+((b.crW||0)-(b.cr||0))*Math.min(1,dt*8);b.run=!!(mv===1&&(b.tg||(b.team===0&&(ORD==='attack'||ORD==='follow'))));if(FRZ)return[a,0];let dst=null;
- if(b.tg){if(mv===1)dst=b.tg.p?[P.x,P.z]:[b.tg.o.x,b.tg.o.z]}else if(b.team===0&&ORD!=='auto'){if(ORD==='hold')return[a,0];dst=ORD==='follow'?[P.x,P.z]:ORD==='attack'?[40,b.oz||(b.oz=rnd(-35,35))]:ORD==='defend'?[-40,b.oz||(b.oz=rnd(-35,35))]:(b.so||(b.so=[rnd(-44,44),rnd(-44,44)]));if(ORD==='follow'&&Math.hypot(dst[0]-b.x,dst[1]-b.z)<6)return[a,0]}else dst=b.t;
+ if(b.tg){if(mv===1)dst=b.tg.p?[P.x,P.z]:[b.tg.o.x,b.tg.o.z]}else if(b.team===0&&ORD!=='auto'){if(ORD==='hold')return[a,0];dst=ORD==='follow'?folPos():ORD==='attack'?[40,b.oz||(b.oz=rnd(-35,35))]:ORD==='defend'?[-40,b.oz||(b.oz=rnd(-35,35))]:(b.so||(b.so=[rnd(-44,44),rnd(-44,44)]));if(ORD==='follow'&&Math.hypot(dst[0]-b.x,dst[1]-b.z)<6)return[a,0]}else dst=b.t;
  if(!dst)return[a,mv];b.pT=(b.pT||0)-dt;if(!b.path||b.pT<=0||!b.goal||Math.hypot(b.goal[0]-dst[0],b.goal[1]-dst[1])>5){if(pb>0||!b.path){pb--;b.path=findPath(b.x,b.z,dst[0],dst[1]);b.pi=0;b.goal=dst.slice();b.pT=rnd(.9,1.5)}}
  b.sk=(b.sk||0)+dt;if(b.sk>.7){if(Math.hypot(b.x-(b.lx||0),b.z-(b.lz||0))<.25&&mv>0){b.pT=0;b.path=null;b.nudge=rnd(-1.2,1.2);if(ORD!=='auto'){b.oz=null;b.so=null}b.wt=0}b.lx=b.x;b.lz=b.z;b.sk=0}
  const p=b.path;if(!p||!p.length)return[a+(b.nudge||0),mv];while(b.pi<p.length-1&&Math.hypot(p[b.pi][0]-b.x,p[b.pi][1]-b.z)<.9)b.pi++;const w=p[Math.min(b.pi,p.length-1)];return[Math.atan2(w[0]-b.x,w[1]-b.z),mv]}
@@ -695,7 +695,7 @@ function navStep(b,a,mv,dt){b.rec=Math.max(0,(b.rec||0)-dt);b.cT=(b.cT||0)-dt;if
   else if(mv===1){const d=Math.hypot(tx-b.x,tz-b.z)||1;if(!b.fl)b.fl=(Math.random()<.5?-1:1)*rnd(6,10);if(d>22){dst=[tx-(tz-b.z)/d*b.fl,tz+(tx-b.x)/d*b.fl]}else dst=[tx,tz]}}
  else if(b.lt>0&&b.ls){b.lt-=dt;dst=b.ls;if(Math.hypot(b.ls[0]-b.x,b.ls[1]-b.z)<2.5)b.lt=0}
  else if(b.pz>0)return[a,0];
- else{if(Math.random()<dt*.04)b.pz=rnd(1,2.2);if(b.team===0&&ORD!=='auto'){if(ORD==='hold')return[a,0];dst=ORD==='follow'?[P.x,P.z]:ORD==='attack'?[40,b.oz||(b.oz=rnd(-35,35))]:ORD==='defend'?[-40,b.oz||(b.oz=rnd(-35,35))]:(b.so||(b.so=[rnd(-44,44),rnd(-44,44)]));if(ORD==='follow'&&Math.hypot(dst[0]-b.x,dst[1]-b.z)<6)return[a,0]}else dst=b.t}
+ else{if(Math.random()<dt*.04)b.pz=rnd(1,2.2);if(b.team===0&&ORD!=='auto'){if(ORD==='hold')return[a,0];dst=ORD==='follow'?folPos():ORD==='attack'?[40,b.oz||(b.oz=rnd(-35,35))]:ORD==='defend'?[-40,b.oz||(b.oz=rnd(-35,35))]:(b.so||(b.so=[rnd(-44,44),rnd(-44,44)]));if(ORD==='follow'&&Math.hypot(dst[0]-b.x,dst[1]-b.z)<6)return[a,0]}else dst=b.t}
  if(!dst)return[a,mv*fm];b.pT=(b.pT||0)-dt;if(!b.path||b.pT<=0||!b.goal||Math.hypot(b.goal[0]-dst[0],b.goal[1]-dst[1])>5){if(pb>0||!b.path){pb--;b.path=findPath(b.x,b.z,dst[0],dst[1]);b.pi=0;b.goal=dst.slice();b.pT=rnd(.9,1.5)}}
  b.sk=(b.sk||0)+dt;if(b.sk>.7){if(Math.hypot(b.x-(b.lx||0),b.z-(b.lz||0))<.25&&mv>0){b.pT=0;b.path=null;b.nudge=rnd(-1.2,1.2);if(ORD!=='auto'){b.oz=null;b.so=null}b.wt=0}b.lx=b.x;b.lz=b.z;b.sk=0}
  const p=b.path;if(!p||!p.length)return[a+(b.nudge||0),mv*fm];while(b.pi<p.length-1&&Math.hypot(p[b.pi][0]-b.x,p[b.pi][1]-b.z)<.9)b.pi++;const w=p[Math.min(b.pi,p.length-1)];return[Math.atan2(w[0]-b.x,w[1]-b.z),mv*fm]}
@@ -1551,10 +1551,10 @@ function evApply(type,d){if(type==='dev'){devShow(d.text);return}
  if(state!=='play'){ZE.pend.push([type,d,performance.now()]);return}
  const on=d.on!==false;
  switch(type){
-  case'boss':if(on){bossSpawn(d.team?1:0);evBanner(type)}break;
+  case'boss':if(on){if(MP.on&&!MP.host)evBanner(type);else{bossSpawn(MP.on?(d.team===MP.my?0:1):(d.team?1:0));evBanner(type)}}break;
   case'superspeed':ZE.spd=on;if(on)evBanner(type);break;
   case'supergravity':ZE.grv=on;if(on)evBanner(type);break;
-  case'enlarge':ZE.enl=on?(d.team?1:0):-1;if(on)evBanner(type);break;
+  case'enlarge':ZE.enl=on?(MP.on?(d.team===MP.my?0:1):(d.team?1:0)):-1;if(on)evBanner(type);break;
   case'meteor':if(on){metStart();evBanner(type)}break;
   case'coinrain':if(on){coinRain();evBanner(type)}break;
   case'disco':if(!!DISCO!==on)discoToggle();if(on)evBanner(type);break;
@@ -1562,11 +1562,12 @@ function evApply(type,d){if(type==='dev'){devShow(d.text);return}
   case'infammo':if(!!INF!==on){INF=INF?0:1;if(INF)infTick()}if(on)evBanner(type);break;
   case'ufo':if(!!UFO!==on)ufoToggle();if(on)evBanner(type);break}}
 /* ---- boss ---- */
-function bossBar(b){const c=b.bc,g=c.getContext('2d'),f=Math.max(0,b.hp)/1000;g.clearRect(0,0,320,84);g.font='bold 34px sans-serif';g.textAlign='center';g.lineWidth=5;g.strokeStyle='#000';g.fillStyle='#ff3030';g.strokeText('BOSS',160,34);g.fillText('BOSS',160,34);
- g.fillStyle='#000c';g.fillRect(4,44,312,32);g.fillStyle=f>.5?'#e83030':f>.25?'#ff8a1a':'#ffd400';g.fillRect(8,48,304*f,24);g.strokeStyle='#fff';g.lineWidth=2;g.strokeRect(4,44,312,32);g.font='bold 16px sans-serif';g.fillStyle='#fff';g.fillText(Math.ceil(Math.max(0,b.hp))+' / 1000',160,66);b.bs.material.map.needsUpdate=true;b.bhp=Math.ceil(b.hp)}
+function folPos(){const q=MP.on&&MP.host&&MP.fol&&MP.pl[MP.fol];return q&&q.init?[q.x,q.z]:[P.x,P.z]}
+function bossBar(b){const c=b.bc,g=c.getContext('2d'),f=Math.max(0,b.hp)/5000;g.clearRect(0,0,320,84);g.font='bold 34px sans-serif';g.textAlign='center';g.lineWidth=5;g.strokeStyle='#000';g.fillStyle='#ff3030';g.strokeText('BOSS',160,34);g.fillText('BOSS',160,34);
+ g.fillStyle='#000c';g.fillRect(4,44,312,32);g.fillStyle=f>.5?'#e83030':f>.25?'#ff8a1a':'#ffd400';g.fillRect(8,48,304*f,24);g.strokeStyle='#fff';g.lineWidth=2;g.strokeRect(4,44,312,32);g.font='bold 16px sans-serif';g.fillStyle='#fff';g.fillText(Math.ceil(Math.max(0,b.hp))+' / 5000',160,66);b.bs.material.map.needsUpdate=true;b.bhp=Math.ceil(b.hp)}
 function bossClear(){const o=ZE.boss;if(!o)return;ZE.boss=null;o.boss=false;if(o.bs){o.g.remove(o.bs);o.bs.material.map.dispose();o.bs.material.dispose();o.bs=null}}
-function bossSpawn(team){bossClear();const l=bots.filter(b=>b.team===team);if(!l.length)return;const b=l.find(o=>!o.dead)||l[0];if(b.dead)spawnBot(b);
- b.boss=true;b.hp=1000;b.bc=document.createElement('canvas');b.bc.width=320;b.bc.height=84;b.bs=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(b.bc),transparent:true,depthTest:false,depthWrite:false}));b.bs.scale.set(1.9,.5,1);b.bs.position.y=2.45;b.bs.renderOrder=999;b.g.add(b.bs);ZE.boss=b;bossBar(b);snd(90,1,'sawtooth',.3)}
+function bossSpawn(team){bossClear();const l=bots.filter(b=>b.team===team&&!b.park);if(!l.length)return;const b=l.find(o=>!o.dead)||l[0];if(b.dead)spawnBot(b);
+ b.boss=true;b.hp=5000;b.bc=document.createElement('canvas');b.bc.width=320;b.bc.height=84;b.bs=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(b.bc),transparent:true,depthTest:false,depthWrite:false}));b.bs.scale.set(1.9,.5,1);b.bs.position.y=2.45;b.bs.renderOrder=999;b.g.add(b.bs);ZE.boss=b;bossBar(b);snd(90,1,'sawtooth',.3)}
 {const _sb=spawnBot;spawnBot=function(b){if(b===ZE.boss)bossClear();_sb(b)}}
 {const _k=killBot;killBot=function(v,by,dir,hs){const was=v.dead;_k(v,by,dir,hs);if(v===ZE.boss&&!was&&v.dead){toast('BOSS DEFEATED!');snd(120,.8,'sawtooth',.3);feed('BOSS','DEFEATED')}}}
 {const _d=damageP;damageP=function(d,by){if(by&&by.boss)d=Math.round(d*2);_d(d,by)}}
@@ -1651,7 +1652,7 @@ function mpGone(){const was=MP.on;mpLeave();if(was){toast('DISCONNECTED FROM THE
 function mpLeave(){clearInterval(MP.ping);clearTimeout(MP.to);const ws=MP.ws;MP.ws=null;if(MP.on&&MP.oldMap)SV.map=MP.oldMap;MP.on=false;try{ws&&ws.close()}catch(e){}for(const id in MP.pl)mpRemove(id);MP.bs=null;MP.host=false;bots.forEach(b=>{b.park=0;b.pup=0})}
 function mpMsg(m){
  if(m.t==='w'){const asked=MP.my;MP.t0=performance.now()-(m.el||0);MP.id=m.id;MP.my=m.tm;MP.oldMap=SV.map;SV.map='ind';MP.hostId=m.host;MP.host=m.host===m.id;MP.tc=m.tc;MP.room=m.room;MP.bs=null;MP.on=true;m.pl.forEach(mpAdd);
-  MI=null;MODE='tdm';ORD='auto';RANGE=false;closeP();start();toast('ONLINE · '+m.room.toUpperCase()+' · '+(m.tm?'RED':'BLUE')+' TEAM'+(asked!==m.tm?' (that team was full)':''))}
+  MI=null;MODE='tdm';ORD='auto';RANGE=false;closeP();MP.starting=1;try{start()}finally{MP.starting=0}toast('ONLINE · '+m.room.toUpperCase()+' · '+(m.tm?'RED':'BLUE')+' TEAM'+(asked!==m.tm?' (that team was full)':''))}
  else if(m.t==='pj'){mpAdd(m.p);toast(m.p.n+' JOINED')}
  else if(m.t==='pl'){const p=MP.pl[m.id];if(p)toast(p.n+' LEFT');mpRemove(m.id)}
  else if(m.t==='tc'){MP.tc=m.tc}
@@ -1668,7 +1669,7 @@ function mpAdd(p){if(MP.pl[p.id])return;const c=CH[p.ch]||CH[0],m=buildChar({v:c
 function mpRemove(id){const p=MP.pl[id];if(!p)return;try{sc.remove(p.g)}catch(e){}delete MP.pl[id]}
 function mpBecomeHost(){toast('YOU NOW RUN THE BOTS');MP.bs=null;bots.forEach(b=>{b.path=null;if(b.dead&&!b.park)b.rt=2})}
 function mpHostTick(now){bots.forEach((b,i)=>{const t=i<10?0:1,want=(i%10)<10-MP.tc[t];if(!want&&!b.park){b.park=1;b.dead=true;b.rt=1e9;b.rag=0;b.g.visible=false}else if(want&&b.park){b.park=0;spawnBot(b)}});
- if(now-MP.lb>100&&MP.ws&&MP.ws.readyState===1){MP.lb=now;MP.ws.send(JSON.stringify({t:'b',d:bots.map(b=>[Math.round(b.x*100)/100,Math.round(b.z*100)/100,Math.round(b.g.rotation.y*100)/100,Math.round(((b.ph||0)%6.2832)*100)/100,Math.round((b.mvv||0)*100)/100,b.park?2:b.dead?1:0])}))}}
+ if(now-MP.lb>100&&MP.ws&&MP.ws.readyState===1){MP.lb=now;MP.ws.send(JSON.stringify({t:'b',d:bots.map(b=>[Math.round(b.x*100)/100,Math.round(b.z*100)/100,Math.round(b.g.rotation.y*100)/100,Math.round(((b.ph||0)%6.2832)*100)/100,Math.round((b.mvv||0)*100)/100,b.park?2:b.dead?1:0,b.boss&&!b.dead?Math.round(b.hp):0])}))}}
 function mpPuppet(b,dt){const s=MP.bs&&MP.bs[bots.indexOf(b)];
  if(!s){b.dead=true;b.park=1;b.g.visible=false;b.rt=1e9;return}
  b.park=s[5]===2?1:0;
@@ -1681,14 +1682,14 @@ function mpTick(dt){
  if(state==='menu'||state==='end'){mpLeave();return}
  if(state!=='play')return;
  const now=performance.now();mt=600-(now-(MP.t0||now))/1000;TK[0]=TK[1]=0;
- if(now-MP.ls>66&&MP.ws&&MP.ws.readyState===1){MP.ls=now;MP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz)}))}
+ if(now-MP.ls>66&&MP.ws&&MP.ws.readyState===1){MP.ls=now;MP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz),w:cur,k:(skId(cur)||''),sl:SL.k>.3?1:0}))}
  for(const id in MP.pl){const p=MP.pl[id];if(!p.init){p.g.visible=false;continue}
   const k=Math.min(1,dt*14);p.x+=(p.tx-p.x)*k;p.y+=(p.ty-p.y)*k;p.z+=(p.tz-p.z)*k;let dy=p.tyw-p.yw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));p.yw+=dy*k;
   p.mv+=(Math.min(1,(p.sp||0)/4.6)-p.mv)*Math.min(1,dt*8);p.ph+=dt*7*p.mv*((p.sp||0)>6?1.5:1);
-  p.g.visible=!!p.al;p.g.position.set(p.x,p.y,p.z);p.g.rotation.y=p.yw+Math.PI;try{p.m.pose(skel(p.ph,p.mv,{run:(p.sp||0)>6,cr:p.cr?.8:0}))}catch(e){}}
+  if(p.rag&&p.al)mpRevive(p);if(p.rag){p.g.visible=performance.now()-p.seen<4000;continue}p.g.visible=!!p.al;p.g.position.set(p.x,p.y,p.z);p.g.rotation.y=p.yw+Math.PI;try{p.m.pose(skel(p.ph,p.mv,{run:(p.sp||0)>6,cr:p.sl?.95:(p.cr?.8:0)}))}catch(e){}}
  if(MP.host)mpHostTick(now)}
-{const _sb=spawnBot;spawnBot=function(b){_sb(b);const i=bots.indexOf(b),r=i<10?0:1;b.team=MP.on?(r===MP.my?0:1):r;if(MP.on){b.x=(r?1:-1)*rnd(44,46.5);b.g.position.set(b.x,0,b.z)}}}
-{const _u=updBot;updBot=function(b,dt){if(MP.on){if(!MP.host){mpPuppet(b,dt);return}if(b.park)return}_u(b,dt)}}
+{const _sb=spawnBot;spawnBot=function(b){const i=bots.indexOf(b),r=i<10?0:1;b.team=MP.on?(r===MP.my?0:1):r;_sb(b);if(MP.on){b.x=(r?1:-1)*rnd(44,46.5);b.g.position.set(b.x,0,b.z)}}}
+{const _u=updBot;updBot=function(b,dt){if(MP.on&&!b.isRag){if(!MP.host){mpPuppet(b,dt);return}if(b.park)return}_u(b,dt)}}
 {const _k=killBot;killBot=function(v,by,dir,hs){if(MP.on&&!MP.host)return;_k(v,by,dir,hs)}}
 {const _e=end;end=function(){mpLeave();_e.apply(this,arguments)}}
 {const _m=mfUpd;let t8=performance.now();mfUpd=function(){_m();const n=performance.now(),dt=Math.min(.1,(n-t8)/1000);t8=n;try{mpTick(dt)}catch(e){console.error('mpTick',e)}}}
@@ -1699,7 +1700,7 @@ function mpSend(o){try{if(MP.ws&&MP.ws.readyState===1)MP.ws.send(JSON.stringify(
 function mpReal(by){if(by.rp!==undefined)return by.rp;if(by===P)return MP.my;const i=bots.indexOf(by);return i>=0?(i<10?0:1):1-MP.my}
 {const _a=mpAdd;mpAdd=function(p){_a(p);const q=MP.pl[p.id];if(!q)return;q.seen=performance.now();q.att={name:p.n,k:0,team:1,rp:p.tm,pid:p.id};
  q.m.hit.forEach((h,j)=>{h.userData={rp:p.id,head:j===1?1:0}});
- const stub={x:0,z:0,dead:false,team:1,name:p.n,cur:'BOT'};let H=1e9;Object.defineProperty(stub,'hp',{get(){return H},set(v){const d=H-v;if(d>0&&d<100)mpSend({t:'hit2',to:p.id,d:Math.round(d),bn:stub.cur})}});q.stub=stub}}
+ const stub={x:0,z:0,dead:false,team:1,name:p.n,cur:'BOT'};let H=1e9;Object.defineProperty(stub,'hp',{get(){return H},set(v){const d=H-v;if(d>0&&d<100)mpSend({t:'hit2',to:p.id,d:Math.round(d*(stub.bos?2:1)),bn:stub.cur})}});q.stub=stub}}
 {const _t=targets;targets=function(){const t=_t();if(MP.on)for(const id in MP.pl){const p=MP.pl[id];if(p.al&&p.init&&p.g.visible)t.push(...p.m.hit)}return t}}
 {const _s=shoot;shoot=function(o,dir,w){if(!MP.on)return _s(o,dir,w);
  ray.set(o,dir);ray.far=w.rng;const h=ray.intersectObjects(targets(),false)[0];
@@ -1724,7 +1725,7 @@ function mpReal(by){if(by.rp!==undefined)return by.rp;if(by===P)return MP.my;con
   if(now-p.seen>4000)p.g.visible=false;if(now-p.seen>25000)mpRemove(id)}
  if(MP.host)for(const b of bots){if(b.dead||b.park||b.tg||(b.rpT=(b.rpT||0)-dt)>0)continue;b.rpT=.3;const br=bots.indexOf(b)<10?0:1;let best=null,bd=42;
   for(const id in MP.pl){const p=MP.pl[id];if(!p.al||!p.init||p.tm===br)continue;const d=Math.hypot(p.x-b.x,p.z-b.z);if(d<bd&&visible(new V3(b.x,1.6,b.z),new V3(p.x,p.y+1.3,p.z))){bd=d;best=p}}
-  if(best){best.stub.cur=b.name;b.tg={o:best.stub}}}}}
+  if(best){best.stub.cur=b.name;best.stub.bos=b.boss?1:0;b.tg={o:best.stub}}}}}
 {const _m=mpMsg;mpMsg=function(m){if(m.t==='s'){const p=MP.pl[m.i];if(p)p.seen=performance.now()}return _m(m)}}
 try{new MutationObserver(()=>{if(!MP.on||MP.my!==1)return;const e=$('sc'),t=e.textContent,x=/^BLUE (\d+) · RED (\d+)(.*)$/.exec(t);if(!x||t===e._o)return;e._o='BLUE '+x[2]+' · RED '+x[1]+x[3];e.textContent=e._o}).observe($('sc'),{childList:true,characterData:true,subtree:true})}catch(e){}
 
@@ -1733,6 +1734,129 @@ $('bOnline').style.display='none';{const n=$('bOnline').nextElementSibling;if(n&
 function plChoice(){showP('<h3>PLAY</h3><p><b>ONLINE OR OFFLINE?</b></p><div class="row"><button onclick="mpPanel()" style="min-width:170px;border-color:#35ff6a">ONLINE</button><small>Play with real players. Bots fill the empty spots.</small></div><div class="row"><button onclick="plOff()" style="min-width:170px">OFFLINE</button><small>Pick a map and play with bots on your own.</small></div>')}
 var _plOff=playSel;function plOff(){closeP();_plOff()}
 playSel=function(){if(SV.mode==='tdm')plChoice();else _plOff()};$('bPlay').onclick=playSel;
+
+/* leaving online play always resets to the normal blue side */
+{const _s=start;start=function(){if(MP.on&&!MP.starting)mpLeave();_s.apply(this,arguments)}}
+{const _b=$('bMenu').onclick;$('bMenu').onclick=function(){mpLeave();return _b&&_b.apply(this,arguments)}}
+
+/* ===== Update 20: online stage 3 (server list, ragdolls, guns, chat, real-player board) ===== */
+MP.pick=0;MP.chat=[];MP.lb=[];MP.code='';MP.rname='';MP.errm='';MP.fl=[];
+var mpEsc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function mpPanel(msg){showP('<h3>ONLINE</h3><p><b>1. PICK YOUR TEAM</b></p><div class="row"><button id="mpB" onclick="mpPick(0)" style="border-color:#3a8bff;min-width:130px">BLUE</button><button id="mpR" onclick="mpPick(1)" style="border-color:#ff3a3a;min-width:130px">RED</button></div><p><b>2. PICK A SERVER</b></p><div class="row"><button onclick="mpJoin(MP.pick)" style="border-color:#35ff6a;min-width:270px">QUICK JOIN (GENERAL)</button></div><div id="mpl" style="max-height:170px;overflow:auto;text-align:left;margin:6px 0">Loading servers...</div><div class="row"><button onclick="mpRefresh()">REFRESH LIST</button><button onclick="mpJoin(MP.pick,{create:1})">CREATE PRIVATE SERVER</button></div><div class="row"><input id="mpcode" maxlength="4" placeholder="CODE" onkeydown="event.stopPropagation()" onkeyup="event.stopPropagation()" style="width:90px;text-align:center;padding:8px;border-radius:8px;border:1px solid #4a5038;background:#12161a;color:#fff;text-transform:uppercase"><button onclick="mpCode()">JOIN WITH CODE</button></div><p id="mpst">'+(msg||'')+'</p><small>Up to 12 players per server. You can join a server at any time, even in the middle of a round. Online games use the Industrial District for now.</small>');mpPick(MP.pick);mpRefresh()}
+function mpPick(t){MP.pick=t;const b=$('mpB'),r=$('mpR');if(b)b.style.background=t===0?'#1f4fa0':'';if(r)r.style.background=t===1?'#a02020':''}
+function mpCode(){const e=$('mpcode'),c=((e&&e.value)||'').trim().toUpperCase();if(c.length<4){mpSt('Type the 4 letter code first.');return}mpJoin(MP.pick,{code:c})}
+function mpRefresh(){const box=$('mpl');if(!box)return;if(!acApi()){box.textContent='Log in first to see servers.';return}
+ try{fetch(acApi()+'/api/rooms').then(r=>r.json()).then(j=>{const b=$('mpl');if(!b)return;b.innerHTML='';
+  (j.rooms||[]).forEach(r=>{const row=document.createElement('div');row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 6px;border-bottom:1px solid #333;font-size:13px';
+   const l=document.createElement('span'),left=Math.max(0,600-(r.el||0)/1000),mm=Math.floor(left/60),ss=Math.floor(left%60);
+   l.textContent=r.name+(r.n?' · '+r.n+'/12 · BLUE '+r.tc[0]+' RED '+r.tc[1]+' · '+mm+':'+(ss<10?'0':'')+ss+' left':' · empty, starts when you join');
+   const bt=document.createElement('button');bt.textContent=r.n>=12?'FULL':'JOIN';bt.disabled=r.n>=12;bt.onclick=()=>mpJoin(MP.pick,{room:r.id});row.append(l,bt);b.appendChild(row)})}).catch(()=>{const b=$('mpl');if(b)b.textContent='Could not load the list. The server may be waking up (up to a minute). Press REFRESH LIST.'})}catch(e){}}
+function mpJoin(team,o){o=o||{};
+ if(!AX.tok||!acApi()){mpPanel('Log in first: close this, then press LOG IN / CREATE ACCOUNT.');return}
+ mpLeave();MP.my=team;MP.errm='';mpSt('Connecting... the first connection can take up to a minute while the server wakes up.');
+ let ws;try{ws=new WebSocket(acApi().replace(/^http/i,'ws')+'/ws')}catch(e){mpSt('Could not connect to the server.');return}
+ MP.ws=ws;
+ clearTimeout(MP.to);MP.to=setTimeout(()=>{if(MP.ws===ws&&!MP.on){mpSt('The server did not answer. Try again in a minute.');try{ws.close()}catch(e){}}},75000);
+ ws.onopen=()=>{if(MP.ws!==ws)return;ws.send(JSON.stringify({t:'join',token:AX.tok,team,ch:SV.eq.ch|0,room:o.room||'',code:o.code||'',create:o.create?1:0}));MP.ping=setInterval(()=>{try{ws.send('{"t":"ping"}')}catch(e){}},10000)};
+ ws.onmessage=e=>{if(MP.ws!==ws)return;try{mpMsg(JSON.parse(e.data))}catch(x){console.error('mp',x)}};
+ ws.onclose=()=>{if(MP.ws===ws)mpGone()};ws.onerror=()=>{}}
+function mpGone(){const was=MP.on,em=MP.errm;MP.errm='';mpLeave();if(was){toast(em||'DISCONNECTED FROM THE SERVER');try{$('bMenu').onclick()}catch(e){}}else mpSt(em||'Could not connect. If you just updated, the server may need to be redeployed.')}
+
+/* remote players: real gun + skin, slide, muzzle flash */
+function mpGun(p,w,k){w=w|0;k=k||'';if(p.gw===w&&p.gk===k)return;p.gw=w;p.gk=k;
+ try{const gn=p.g.children.find(o=>o.isGroup);if(!gn)return;SKFORCE={i:w,id:k||null};let nm;try{nm=gunModel(w)}finally{SKFORCE=null}
+  gn.children.slice().forEach(ch=>gn.remove(ch));nm.children.slice().forEach(ch=>gn.add(ch))}catch(e){console.log('mpGun',e)}}
+var MPFG=null,MPFM=null;
+function mpFx(m){const p=MP.pl[m.i];if(!p||!p.init||p.rag||!p.g.visible)return;
+ const d=Math.hypot(p.x-P.x,p.z-P.z),v=Math.max(0,1-d/70);if(v>0)snd(140+Math.random()*50,.09,'sawtooth',.14*v);
+ try{MPFG=MPFG||new THREE.SphereGeometry(.09,8,6);MPFM=MPFM||new THREE.MeshBasicMaterial({color:0xffd070});const f=new THREE.Mesh(MPFG,MPFM);
+  f.position.set(p.x-Math.sin(p.yw)*.85,p.y+1.38,p.z-Math.cos(p.yw)*.85);sc.add(f);MP.fl.push({m:f,t:performance.now()+70})}catch(e){}}
+{const _s=shoot;let lf=0;shoot=function(o,dir,w){if(MP.on){const n=performance.now();if(n-lf>70){lf=n;mpSend({t:'fx',w:cur})}}return _s(o,dir,w)}}
+
+/* remote players: ragdoll when they die */
+function mpDie(p){if(p.rag||p.dieErr)return;
+ try{const fb=p.fb||(p.fb={g:p.g,m:p.m,hit:p.m.hit,isRag:1,team:1,hp:0,k:0,d:0,name:p.n,tg:null,x:0,z:0});
+  fb.ph=p.ph;fb.mvv=p.mv;fb.dead=true;fb.rt=1e9;fb.chk=0;fb.flat=0;fb.rag=0;fb.pts=null;fb.rg=0;
+  p.g.position.set(p.x,p.y,p.z);p.g.rotation.set(0,p.yw+Math.PI,0);p.g.visible=true;
+  startRag(fb,new V3(Math.sin(p.yw),0,Math.cos(p.yw)));
+  p.rag=1;const sp=p.g.children.find(o=>o.isSprite);if(sp)sp.visible=false;mpBubOff(p)}catch(e){p.dieErr=1;console.error('mpDie',e)}}
+function mpRevive(p){p.rag=0;p.dieErr=0;
+ try{p.g.scale.setScalar(1);const sp=p.g.children.find(o=>o.isSprite);if(sp)sp.visible=true;if(p.fb){p.fb.rag=0;p.fb.pts=null;p.fb.dead=false}}catch(e){}
+ p.x=p.tx;p.y=p.ty;p.z=p.tz;p.yw=p.tyw;p.g.rotation.set(0,p.yw+Math.PI,0)}
+
+/* chat: bubbles over heads, small log, sidebar */
+function mpBubOff(p){if(p.bub){try{p.g.remove(p.bub);p.bub.material.map.dispose();p.bub.material.dispose()}catch(e){}p.bub=null}}
+function mpBub(p,text){mpBubOff(p);if(p.rag)return;
+ try{const cv=document.createElement('canvas');cv.width=512;cv.height=96;const g=cv.getContext('2d');g.font='bold 34px sans-serif';
+  const t=text.length>38?text.slice(0,38)+'...':text,w=Math.min(500,g.measureText(t).width+40),x=256-w/2;
+  g.fillStyle='rgba(0,0,0,.75)';g.beginPath();g.moveTo(x+16,10);g.lineTo(x+w-16,10);g.quadraticCurveTo(x+w,10,x+w,26);g.lineTo(x+w,66);g.quadraticCurveTo(x+w,82,x+w-16,82);g.lineTo(x+16,82);g.quadraticCurveTo(x,82,x,66);g.lineTo(x,26);g.quadraticCurveTo(x,10,x+16,10);g.fill();
+  g.fillStyle='#fff';g.textAlign='center';g.fillText(t,256,58);
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));sp.scale.set(3.4,.64,1);sp.position.y=2.85;p.g.add(sp);p.bub=sp;p.bubT=performance.now()+6000}catch(e){}}
+const mpChL=document.createElement('div');mpChL.style.cssText='position:absolute;left:12px;bottom:140px;width:340px;font:600 13px sans-serif;color:#fff;text-shadow:0 1px 3px #000;pointer-events:none;z-index:15';$('hud').appendChild(mpChL);
+const mpChI=document.createElement('input');mpChI.maxLength=120;mpChI.placeholder='Message (Enter to send, Esc to cancel)';mpChI.style.cssText='position:absolute;left:12px;bottom:104px;width:340px;display:none;z-index:70;padding:8px;border-radius:8px;border:1px solid #999;background:rgba(0,0,0,.8);color:#fff;font:14px sans-serif;pointer-events:auto';$('hud').appendChild(mpChI);
+function mpChatOpen(){if(!MP.on||state!=='play'||mpChI.style.display!=='none')return;for(const k in keys)keys[k]=0;mb[0]=mb[1]=mb[2]=0;mpChI.style.display='block';mpChI.value='';mpChI.focus()}
+function mpChatClose(send){const t=mpChI.value.trim();mpChI.style.display='none';mpChI.blur();if(send&&t)mpSend({t:'c',m:t});if(!TOUCH)lock()}
+mpChI.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')mpChatClose(true);else if(e.key==='Escape')mpChatClose(false)});
+mpChI.addEventListener('keyup',e=>e.stopPropagation());
+addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.repeat&&MP.on&&state==='play'&&cp.style.display==='none'&&mpChI.style.display==='none'){e.preventDefault();mpChatOpen()}});
+document.addEventListener('pointerlockchange',()=>{if(document.pointerLockElement!==R.domElement&&mpChI.style.display!=='none'){mpChI.style.display='none';mpChI.blur()}});
+function mpChatIn(m){const e={n:m.n,tm:m.tm,m:m.m,t:performance.now()};MP.chat.push(e);while(MP.chat.length>40)MP.chat.shift();mpChatLog();
+ if(m.i!==MP.id){const p=MP.pl[m.i];if(p)mpBub(p,m.m)}}
+function mpChatLog(){mpChL.innerHTML='';const n=performance.now();MP.chat.filter(e=>n-e.t<12000).slice(-5).forEach(e=>{const d=document.createElement('div'),a=document.createElement('b');a.textContent=e.n+': ';a.style.color=e.tm?'#ff7a7a':'#7ab4ff';const x=document.createElement('span');x.textContent=e.m;d.append(a,x);mpChL.appendChild(d)})}
+{const _l=mpLeave;mpLeave=function(){_l();MP.chat=[];MP.lb=[];MP.code='';MP.rname='';try{MP.fl.forEach(f=>sc.remove(f.m))}catch(e){}MP.fl=[];mpChI.style.display='none';mpChL.innerHTML=''}}
+
+/* the in-game sidebar shows real players only */
+{const _b=board;board=function(){if(!MP.on){_b();return}
+ const lb={};(MP.lb||[]).forEach(a=>lb[a[0]]=a);const me=lb[MP.id]||[0,P.k|0,P.d|0],rows=[{n:AX.user||'YOU',t:MP.my,k:me[1],d:me[2],me:1}];
+ for(const id in MP.pl){const p=MP.pl[id],a=lb[p.id]||[0,0,0];rows.push({n:p.n,t:p.tm,k:a[1],d:a[2]})}
+ rows.sort((a,b)=>b.k-a.k||a.d-b.d);
+ let h='<div>'+mpEsc(MP.rname||'ONLINE')+(MP.code?' · CODE '+mpEsc(MP.code):'')+' · BLUE '+(MP.sc[0]|0)+' · RED '+(MP.sc[1]|0)+'</div><table><tr><th>PLAYER</th><th>TEAM</th><th>K</th><th>D</th><th>POINTS</th></tr>'+
+  rows.map(r=>'<tr style="color:'+(r.t?'#f77':'#7af')+(r.me?';font-weight:900':'')+'"><td>'+mpEsc(r.n)+(r.me?' (YOU)':'')+'</td><td>'+(r.t?'RED':'BLUE')+'</td><td>'+r.k+'</td><td>'+r.d+'</td><td>'+r.k*100+'</td></tr>').join('')+'</table>';
+ h+='<div style="margin-top:8px;text-align:left;max-height:150px;overflow:auto;font-size:13px"><b>CHAT</b> (press Enter to talk)'+MP.chat.slice(-12).map(e=>'<div><span style="color:'+(e.tm?'#f77':'#7af')+'">'+mpEsc(e.n)+':</span> '+mpEsc(e.m)+'</div>').join('')+'</div>';
+ $('sb').innerHTML=h}}
+
+/* message handling */
+{const _m=mpMsg;mpMsg=function(m){
+ if(m.t==='w'){MP.chat=[];MP.lb=m.lb||[];MP.code=m.code||'';MP.rname=m.name||m.room;_m(m);
+  if(MP.on&&state==='play'){const s=spawnPt();P.x=s[0];P.z=s[1];P.yaw=Math.atan2(-s[0],-s[1])+Math.PI;P.team=0}
+  if(m.priv)setTimeout(()=>toast('PRIVATE SERVER · CODE '+m.code+' (press TAB)'),1500);return}
+ if(m.t==='err')MP.errm=m.m;
+ if((m.t==='kl'||m.t==='end')&&m.lb)MP.lb=m.lb;
+ if(m.t==='c'){mpChatIn(m);return}
+ if(m.t==='fx'){mpFx(m);return}
+ if(m.t==='s'){const p=MP.pl[m.i];if(p){p.sl=m.sl;mpGun(p,m.w,m.k)}}
+ return _m(m)}}
+{const _t=mpTick;let lt=0;mpTick=function(dt){_t(dt);if(!MP.on||state!=='play')return;const now=performance.now();
+ for(const id in MP.pl){const p=MP.pl[id];
+  if(p.rag){if(p.fb&&p.fb.rg<5)updBot(p.fb,dt)}else if(!p.al&&p.init&&!p.dieErr&&now-p.seen<4000)mpDie(p);
+  if(p.bub&&now>p.bubT)mpBubOff(p)}
+ if(MP.fl.length){MP.fl=MP.fl.filter(f=>{if(now<f.t)return true;sc.remove(f.m);return false})}
+ if(now-lt>500){lt=now;if(MP.chat.length)mpChatLog()}}}
+
+/* ===== Update 20b: admin commands work online even when you are not the host ===== */
+{const via=['freeze','killred','auto','follow','hold','attack','defend','spread'];
+ via.forEach(k=>{const f=CMD[k];CMD[k]=function(){
+  if(!MP.on)return f();
+  if(MP.host){if(k==='killred'){bots.forEach((b,i)=>{if((i<10?0:1)!==MP.my&&!b.dead&&!b.park)killBot(b,P,new V3(1,0,0),0)});return'Enemy team eliminated'}return f()}
+  const h=MP.pl[MP.hostId];if(['auto','follow','hold','attack','defend','spread'].includes(k)&&h&&h.tm!==MP.my)return'Ally orders only work when you are on the same team as the host.';
+  mpSend({t:'adm',c:k});return{freeze:'Freeze toggled for everyone in this server',killred:'Enemy team eliminated'}[k]||'Order sent to this server'}});
+ const ft=CMD.time;CMD.time=function(){if(!MP.on)return ft();mpSend({t:'adm',c:'time'});return'1 minute skipped for everyone in this server'}}
+{const _m=mpMsg;mpMsg=function(m){
+ if(m.t==='clk'){MP.t0=performance.now()-(m.el||0);return}
+ if(m.t==='adm'){if(!MP.host)return;const p=MP.pl[m.from];
+  if(m.c==='freeze'){FRZ=!FRZ;toast('BOTS '+(FRZ?'FROZEN':'UNFROZEN')+' BY ADMIN')}
+  else if(m.c==='killred'){if(!p)return;bots.forEach((b,i)=>{if((i<10?0:1)!==m.tm&&!b.dead&&!b.park){const a=p.att;a.team=p.tm===MP.my?0:1;a.pid=p.id;killBot(b,a,new V3(b.x-p.x,0,b.z-p.z).normalize(),0)}})}
+  else if(['auto','follow','hold','attack','defend','spread'].includes(m.c)){ORD=m.c;if(m.c==='spread')bots.forEach(b=>b.so=null)}
+  return}
+ return _m(m)}}
+
+/* ===== Update 20c: one shared boss (5000 HP) and follow-me for any admin ===== */
+function bossAttach(b){if(b.bs)return;b.boss=true;b.bc=document.createElement('canvas');b.bc.width=320;b.bc.height=84;b.bs=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(b.bc),transparent:true,depthTest:false,depthWrite:false}));b.bs.scale.set(1.9,.5,1);b.bs.position.y=2.45;b.bs.renderOrder=999;b.g.add(b.bs);ZE.boss=b}
+{const _p=mpPuppet;mpPuppet=function(b,dt){_p(b,dt);const s=MP.bs&&MP.bs[bots.indexOf(b)];if(!s)return;const h=s[6]|0;
+ if(h>0&&s[5]===0){if(ZE.boss&&ZE.boss!==b)bossClear();if(!b.boss){bossAttach(b);b.hp=h;bossBar(b);snd(90,1,'sawtooth',.3)}b.hp=h;if(Math.ceil(h)!==b.bhp)bossBar(b)}
+ else if(b.boss){const dead=s[5]!==0;bossClear();if(dead){toast('BOSS DEFEATED!');snd(120,.8,'sawtooth',.3)}}}}
+{const _m=mpMsg;mpMsg=function(m){if(m.t==='adm'&&MP.host&&m.c==='follow')MP.fol=m.from;else if(m.t==='adm'&&MP.host)MP.fol=0;return _m(m)}}
+{const _f=CMD.follow;CMD.follow=function(){if(MP.on&&MP.host)MP.fol=0;return _f()}}
 
 applyGfx();requestAnimationFrame(frame);
 </script></body></html>
