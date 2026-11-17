@@ -1637,7 +1637,7 @@ var MP={on:false,ws:null,my:0,id:0,host:false,hostId:0,pl:{},tc:[0,0],room:'',ls
 function spawnPt(){return RANGE?[0,44]:[MP.on&&MP.my?45:-45,rnd(-34,34)]}
 $('bMode').insertAdjacentHTML('beforebegin','<button id="bOnline">JOIN ONLINE</button><br>');
 $('bOnline').onclick=()=>mpPanel();
-function mpPanel(msg){showP('<h3>JOIN ONLINE</h3><p>Play with other real players. Bots fill the empty spots on each team. You need to be logged in.</p><p><b>CHOOSE YOUR TEAM</b></p><div class="row"><button onclick="mpJoin(0)" style="border-color:#3a8bff;min-width:150px">JOIN BLUE</button><button onclick="mpJoin(1)" style="border-color:#ff3a3a;min-width:150px">JOIN RED</button></div><p id="mpst">'+(msg||'')+'</p><small>Online games use the Industrial District for now. Early test: you can see other players move around. Shooting other players comes next.</small>')}
+function mpPanel(msg){showP('<h3>JOIN ONLINE</h3><p>Play with other real players. Bots fill the empty spots on each team. You need to be logged in.</p><p><b>CHOOSE YOUR TEAM</b></p><div class="row"><button onclick="mpJoin(0)" style="border-color:#3a8bff;min-width:150px">JOIN BLUE</button><button onclick="mpJoin(1)" style="border-color:#ff3a3a;min-width:150px">JOIN RED</button></div><p id="mpst">'+(msg||'')+'</p><small>The map is picked by a vote before every round. Early test: you can see other players move around. Shooting other players comes next.</small>')}
 function mpSt(t){const e=$('mpst');if(e)e.textContent=t}
 function mpJoin(team){
  if(!AX.tok||!acApi()){mpPanel('Log in first: close this, then press LOG IN / CREATE ACCOUNT.');return}
@@ -1651,7 +1651,7 @@ function mpJoin(team){
 function mpGone(){const was=MP.on;mpLeave();if(was){toast('DISCONNECTED FROM THE SERVER');try{$('bMenu').onclick()}catch(e){}}else mpSt('Could not connect. If you just updated, the server may need to be redeployed.')}
 function mpLeave(){clearInterval(MP.ping);clearTimeout(MP.to);const ws=MP.ws;MP.ws=null;if(MP.on&&MP.oldMap)SV.map=MP.oldMap;MP.on=false;try{ws&&ws.close()}catch(e){}for(const id in MP.pl)mpRemove(id);MP.bs=null;MP.host=false;bots.forEach(b=>{b.park=0;b.pup=0})}
 function mpMsg(m){
- if(m.t==='w'){const asked=MP.my;MP.t0=performance.now()-(m.el||0);MP.id=m.id;MP.my=m.tm;MP.oldMap=SV.map;SV.map='ind';MP.hostId=m.host;MP.host=m.host===m.id;MP.tc=m.tc;MP.room=m.room;MP.bs=null;MP.on=true;m.pl.forEach(mpAdd);
+ if(m.t==='w'){const asked=MP.my;MP.t0=performance.now()-(m.el||0);MP.id=m.id;MP.my=m.tm;MP.oldMap=SV.map;SV.map=(m.map&&MAPS[m.map]&&m.map!=='rng')?m.map:'ind';MP.hostId=m.host;MP.host=m.host===m.id;MP.tc=m.tc;MP.room=m.room;MP.bs=null;MP.on=true;m.pl.forEach(mpAdd);
   MI=null;MODE='tdm';ORD='auto';RANGE=false;closeP();MP.starting=1;try{start()}finally{MP.starting=0}toast('ONLINE · '+m.room.toUpperCase()+' · '+(m.tm?'RED':'BLUE')+' TEAM'+(asked!==m.tm?' (that team was full)':''))}
  else if(m.t==='pj'){mpAdd(m.p);toast(m.p.n+' JOINED')}
  else if(m.t==='pl'){const p=MP.pl[m.id];if(p)toast(p.n+' LEFT');mpRemove(m.id)}
@@ -1679,7 +1679,7 @@ function mpPuppet(b,dt){const s=MP.bs&&MP.bs[bots.indexOf(b)];
  b.mvv=s[4];b.ph=(b.ph||0)+dt*7*s[4];b.g.position.set(b.x,0,b.z);try{b.m.pose(skel(b.ph,b.mvv,{run:s[4]>.95}))}catch(e){}}
 function mpTick(dt){
  if(!MP.on)return;
- if(state==='menu'||state==='end'){mpLeave();return}
+ if(state==='menu'||(state==='end'&&!MP.stay)){mpLeave();return}if(state==='end')return;
  if(state!=='play')return;
  const now=performance.now();mt=600-(now-(MP.t0||now))/1000;TK[0]=TK[1]=0;
  if(now-MP.ls>66&&MP.ws&&MP.ws.readyState===1){MP.ls=now;MP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz),w:cur,k:(skId(cur)||''),sl:SL.k>.3?1:0}))}
@@ -1691,7 +1691,7 @@ function mpTick(dt){
 {const _sb=spawnBot;spawnBot=function(b){const i=bots.indexOf(b),r=i<10?0:1;b.team=MP.on?(r===MP.my?0:1):r;_sb(b);if(MP.on){b.x=(r?1:-1)*rnd(44,46.5);b.g.position.set(b.x,0,b.z)}}}
 {const _u=updBot;updBot=function(b,dt){if(MP.on&&!b.isRag){if(!MP.host){mpPuppet(b,dt);return}if(b.park)return}_u(b,dt)}}
 {const _k=killBot;killBot=function(v,by,dir,hs){if(MP.on&&!MP.host)return;_k(v,by,dir,hs)}}
-{const _e=end;end=function(){mpLeave();_e.apply(this,arguments)}}
+{const _e=end;end=function(){if(!MP.stay)mpLeave();_e.apply(this,arguments)}}
 {const _m=mfUpd;let t8=performance.now();mfUpd=function(){_m();const n=performance.now(),dt=Math.min(.1,(n-t8)/1000);t8=n;try{mpTick(dt)}catch(e){console.error('mpTick',e)}}}
 
 /* ===== Update 19b: online stage 2 (fighting, scores, leaving players) ===== */
@@ -1740,16 +1740,16 @@ playSel=function(){if(SV.mode==='tdm')plChoice();else _plOff()};$('bPlay').oncli
 {const _b=$('bMenu').onclick;$('bMenu').onclick=function(){mpLeave();return _b&&_b.apply(this,arguments)}}
 
 /* ===== Update 20: online stage 3 (server list, ragdolls, guns, chat, real-player board) ===== */
-MP.pick=0;MP.chat=[];MP.lb=[];MP.code='';MP.rname='';MP.errm='';MP.fl=[];
+MP.pick=0;MP.chat=[];MP.sbd=[];MP.code='';MP.rname='';MP.errm='';MP.fl=[];
 var mpEsc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function mpPanel(msg){showP('<h3>ONLINE</h3><p><b>1. PICK YOUR TEAM</b></p><div class="row"><button id="mpB" onclick="mpPick(0)" style="border-color:#3a8bff;min-width:130px">BLUE</button><button id="mpR" onclick="mpPick(1)" style="border-color:#ff3a3a;min-width:130px">RED</button></div><p><b>2. PICK A SERVER</b></p><div class="row"><button onclick="mpJoin(MP.pick)" style="border-color:#35ff6a;min-width:270px">QUICK JOIN (GENERAL)</button></div><div id="mpl" style="max-height:170px;overflow:auto;text-align:left;margin:6px 0">Loading servers...</div><div class="row"><button onclick="mpRefresh()">REFRESH LIST</button><button onclick="mpJoin(MP.pick,{create:1})">CREATE PRIVATE SERVER</button></div><div class="row"><input id="mpcode" maxlength="4" placeholder="CODE" onkeydown="event.stopPropagation()" onkeyup="event.stopPropagation()" style="width:90px;text-align:center;padding:8px;border-radius:8px;border:1px solid #4a5038;background:#12161a;color:#fff;text-transform:uppercase"><button onclick="mpCode()">JOIN WITH CODE</button></div><p id="mpst">'+(msg||'')+'</p><small>Up to 12 players per server. You can join a server at any time, even in the middle of a round. Online games use the Industrial District for now.</small>');mpPick(MP.pick);mpRefresh()}
+function mpPanel(msg){showP('<h3>ONLINE</h3><p><b>1. PICK YOUR TEAM</b></p><div class="row"><button id="mpB" onclick="mpPick(0)" style="border-color:#3a8bff;min-width:130px">BLUE</button><button id="mpR" onclick="mpPick(1)" style="border-color:#ff3a3a;min-width:130px">RED</button></div><p><b>2. PICK A SERVER</b></p><div class="row"><button onclick="mpQuick()" style="border-color:#35ff6a;min-width:270px">'+(MP.last?'QUICK JOIN: BACK TO '+mpEsc(MP.last.name||MP.last.room):'QUICK JOIN (GENERAL)')+'</button></div><div id="mpl" style="max-height:170px;overflow:auto;text-align:left;margin:6px 0">Loading servers...</div><div class="row"><button onclick="mpRefresh()">REFRESH LIST</button><button onclick="mpCreateP()">CREATE PRIVATE SERVER</button></div><div class="row"><input id="mpcode" maxlength="10" placeholder="CODE" onkeydown="event.stopPropagation()" onkeyup="event.stopPropagation()" style="width:90px;text-align:center;padding:8px;border-radius:8px;border:1px solid #4a5038;background:#12161a;color:#fff;text-transform:uppercase"><button onclick="mpCode()">JOIN WITH CODE</button></div><p id="mpst">'+(msg||'')+'</p><small>Up to 12 players per server. You can join a server at any time, even in the middle of a round. The map is picked by a vote before every round.</small>');mpPick(MP.pick);mpRefresh()}
 function mpPick(t){MP.pick=t;const b=$('mpB'),r=$('mpR');if(b)b.style.background=t===0?'#1f4fa0':'';if(r)r.style.background=t===1?'#a02020':''}
-function mpCode(){const e=$('mpcode'),c=((e&&e.value)||'').trim().toUpperCase();if(c.length<4){mpSt('Type the 4 letter code first.');return}mpJoin(MP.pick,{code:c})}
+function mpCode(){const e=$('mpcode'),c=((e&&e.value)||'').trim().toUpperCase();if(c.length<3){mpSt('Type the server code first.');return}mpJoin(MP.pick,{code:c})}
 function mpRefresh(){const box=$('mpl');if(!box)return;if(!acApi()){box.textContent='Log in first to see servers.';return}
  try{fetch(acApi()+'/api/rooms').then(r=>r.json()).then(j=>{const b=$('mpl');if(!b)return;b.innerHTML='';
   (j.rooms||[]).forEach(r=>{const row=document.createElement('div');row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 6px;border-bottom:1px solid #333;font-size:13px';
    const l=document.createElement('span'),left=Math.max(0,600-(r.el||0)/1000),mm=Math.floor(left/60),ss=Math.floor(left%60);
-   l.textContent=r.name+(r.n?' · '+r.n+'/12 · BLUE '+r.tc[0]+' RED '+r.tc[1]+' · '+mm+':'+(ss<10?'0':'')+ss+' left':' · empty, starts when you join');
+   l.textContent=r.name+(r.n?' · '+r.n+'/12 · BLUE '+r.tc[0]+' RED '+r.tc[1]+' · '+(r.ph==='vote'?'VOTING FOR THE MAP':(MAPS[r.map]?MAPS[r.map].n:'')+' '+mm+':'+(ss<10?'0':'')+ss+' left'):' · empty, starts when you join');
    const bt=document.createElement('button');bt.textContent=r.n>=12?'FULL':'JOIN';bt.disabled=r.n>=12;bt.onclick=()=>mpJoin(MP.pick,{room:r.id});row.append(l,bt);b.appendChild(row)})}).catch(()=>{const b=$('mpl');if(b)b.textContent='Could not load the list. The server may be waking up (up to a minute). Press REFRESH LIST.'})}catch(e){}}
 function mpJoin(team,o){o=o||{};
  if(!AX.tok||!acApi()){mpPanel('Log in first: close this, then press LOG IN / CREATE ACCOUNT.');return}
@@ -1763,8 +1763,13 @@ function mpJoin(team,o){o=o||{};
 function mpGone(){const was=MP.on,em=MP.errm;MP.errm='';mpLeave();if(was){toast(em||'DISCONNECTED FROM THE SERVER');try{$('bMenu').onclick()}catch(e){}}else mpSt(em||'Could not connect. If you just updated, the server may need to be redeployed.')}
 
 /* remote players: real gun + skin, slide, muzzle flash */
+function mpHeld(w){const g=new THREE.Group(),M=(geo,col,r,m)=>{const x=new THREE.Mesh(geo,MA(col,r,m));g.add(x);return x};
+ if(w===5){const b=M(new THREE.SphereGeometry(.075,12,10),0x3f5a2a,.6,.2);b.position.set(0,0,-.1);const t=M(new THREE.CylinderGeometry(.02,.02,.04,8),0x222222,.5,.5);t.position.set(0,.08,-.1);const l=M(new THREE.BoxGeometry(.012,.012,.08),0x999999,.3,.8);l.position.set(.03,.085,-.1);return g}
+ if(w===6){const b=M(new THREE.CylinderGeometry(.045,.045,.2,12),0x9aa0a6,.5,.4);b.rotation.x=Math.PI/2;b.position.set(0,0,-.1);const t=M(new THREE.CylinderGeometry(.03,.045,.04,12),0x333333,.5,.4);t.rotation.x=Math.PI/2;t.position.set(0,0,-.22);return g}
+ if(w===2||w===12){const bl=M(new THREE.BoxGeometry(.018,.055,.3),0xdfe3e6,.2,.9);bl.position.set(0,0,-.2);const tp=M(new THREE.ConeGeometry(.03,.09,4),0xdfe3e6,.2,.9);tp.rotation.x=-Math.PI/2;tp.position.set(0,0,-.395);const gd=M(new THREE.BoxGeometry(.07,.02,.025),0x222222,.5,.3);gd.position.set(0,0,-.05);const hd=M(new THREE.CylinderGeometry(.02,.02,.13,8),0x181818,.7,.1);hd.rotation.x=Math.PI/2;hd.position.set(0,0,.02);try{applySkin(g,w)}catch(e){}return g}
+ return null}
 function mpGun(p,w,k){w=w|0;k=k||'';if(p.gw===w&&p.gk===k)return;p.gw=w;p.gk=k;
- try{const gn=p.g.children.find(o=>o.isGroup);if(!gn)return;SKFORCE={i:w,id:k||null};let nm;try{nm=gunModel(w)}finally{SKFORCE=null}
+ try{const gn=p.g.children.find(o=>o.isGroup);if(!gn)return;SKFORCE={i:w,id:k||null};let nm;try{nm=mpHeld(w)||gunModel(w)}finally{SKFORCE=null}
   gn.children.slice().forEach(ch=>gn.remove(ch));nm.children.slice().forEach(ch=>gn.add(ch))}catch(e){console.log('mpGun',e)}}
 var MPFG=null,MPFM=null;
 function mpFx(m){const p=MP.pl[m.i];if(!p||!p.init||p.rag||!p.g.visible)return;
@@ -1803,25 +1808,25 @@ document.addEventListener('pointerlockchange',()=>{if(document.pointerLockElemen
 function mpChatIn(m){const e={n:m.n,tm:m.tm,m:m.m,t:performance.now()};MP.chat.push(e);while(MP.chat.length>40)MP.chat.shift();mpChatLog();
  if(m.i!==MP.id){const p=MP.pl[m.i];if(p)mpBub(p,m.m)}}
 function mpChatLog(){mpChL.innerHTML='';const n=performance.now();MP.chat.filter(e=>n-e.t<12000).slice(-5).forEach(e=>{const d=document.createElement('div'),a=document.createElement('b');a.textContent=e.n+': ';a.style.color=e.tm?'#ff7a7a':'#7ab4ff';const x=document.createElement('span');x.textContent=e.m;d.append(a,x);mpChL.appendChild(d)})}
-{const _l=mpLeave;mpLeave=function(){_l();MP.chat=[];MP.lb=[];MP.code='';MP.rname='';try{MP.fl.forEach(f=>sc.remove(f.m))}catch(e){}MP.fl=[];mpChI.style.display='none';mpChL.innerHTML=''}}
+{const _l=mpLeave;mpLeave=function(){_l();MP.chat=[];MP.sbd=[];MP.code='';MP.rname='';try{MP.fl.forEach(f=>sc.remove(f.m))}catch(e){}MP.fl=[];mpChI.style.display='none';mpChL.innerHTML=''}}
 
 /* the in-game sidebar shows real players only */
 {const _b=board;board=function(){if(!MP.on){_b();return}
- const lb={};(MP.lb||[]).forEach(a=>lb[a[0]]=a);const me=lb[MP.id]||[0,P.k|0,P.d|0],rows=[{n:AX.user||'YOU',t:MP.my,k:me[1],d:me[2],me:1}];
+ const lb={};(MP.sbd||[]).forEach(a=>lb[a[0]]=a);const me=lb[MP.id]||[0,P.k|0,P.d|0],rows=[{n:AX.user||'YOU',t:MP.my,k:me[1],d:me[2],me:1}];
  for(const id in MP.pl){const p=MP.pl[id],a=lb[p.id]||[0,0,0];rows.push({n:p.n,t:p.tm,k:a[1],d:a[2]})}
  rows.sort((a,b)=>b.k-a.k||a.d-b.d);
  let h='<div>'+mpEsc(MP.rname||'ONLINE')+(MP.code?' · CODE '+mpEsc(MP.code):'')+' · BLUE '+(MP.sc[0]|0)+' · RED '+(MP.sc[1]|0)+'</div><table><tr><th>PLAYER</th><th>TEAM</th><th>K</th><th>D</th><th>POINTS</th></tr>'+
   rows.map(r=>'<tr style="color:'+(r.t?'#f77':'#7af')+(r.me?';font-weight:900':'')+'"><td>'+mpEsc(r.n)+(r.me?' (YOU)':'')+'</td><td>'+(r.t?'RED':'BLUE')+'</td><td>'+r.k+'</td><td>'+r.d+'</td><td>'+r.k*100+'</td></tr>').join('')+'</table>';
- h+='<div style="margin-top:8px;text-align:left;max-height:150px;overflow:auto;font-size:13px"><b>CHAT</b> (press Enter to talk)'+MP.chat.slice(-12).map(e=>'<div><span style="color:'+(e.tm?'#f77':'#7af')+'">'+mpEsc(e.n)+':</span> '+mpEsc(e.m)+'</div>').join('')+'</div>';
+ h+='<div style="margin-top:8px;text-align:left;max-height:32vh;overflow:auto;font-size:13px;overflow-wrap:anywhere;word-break:break-word;max-width:min(92vw,520px)"><b>CHAT</b> (press Enter to talk)'+MP.chat.slice(-12).map(e=>'<div><span style="color:'+(e.tm?'#f77':'#7af')+'">'+mpEsc(e.n)+':</span> '+mpEsc(e.m)+'</div>').join('')+'</div>';
  $('sb').innerHTML=h}}
 
 /* message handling */
 {const _m=mpMsg;mpMsg=function(m){
- if(m.t==='w'){MP.chat=[];MP.lb=m.lb||[];MP.code=m.code||'';MP.rname=m.name||m.room;_m(m);
+ if(m.t==='w'){MP.chat=[];MP.sbd=m.lb||[];MP.code=m.code||'';MP.rname=m.name||m.room;_m(m);
   if(MP.on&&state==='play'){const s=spawnPt();P.x=s[0];P.z=s[1];P.yaw=Math.atan2(-s[0],-s[1])+Math.PI;P.team=0}
   if(m.priv)setTimeout(()=>toast('PRIVATE SERVER · CODE '+m.code+' (press TAB)'),1500);return}
  if(m.t==='err')MP.errm=m.m;
- if((m.t==='kl'||m.t==='end')&&m.lb)MP.lb=m.lb;
+ if((m.t==='kl'||m.t==='end')&&m.lb)MP.sbd=m.lb;
  if(m.t==='c'){mpChatIn(m);return}
  if(m.t==='fx'){mpFx(m);return}
  if(m.t==='s'){const p=MP.pl[m.i];if(p){p.sl=m.sl;mpGun(p,m.w,m.k)}}
@@ -1857,6 +1862,119 @@ function bossAttach(b){if(b.bs)return;b.boss=true;b.bc=document.createElement('c
  else if(b.boss){const dead=s[5]!==0;bossClear();if(dead){toast('BOSS DEFEATED!');snd(120,.8,'sawtooth',.3)}}}}
 {const _m=mpMsg;mpMsg=function(m){if(m.t==='adm'&&MP.host&&m.c==='follow')MP.fol=m.from;else if(m.t==='adm'&&MP.host)MP.fol=0;return _m(m)}}
 {const _f=CMD.follow;CMD.follow=function(){if(MP.on&&MP.host)MP.fol=0;return _f()}}
+
+/* ===== Update 20d: private server code always visible ===== */
+const mpCdH=document.createElement('div');mpCdH.style.cssText='position:absolute;left:50%;top:6px;transform:translateX(-50%);padding:4px 12px;border-radius:8px;background:rgba(0,0,0,.6);border:1px solid #ffd400;color:#ffd400;font:900 14px sans-serif;letter-spacing:.12em;pointer-events:none;display:none;z-index:14';$('hud').appendChild(mpCdH);
+const mpCdP=document.createElement('div');mpCdP.style.cssText='margin:10px auto;padding:8px 14px;border:2px solid #ffd400;border-radius:10px;background:rgba(0,0,0,.7);color:#ffd400;font:900 22px sans-serif;letter-spacing:.2em;text-align:center;display:none;width:fit-content;pointer-events:none';$('pause').appendChild(mpCdP);
+function mpCdShow(){const on=MP.on&&MP.code;mpCdH.style.display=on?'block':'none';mpCdP.style.display=on?'block':'none';if(on){mpCdH.textContent='PRIVATE SERVER · CODE '+MP.code;mpCdP.textContent='SERVER CODE: '+MP.code}}
+{const _m=mpMsg;mpMsg=function(m){_m(m);if(m.t==='w'&&m.priv){mpCdShow();setTimeout(()=>toast('PRIVATE SERVER · CODE '+m.code+' · SHARE IT'),2500)}}}
+{const _l=mpLeave;mpLeave=function(){_l();mpCdShow()}}
+
+/* ===== Update 20e: the host must be a visible window (hidden tabs pause the game and the bots) ===== */
+document.addEventListener('visibilitychange',()=>{if(MP.on)mpSend({t:'vis',v:document.hidden?0:1})});
+{const _m=mpMsg;mpMsg=function(m){if(m.t==='b')MP.bsT=performance.now();if(m.t==='w'){MP.bsT=performance.now();setTimeout(()=>{if(MP.on&&document.hidden)mpSend({t:'vis',v:0})},300)}return _m(m)}}
+{const _t=mpTick;let wt=0;mpTick=function(dt){_t(dt);if(!MP.on||state!=='play'||MP.host)return;const n=performance.now();if(n-(MP.bsT||n)>3500&&n-wt>5000){wt=n;toast('NO BOT DATA FROM THE HOST. THEIR WINDOW MAY BE HIDDEN OR OFFLINE')}}}
+
+/* ===== Update 20f: every player always gets an end screen and points online ===== */
+{const _e=end;end=function(){
+ if(!MP.on||MP.ending||state!=='play')return _e.apply(this,arguments);
+ MP.ending=1;
+ try{
+  const lb={};(MP.sbd||[]).forEach(a=>lb[a[0]]=a);const me=lb[MP.id];if(me){P.k=Math.max(P.k|0,me[1]|0);P.d=Math.max(P.d|0,me[2]|0)}
+  const rows=[{n:AX.user||'YOU',t:MP.my,k:P.k|0,d:P.d|0}];for(const id in MP.pl){const p=MP.pl[id],a=lb[p.id]||[0,0,0];rows.push({n:p.n,t:p.tm,k:a[1]|0,d:a[2]|0})}
+  rows.sort((a,b)=>b.k-a.k||a.d-b.d);
+  TK[0]=MP.sc[MP.my]|0;TK[1]=MP.sc[1-MP.my]|0;
+  const p0=SV.pts,c0=SV.coins,win=TK[0]>TK[1]?1:TK[0]===TK[1]?0:-1;let ok=true;
+  try{_e.apply(this,arguments)}catch(e){ok=false;console.error('end failed',e)}
+  const tbl='<table>'+rows.slice(0,12).map((r,i)=>'<tr style="color:'+(r.t?'#f77':'#7af')+'"><td>#'+(i+1)+'</td><td>'+mpEsc(r.n)+'</td><td>'+(r.t?'RED':'BLUE')+'</td><td>'+r.k+' K</td><td>'+r.d+' D</td><td>'+r.k*100+' PTS</td></tr>').join('')+'</table>';
+  if(!ok||state!=='end'){
+   let earn=P.k*10+(win>0?100:0);try{if(SV.coins===c0)SV.coins+=earn;if(SV.pts===p0){SV.pts+=P.k*100;SV.st.k+=P.k;SV.st.d+=P.d;SV.st.m++;if(win>0)SV.st.w++}sv()}catch(e){}
+   state='end';try{document.exitPointerLock()}catch(e){}$('hud').classList.add('h');$('res').classList.remove('h');
+   $('res').innerHTML='<h1 style="font-size:48px">'+(win>0?'VICTORY':win<0?'DEFEAT':'DRAW')+'</h1><p>BLUE '+TK[0]+' · RED '+TK[1]+' · +'+earn+' coins'+'</p><div id="panel">'+tbl+'</div><br><button id="again">PLAY AGAIN</button><button id="toMenu">MAIN MENU</button>';
+   $('again').onclick=start;$('toMenu').onclick=()=>{state='menu';$('res').classList.add('h');$('menu').classList.remove('h')}
+  }else{try{$('res').innerHTML=$('res').innerHTML.replace(/<table>[\s\S]*<\/table>/,tbl)}catch(e){}}
+  if(MP.stay){const a=$('again');if(a){a.textContent='NEXT MAP VOTE COMING...';a.disabled=true;a.onclick=null}const t=$('toMenu');if(t)t.onclick=()=>{mpLeave();state='menu';$('res').classList.add('h');$('menu').classList.remove('h')}}
+ }finally{MP.ending=0}}}
+{const _t=mpTick;mpTick=function(dt){_t(dt);if(MP.on&&state==='play'&&!MP.ending&&((MP.sc[0]|0)>=50||(MP.sc[1]|0)>=50||mt<=0)){try{end()}catch(e){console.error(e)}}}}
+
+/* ===== Update 20g: always-visible CHAT button, wrapping chat, taller log, multi-line bubbles ===== */
+function mpBub(p,text){mpBubOff(p);if(p.rag)return;
+ try{const m=document.createElement('canvas').getContext('2d');m.font='bold 32px sans-serif';const MW=470,lines=[];let ln='';
+  for(const w0 of String(text).split(/\s+/)){let w=w0;while(m.measureText(w).width>MW){let k=w.length;while(k>1&&m.measureText(w.slice(0,k)).width>MW)k--;if(ln){lines.push(ln);ln=''}lines.push(w.slice(0,k));w=w.slice(k)}
+   const t=ln?ln+' '+w:w;if(m.measureText(t).width>MW){if(ln)lines.push(ln);ln=w}else ln=t}
+  if(ln)lines.push(ln);const L=lines.slice(0,5),h=L.length*40+30;let mx=0;L.forEach(l=>mx=Math.max(mx,m.measureText(l).width));
+  const cv=document.createElement('canvas');cv.width=512;cv.height=h;const g=cv.getContext('2d'),bw=Math.min(500,mx+40),x=256-bw/2,y=4,hh=h-8,r=16;
+  g.fillStyle='rgba(0,0,0,.75)';g.beginPath();g.moveTo(x+r,y);g.lineTo(x+bw-r,y);g.quadraticCurveTo(x+bw,y,x+bw,y+r);g.lineTo(x+bw,y+hh-r);g.quadraticCurveTo(x+bw,y+hh,x+bw-r,y+hh);g.lineTo(x+r,y+hh);g.quadraticCurveTo(x,y+hh,x,y+hh-r);g.lineTo(x,y+r);g.quadraticCurveTo(x,y,x+r,y);g.fill();
+  g.font='bold 32px sans-serif';g.fillStyle='#fff';g.textAlign='center';L.forEach((l,i)=>g.fillText(l,256,y+36+i*40));
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));sp.scale.set(512/150,h/150,1);sp.position.y=2.55+h/300;p.g.add(sp);p.bub=sp;p.bubT=performance.now()+7000}catch(e){}}
+mpChL.style.cssText='position:absolute;left:12px;bottom:130px;width:min(340px,70vw);max-height:42vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;font:600 13px sans-serif;color:#fff;text-shadow:0 1px 3px #000;pointer-events:none;z-index:15;overflow-wrap:anywhere;word-break:break-word';
+function mpChatLog(){mpChL.innerHTML='';const n=performance.now();MP.chat.filter(e=>n-e.t<15000).slice(-8).forEach(e=>{const d=document.createElement('div'),a=document.createElement('b'),x=document.createElement('span');d.style.cssText='background:rgba(0,0,0,.4);border-radius:6px;padding:2px 7px;margin-top:2px';a.textContent=e.n+': ';a.style.color=e.tm?'#ff7a7a':'#7ab4ff';x.textContent=e.m;d.append(a,x);mpChL.appendChild(d)})}
+const mpChB=document.createElement('div');mpChB.id='mpChat';mpChB.textContent='CHAT';mpChB.style.cssText='position:absolute;left:20px;bottom:90px;padding:6px 14px;border-radius:8px;background:rgba(0,0,0,.55);border:1px solid #9ad;color:#fff;font:800 12px sans-serif;letter-spacing:.12em;pointer-events:auto;cursor:pointer;display:none;z-index:30;user-select:none;-webkit-user-select:none';$('hud').appendChild(mpChB);
+mpChB.onclick=()=>{if(mpChI.style.display==='none')mpChatOpen();else mpChatClose(false)};
+TB.mpChat=[()=>{if(mpChI.style.display==='none')mpChatOpen();else mpChatClose(false)}];
+const mpRow=document.createElement('div');mpRow.style.cssText='position:absolute;left:12px;bottom:130px;width:min(360px,92vw);display:none;gap:6px;z-index:70;pointer-events:auto';$('hud').appendChild(mpRow);
+mpChI.style.cssText='flex:1;min-width:0;padding:9px;border-radius:8px;border:1px solid #999;background:rgba(0,0,0,.85);color:#fff;font:16px sans-serif;display:none';mpRow.appendChild(mpChI);
+const mpSB=document.createElement('button');mpSB.textContent='SEND';mpSB.style.cssText='min-width:0;margin:0;padding:8px 12px;font-size:12px';mpRow.appendChild(mpSB);
+const mpXB=document.createElement('button');mpXB.textContent='X';mpXB.style.cssText='min-width:0;margin:0;padding:8px 12px;font-size:12px';mpRow.appendChild(mpXB);
+mpSB.onclick=()=>mpChatClose(true);mpXB.onclick=()=>mpChatClose(false);
+[mpRow,mpChB].forEach(e=>{e.addEventListener('touchstart',ev=>ev.stopPropagation(),{passive:true});e.addEventListener('mousedown',ev=>ev.stopPropagation())});
+mpChB.addEventListener('touchstart',ev=>{ev.preventDefault();mpChB.onclick()},{passive:false});
+function mpChLay(){const bl=$('bl').getBoundingClientRect(),base=Math.max(8,innerHeight-bl.top+8),open=mpChI.style.display!=='none';
+ mpChB.style.display=MP.on&&state==='play'?'block':'none';mpChB.style.bottom=base+'px';
+ mpRow.style.display=open?'flex':'none';mpRow.style.bottom=(base+34)+'px';mpChL.style.bottom=(base+34+(open?50:0))+'px'}
+{const _t=mpTick;mpTick=function(dt){_t(dt);try{mpChLay()}catch(e){}}}
+{const _l=mpLeave;mpLeave=function(){_l();try{mpChLay()}catch(e){}}}
+
+/* ===== Update 20h: quick join goes back to the server you were just in ===== */
+MP.last=null;MP.qfb=0;
+function mpQuick(){const l=MP.last;MP.qfb=l?1:0;mpJoin(MP.pick,l?(l.code?{code:l.code}:{room:l.room}):{})}
+{const _m=mpMsg;mpMsg=function(m){if(m.t==='w'){MP.qfb=0;MP.last={room:m.room,code:m.priv?m.code:'',name:m.name||m.room}}return _m(m)}}
+{const _g=mpGone;mpGone=function(){const was=MP.on,em=MP.errm;if(!was&&MP.qfb&&em){MP.qfb=0;MP.last=null;MP.errm='';mpLeave();mpSt('Your last server is gone. Finding another one...');mpJoin(MP.pick);return}_g()}}
+
+/* ===== Update 21: online stage 4 (map voting, rounds repeat), thrown grenades, knife skins ===== */
+MP.stay=0;MP.vote=null;MP.nd=[];
+const mpV=document.createElement('div');mpV.style.cssText='position:fixed;left:0;top:0;right:0;bottom:0;z-index:95;background:rgba(6,9,12,.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#fff;font-family:sans-serif;padding:16px;overflow:auto';
+mpV.innerHTML='<div style="font:900 26px sans-serif;letter-spacing:.16em;text-align:center">VOTE FOR THE NEXT MAP</div><div style="width:min(560px,90vw);height:16px;border:2px solid #fff;border-radius:9px;overflow:hidden"><i id="mpvb" style="display:block;height:100%;width:100%;background:#ffd400"></i></div><div id="mpvt" style="font:700 14px sans-serif"></div><div id="mpvc" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center"></div><button id="mpvl" style="padding:8px 16px">LEAVE SERVER</button>';
+document.body.appendChild(mpV);
+$('mpvl').onclick=()=>{mpLeave();state='menu';mpV.style.display='none';$('res').classList.add('h');$('menu').classList.remove('h')};
+var MPART={};
+function mpVCards(){const box=$('mpvc');if(!box||!MP.vote)return;box.innerHTML='';
+ ['ind','des','cit'].forEach(k=>{if(!MAPS[k])return;let a=MPART[k];if(a===undefined){try{a=MPART[k]=mapArt(k,'tdm')}catch(e){a=MPART[k]=''}}
+  const c=document.createElement('div'),n=(MP.vote.counts&&MP.vote.counts[k])|0;
+  c.style.cssText='width:min(210px,42vw);height:140px;border-radius:12px;border:3px solid '+(MP.vote.mine===k?'#35ff6a':'#777')+';background:#222 center/cover url('+a+');cursor:pointer;position:relative;overflow:hidden';
+  const t=document.createElement('div');t.style.cssText='position:absolute;left:0;right:0;bottom:0;padding:6px;background:rgba(0,0,0,.72);font:800 12px sans-serif;letter-spacing:.06em;display:flex;justify-content:space-between';
+  const nm=document.createElement('span');nm.textContent=MAPS[k].n;const v=document.createElement('span');v.textContent=n+(n===1?' VOTE':' VOTES');v.style.color='#ffd400';t.append(nm,v);c.appendChild(t);
+  c.onclick=()=>{if(!MP.vote)return;MP.vote.mine=k;mpSend({t:'vote',m:k});mpVCards()};box.appendChild(c)})}
+function mpVLoop(){if(!MP.vote||mpV.style.display==='none')return;const left=Math.max(0,MP.vote.end-performance.now());$('mpvb').style.width=Math.min(100,left/100)+'%';$('mpvt').textContent='Next round starts in '+Math.ceil(left/1000)+' s';requestAnimationFrame(mpVLoop)}
+function mpVoteStart(left,counts,showIn){MP.vote={end:performance.now()+left,counts:counts||{ind:0,des:0,cit:0},mine:null};clearTimeout(MP.vsT);
+ const show=()=>{if(!MP.vote||!MP.on)return;mpVCards();mpV.style.display='flex';try{document.exitPointerLock()}catch(e){}mpVLoop()};
+ if(showIn>0)MP.vsT=setTimeout(show,showIn);else show()}
+function mpGo(map){MP.vote=null;clearTimeout(MP.vsT);mpV.style.display='none';SV.map=(MAPS[map]&&map!=='rng')?map:'ind';MP.t0=performance.now();MP.sc=[0,0];MP.sbd=[];MP.bs=null;
+ MI=null;MODE='tdm';ORD='auto';RANGE=false;closeP();MP.starting=1;try{start()}finally{MP.starting=0}
+ if(MP.on&&state==='play'){const s=spawnPt();P.x=s[0];P.z=s[1];P.yaw=Math.atan2(-s[0],-s[1])+Math.PI;P.team=0}
+ toast('MAP: '+MAPS[SV.map].n)}
+{const _l=mpLeave;mpLeave=function(){_l();MP.stay=0;MP.vote=null;clearTimeout(MP.vsT);mpV.style.display='none';MP.nd.forEach(n=>{try{sc.remove(n.m)}catch(e){}});MP.nd=[]}}
+function mpNade(m){const me=new THREE.Mesh(m.k==='gr'?GRG:SMG2,m.k==='gr'?GRM:SMM);me.position.set(m.x,m.y,m.z);sc.add(me);MP.nd.push({m:me,k:m.k,v:new V3(m.vx,m.vy,m.vz),t:m.k==='gr'?2.2:1.3})}
+function mpNx(m){const p=MP.pl[m.i];if(!p||state!=='play')return;
+ if(p.tm!==MP.my&&P.alive){const d=Math.hypot(P.x-m.x,P.z-m.z);if(d<5)damageP(Math.round(60*(1-d/5)),p.att)}
+ if(MP.host){const a=p.att;bots.forEach((b,i)=>{if(b.dead||b.park||(i<10?0:1)===p.tm)return;const d=Math.hypot(b.x-m.x,b.z-m.z);if(d<7){b.hp-=170*(1-d/7);if(b.hp<=0){a.team=p.tm===MP.my?0:1;a.pid=p.id;killBot(b,a,new V3(b.x-m.x,0,b.z-m.z).normalize(),0)}}})}}
+{const _t=throwItem;throwItem=function(k){const n=NADES.length;_t(k);if(MP.on&&NADES.length>n){const g=NADES[NADES.length-1],p=g.m.position;mpSend({t:'nd',k,x:p.x,y:p.y,z:p.z,vx:g.v.x,vy:g.v.y,vz:g.v.z})}}}
+{const _b=boom;boom=function(p){_b(p);if(MP.on)mpSend({t:'nx',x:p.x,z:p.z})}}
+{const _t=mpTick;mpTick=function(dt){_t(dt);if(!MP.on||state!=='play')return;
+ for(let i=MP.nd.length-1;i>=0;i--){const n=MP.nd[i],p=n.m.position;n.v.y-=18*dt;let ny=p.y+n.v.y*dt;if(blocked(p.x+n.v.x*dt,p.z,p.y,p.y+.3,.1))n.v.x*=-.4;if(blocked(p.x,p.z+n.v.z*dt,p.y,p.y+.3,.1))n.v.z*=-.4;if(ny<.12){ny=.12;n.v.y*=-.4;n.v.x*=.7;n.v.z*=.7}p.set(p.x+n.v.x*dt,ny,p.z+n.v.z*dt);n.m.rotation.x+=dt*6;n.t-=dt;if(n.t<=0){MP.nd.splice(i,1);sc.remove(n.m);if(n.k==='gr')explode(p.clone());else puff(p.clone())}}}}
+{const _m=mpMsg;mpMsg=function(m){
+ if(m.t==='w'){MP.stay=1;_m(m);if(m.ph==='vote'&&MP.on){state='end';try{document.exitPointerLock()}catch(e){}$('hud').classList.add('h');$('pause').classList.add('h');mpVoteStart(m.vl||10000,m.vt,0)}return}
+ if(m.t==='end'){_m(m);if(MP.on&&MP.stay&&!MP.vote)mpVoteStart(m.vl||16000,{ind:0,des:0,cit:0},m.rs||6000);return}
+ if(m.t==='vt'){if(MP.vote){MP.vote.counts=m.v;if(mpV.style.display!=='none')mpVCards()}return}
+ if(m.t==='go'){if(MP.on)mpGo(m.map);return}
+ if(m.t==='nd'){if(state==='play'&&m.i!==MP.id)mpNade(m);return}
+ if(m.t==='nx'){mpNx(m);return}
+ return _m(m)}}
+
+/* ===== Update 21b: choose your own private server code ===== */
+function mpCreateP(){showP('<h3>CREATE A PRIVATE SERVER</h3><p>Choose a code (3 to 10 letters or numbers). Only people who type this exact code can join.</p><div class="row"><input id="mpnc" maxlength="10" placeholder="YOUR CODE" style="width:200px;text-align:center;padding:9px;border-radius:8px;border:1px solid #4a5038;background:#12161a;color:#fff;text-transform:uppercase;font-size:16px;letter-spacing:.15em"></div><p><b>YOUR TEAM</b></p><div class="row"><button id="mpB" onclick="mpPick(0)" style="border-color:#3a8bff;min-width:120px">BLUE</button><button id="mpR" onclick="mpPick(1)" style="border-color:#ff3a3a;min-width:120px">RED</button></div><div class="row"><button onclick="mpCreate()" style="border-color:#35ff6a;min-width:220px">CREATE SERVER</button><button onclick="mpPanel()">BACK</button></div><p id="mpst"></p>');try{mpPick(MP.pick)}catch(e){}}
+function mpCreate(){const e=$('mpnc'),c=((e&&e.value)||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(c.length<3){mpSt('The code must be 3 to 10 letters or numbers.');return}mpJoin(MP.pick,{create:1,code:c})}
+{const _c=mpChLay;mpChLay=function(){_c();try{if(mpCdH.style.display!=='none'){const t=$('top').getBoundingClientRect();mpCdH.style.top=Math.round(t.bottom+4)+'px'}}catch(e){}}}
 
 applyGfx();requestAnimationFrame(frame);
 </script></body></html>
