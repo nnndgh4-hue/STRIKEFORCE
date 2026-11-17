@@ -901,7 +901,7 @@ function layFlat(b){try{b.rag=0;b.pts=null;b.flat=1;b.g.position.set(b.x||0,.12,
 {const _w=updBot;updBot=function(b,dt){
  try{_w(b,dt)}catch(e){if(!b._er){b._er=1;console.error('bot update',e)}}
  if(!b.dead){if(b.flat){b.flat=0;b.g.rotation.set(0,b.g.rotation.y,0);b.g.position.y=0}b.chk=0;return}
- if(b.rt>1e8&&!(MI&&MI.live))b.rt=6;
+ if(b.rt>1e8&&!(MI&&MI.live)&&!(window.MP&&MP.co))b.rt=6;
  if(!b.rag&&!b.flat&&b.g.visible)layFlat(b);
  if(b.rag&&b.pts&&b.rg>=4&&!b.chk){b.chk=1;let mx=-1e9,mn=1e9,bad=false;for(const p of b.pts){if(!(p.y===p.y)||!(p.x===p.x)||!(p.z===p.z))bad=true;mx=Math.max(mx,p.y);mn=Math.min(mn,p.y)}
   if(bad)layFlat(b);else if(mx-mn>.9){for(const p of b.pts)p.y=.07+(p.y-mn)*.05;try{b.m.pose(b.pts)}catch(e){layFlat(b)}}}}}
@@ -1667,7 +1667,7 @@ function mpAdd(p){if(MP.pl[p.id])return;const c=CH[p.ch]||CH[0],m=buildChar({v:c
  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cv),transparent:true,depthWrite:false}));sp.scale.set(1.7,.425,1);sp.position.y=2.3;m.g.add(sp);
  MP.pl[p.id]={id:p.id,n:p.n,tm:p.tm,ch:p.ch,g:m.g,m,init:0,x:0,y:0,z:0,yw:0,tx:0,ty:0,tz:0,tyw:0,ph:0,mv:0,al:1,cr:0,sp:0}}
 function mpRemove(id){const p=MP.pl[id];if(!p)return;try{sc.remove(p.g)}catch(e){}delete MP.pl[id]}
-function mpBecomeHost(){toast('YOU NOW RUN THE BOTS');MP.bs=null;bots.forEach(b=>{b.path=null;if(b.dead&&!b.park)b.rt=2})}
+function mpBecomeHost(){toast('YOU NOW RUN THE BOTS');MP.bs=null;bots.forEach(b=>{b.path=null;if(b.dead&&!b.park&&!MP.co)b.rt=2})}
 function mpHostTick(now){bots.forEach((b,i)=>{const t=i<10?0:1,want=(i%10)<10-MP.tc[t];if(!want&&!b.park){b.park=1;b.dead=true;b.rt=1e9;b.rag=0;b.g.visible=false}else if(want&&b.park){b.park=0;spawnBot(b)}});
  if(now-MP.lb>100&&MP.ws&&MP.ws.readyState===1){MP.lb=now;MP.ws.send(JSON.stringify({t:'b',d:bots.map(b=>[Math.round(b.x*100)/100,Math.round(b.z*100)/100,Math.round(b.g.rotation.y*100)/100,Math.round(((b.ph||0)%6.2832)*100)/100,Math.round((b.mvv||0)*100)/100,b.park?2:b.dead?1:0,b.boss&&!b.dead?Math.round(b.hp):0,Math.round((b.g.scale.x||1)*100)])}))}}
 function mpPuppet(b,dt){const s=MP.bs&&MP.bs[bots.indexOf(b)];
@@ -2051,10 +2051,11 @@ function plChoiceS(){showP('<h3>PLAY WAVE SURVIVAL</h3><p><b>ONLINE OR OFFLINE?<
 function coopPanel(msg){MP.coMk=0;showP('<h3>CO-OP WAVE SURVIVAL</h3><p>Fight the waves together. Up to 6 players, everyone on the blue team. One life each: if you go down you wait for the next wave or a restart. Between waves everyone heals and restocks. If all players go down, the run restarts from wave 1.</p><div class="row"><button onclick="mpJoin(0,{co:1})" style="border-color:#35ff6a;min-width:250px">JOIN A CO-OP GAME</button></div><div class="row"><button onclick="MP.coMk=1;mpCreateP()" style="min-width:250px">CREATE A PRIVATE CO-OP GAME</button></div><div class="row"><input id="mpcode" maxlength="10" placeholder="CODE" onkeydown="event.stopPropagation()" onkeyup="event.stopPropagation()" style="width:90px;text-align:center;padding:8px;border-radius:8px;border:1px solid #4a5038;background:#12161a;color:#fff;text-transform:uppercase"><button onclick="mpCode()">JOIN WITH CODE</button></div><p id="mpst">'+(msg||'')+'</p><button onclick="plChoiceS()">BACK</button>')}
 {const _p=playSel;playSel=function(){if(SV.mode==='survival')plChoiceS();else _p()};$('bPlay').onclick=playSel}
 function mpCreate(){const e=$('mpnc'),c=((e&&e.value)||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(c.length<3){mpSt('The code must be 3 to 10 letters or numbers.');return}const co=MP.coMk?1:0;MP.coMk=0;mpJoin(MP.pick,{create:1,code:c,co})}
-function mpCoLabel(){try{const e=$('top').firstElementChild;if(e)e.textContent='CO-OP WAVES · WAVE '+(MP.cwv|0)+' · ENEMIES '+(MP.cen|0);$('sc').style.visibility='hidden'}catch(x){}}
+function mpCoLabel(){try{const e=$('top').firstElementChild;if(e)e.textContent='CO-OP WAVES · WAVE '+(MP.cwv|0)+' · ENEMIES '+(MP.cen|0);$('sc').style.visibility='hidden';$('tm').style.visibility='hidden'}catch(x){}}
+function coSpawnPt(qx,qz){let best=null;for(let k=0;k<14;k++){const[i,j]=nearestFree(cell(rnd(-44,44)),cell(rnd(-44,44))),px=-49.5+i,pz=-49.5+j,d=Math.hypot(px-qx,pz-qz);if(d<28||d>75||navB[i*NG+j])continue;if(!visible(new V3(qx,1.5,qz),new V3(px,1.3,pz)))return[px,pz];best=best||[px,pz]}return best||[44,rnd(-30,30)]}
 function mpCoWave(w){MP.cwv=w;if(w>1){giveXP(40+(w-1)*10);SV.coins+=20+(w-1)*5}
  if(P.alive){P.hp=100;ammo.forEach((a,i)=>{if(a&&W[i]&&!W[i].melee&&W[i].it===undefined&&W[i].mag!==undefined){a.mag=W[i].mag;a.res=W[i].res}})}
- toast('WAVE '+w+(w>1?' · HEALED AND RESTOCKED':''));mpCoLabel()}
+ if(!P.alive){try{spawnP();toast('YOU ARE BACK FOR WAVE '+w)}catch(e){}}else toast('WAVE '+w+(w>1?' · HEALED AND RESTOCKED':''));mpCoLabel()}
 const CW={init:0,wave:0,left:0,brk:3,n:0,sp:0,hs:1,last:0,hb:0,hunt:0};
 function mpCoTick(now){
  const dt=Math.min(.2,CW.last?(now-CW.last)/1000:.016);CW.last=now;
@@ -2065,9 +2066,12 @@ function mpCoTick(now){
  else if(CW.left>0){CW.sp-=dt;const cap=Math.min(10,3+CW.wave+np);
   if(CW.sp<=0&&en.length<cap){CW.sp=rnd(.8,1.6);
    let pool=bots.filter((b,i)=>i>=10&&b.dead);pool.sort((a,b)=>(a.park?1e9:(a.rg||0))-(b.park?1e9:(b.rg||0)));const b=pool[pool.length-1];
-   if(b){b.park=0;spawnBot(b);let p=null;try{p=pickSpawn()}catch(e){}if(p){b.x=p[0];b.z=p[1]}b.g.position.set(b.x,0,b.z);CW.n++;const heavy=CW.wave>=3&&CW.n%4===0;b.hp=(heavy?220:100)*CW.hs;b.g.scale.setScalar(heavy?1.12:1);CW.left--}}}
- if((CW.hunt-=dt)<=0){CW.hunt=1;const t=[];if(P.alive)t.push([P.x,P.z]);for(const id in MP.pl){const q=MP.pl[id];if(q.al&&q.init)t.push([q.x,q.z])}
-  if(t.length)en.forEach(b=>{if(!b.tg){const q=t[Math.floor(Math.random()*t.length)];b.ls=[q[0],q[1]];b.lt=30}})}
+   if(b){b.park=0;spawnBot(b);let p=null;try{const L=[];if(P.alive)L.push([P.x,P.z]);for(const id in MP.pl){const q=MP.pl[id];if(q.al&&q.init)L.push([q.x,q.z])}const q=L.length?L[Math.floor(Math.random()*L.length)]:[P.x,P.z];p=coSpawnPt(q[0],q[1])}catch(e){}if(p){b.x=p[0];b.z=p[1]}b.g.position.set(b.x,0,b.z);CW.n++;const heavy=CW.wave>=3&&CW.n%4===0;b.hp=(heavy?220:100)*CW.hs;b.g.scale.setScalar(heavy?1.12:1);CW.left--}}}
+ if((CW.hunt-=dt)<=0){CW.hunt=.4;const t=[];if(P.alive)t.push({p:1,x:P.x,y:P.y+1.3,z:P.z});for(const id in MP.pl){const q=MP.pl[id];if(q.al&&q.init&&q.stub)t.push({st:q.stub,x:q.x,y:q.y+1.3,z:q.z})}
+  if(t.length)en.forEach(b=>{let best=null,bd=1e9;for(const q of t){const d=Math.hypot(q.x-b.x,q.z-b.z);if(d<bd){bd=d;best=q}}if(!best)return;
+   const cur=b.tg?(b.tg.p?Math.hypot(P.x-b.x,P.z-b.z):(b.tg.o?Math.hypot(b.tg.o.x-b.x,b.tg.o.z-b.z):1e9)):1e9;
+   if(bd<55&&bd<cur-6&&visible(new V3(b.x,1.6,b.z),new V3(best.x,best.y,best.z))){if(best.st){best.st.cur=b.name;best.st.bos=0;b.tg={o:best.st}}else b.tg={p:1}}
+   else if(!b.tg){b.ls=[best.x,best.z];b.lt=30}})}
  MP.cen=en.length;if((CW.hb-=dt)<=0){CW.hb=1.5;mpSend({t:'wv',w:CW.wave,l:CW.left,a:en.length,p:'h'})}
  if(now-MP.lb>100&&MP.ws&&MP.ws.readyState===1){MP.lb=now;MP.ws.send(JSON.stringify({t:'b',d:bots.map(b=>[Math.round(b.x*100)/100,Math.round(b.z*100)/100,Math.round(b.g.rotation.y*100)/100,Math.round(((b.ph||0)%6.2832)*100)/100,Math.round((b.mvv||0)*100)/100,b.park?2:b.dead?1:0,0,Math.round((b.g.scale.x||1)*100)])}))}}
 {const _h=mpHostTick;mpHostTick=function(now){if(MP.co){mpCoTick(now);return}_h(now)}}
@@ -2080,7 +2084,7 @@ function mpCoTick(now){
  if(m.t==='go'&&MP.co){CW.init=0;MP.cwv=0;MP.cen=0;_m(m);if(state==='play')mpCoLabel();return}
  return _m(m)}}
 {const _t=mpTick;mpTick=function(dt){_t(dt);if(!MP.on||!MP.co||state!=='play')return;MP.t0=performance.now();MP.sc=[0,0];TK[0]=TK[1]=0;MP.bsT=performance.now();mt=1e9;mpCoLabel()}}
-{const _l=mpLeave;mpLeave=function(){const was=MP.co;_l();MP.co=0;MP.cwv=0;MP.cen=0;CW.init=0;if(was){try{bots.forEach(b=>b.g.scale.setScalar(1))}catch(e){}try{$('sc').style.visibility='';$('top').firstElementChild.textContent='TEAM DEATHMATCH · BLUE vs RED'}catch(e){}}}}
+{const _l=mpLeave;mpLeave=function(){const was=MP.co;_l();MP.co=0;MP.cwv=0;MP.cen=0;CW.init=0;if(was){try{bots.forEach(b=>b.g.scale.setScalar(1))}catch(e){}try{$('sc').style.visibility='';$('tm').style.visibility='';$('top').firstElementChild.textContent='TEAM DEATHMATCH · BLUE vs RED'}catch(e){}}}}
 
 applyGfx();requestAnimationFrame(frame);
 </script></body></html>
