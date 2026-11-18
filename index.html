@@ -118,7 +118,7 @@ html,body{height:100%;height:100dvh;overscroll-behavior:none;-webkit-tap-highlig
  </div>
  <div id="panel" class="h"></div>
  <div class="hint">SCROLL FOR GAME INFO &#8595;</div><div id="about"><h2>THE GAME</h2><div class="cards"><div class="card"><b>WAR ZONE</b><br>A gritty first-person shooter in a bombed-out city. Two teams of 10 fight for control while missiles streak overhead and fires burn.</div><div class="card"><b>YOUR TEAM</b><br>You fight on the BLUE side with 10 bot allies against 10 RED bots. First team to 50 kills wins.</div><div class="card"><b>BOTS THAT THINK</b><br>Bots plan routes around walls, flank, take cover, share what they see, limp when hurt. Order your allies from the command center.</div></div>
-<h2>MAPS</h2><div class="cards"><div class="card"><b>INDUSTRIAL DISTRICT</b><br>Warehouses, ruins, a hangar, a watch tower and a container yard.</div><div class="card"><b>DESERT OUTPOST</b><br>Open dusty ground, a central fort, mud-brick compounds and towers.</div><div class="card"><b>CITY BLOCK</b><br>Tight streets, tall buildings, alleys and wrecked vehicles.</div></div>
+<h2>MAPS</h2><div class="cards"><div class="card"><b>ARENA</b><br>Rooftops linked by ramps, walkways and jumpable gaps.</div><div class="card"><b>DOCKYARD</b><br>Container stacks, warehouses, cranes and metal stairs.</div><div class="card"><b>METRO</b><br>An underground station with platforms, trains and tunnels.</div><div class="card"><b>NEON DISTRICT</b><br>Narrow lit streets, balconies, rooftops and alleys.</div><div class="card"><b>FROSTPOINT</b><br>A snowy research base with bridges, labs and mountains.</div><div class="card"><b>OUTPOST</b><br>A desert compound with towers, cliffs and sheltered passages.</div></div>
 <h2>ARSENAL</h2><div class="cards"><div class="card"><b>ASSAULT RIFLE</b><br><img id="wi0" class="gi"><br>Automatic, steady, all-round.</div><div class="card"><b>PISTOL</b><br><img id="wi1" class="gi"><br>Fast to draw, light recoil.</div><div class="card"><b>SNIPER RIFLE</b><br><img id="wi3" class="gi"><br>One-shot power with a scope. Unlock in the shop.</div><div class="card"><b>SHOTGUN</b><br><img id="wi4" class="gi"><br>Devastating up close. Unlock in the shop.</div></div>
 <h2>SHOP AND UPGRADES</h2><div class="cards"><div class="card"><b>COINS</b><br>10 per kill and 100 per win, plus bonus points from pads and crates.</div><div class="card"><b>SOLDIER LOOKS AND CAMOS</b><br>Six soldier uniforms and five gun finishes. Your helmet shows your team colour.</div><div class="card"><b>UPGRADES AND ITEMS</b><br>Armor, damage, quick hands and speed up to level 5, plus frag grenades and smoke bombs.</div></div>
 <h2>HOW TO WIN</h2><div class="cards"><div class="card"><b>1. MOVE SMART</b><br>Use cover, speed pads and jump pads. Watch the minimap radar.</div><div class="card"><b>2. STAY SUPPLIED</b><br>Green crates refill your ammo. Health pads heal you.</div><div class="card"><b>3. LEAD THE SQUAD</b><br>Press / to open the command center and give orders.</div><div class="card"><b>5. MISSIONS</b><br>Play Campaign, Special Ops, Extraction or Wave Survival to earn XP, level up and unlock new weapons.</div><div class="card"><b>4. PRACTICE</b><br>Pick SHOOTING RANGE in the MODE menu to try every weapon and item for free. Shoot windows to break them and red barrels to blow them up.</div></div>
@@ -269,7 +269,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
 const PANELS={
 how:`<h3>HOW TO PLAY</h3><p>Prestige: every 100 levels (100, 200 and so on up to 1000) earns a new emblem, shown next to your level. The XP needed per level starts again after each prestige. Make an account with the LOG IN button to keep your progress on any device. Log in each day for a streak bonus and finish the three daily challenges on the home page for extra coins.</p>Click PLAY, then click the screen to capture the mouse. You join the BLUE team with 10 bot allies against 10 RED bots. First team to 50 kills wins, or the most kills when 10:00 runs out. Kills earn coins for the shop. Your team helmet colour shows who is who: blue for your team, red for the enemy.<table><tr><td>WASD</td><td>Move</td></tr><tr><td>Mouse</td><td>Aim · Left click fires · Right click aims down sights</td></tr><tr><td>I</td><td>Aim down sights on or off (handy on laptops without a right-click button)</td></tr><tr><td>Space / Shift / Ctrl or C</td><td>Jump / Sprint / Crouch</td></tr><tr><td>Shift, then Ctrl or C</td><td>Slide for about 2 seconds while sprinting. Faster, lower, and bullets sometimes miss you</td></tr><tr><td>R</td><td>Reload</td></tr><tr><td>1 / 2 / 3 / 4</td><td>Primary / Secondary / Knife / Special item</td></tr><tr><td>5</td><td>Switch grenade or smoke bomb</td></tr><tr><td>Tab</td><td>Scoreboard (hold)</td></tr><tr><td>M</td><td>Big map</td></tr><tr><td>Q / E</td><td>Lean left / right</td></tr><tr><td>Shift</td><td>Sprint uses stamina; the blue bar under health</td></tr><tr><td>F</td><td>Use ammo crate</td></tr><tr><td>/</td><td>Shooting range: pick any weapon</td></tr><tr><td>Esc</td><td>Pause</td></tr></table><p><b>Touch screen:</b> drag on the left side to move (push fully forward to sprint). Drag on the right side to look. Right-side buttons: FIRE, JUMP, CROUCH (toggle), AIM (toggle). Left-side buttons: RELOAD, SWAP (cycles primary, secondary, knife, special), SCORE, CMD (command center) and II (pause). Tap the minimap for the big map.</p><p>Equip your weapons in LOADOUT AND SHOP: they stay equipped in every match. Grenades hurt enemies; smoke bombs block the bots’ view for 14 seconds. Headshots deal double damage. You respawn after 5 seconds with 3 seconds of protection. Dead bodies and blood stay on the ground until the match ends. SHOOTING RANGE (home page) lets you test every weapon and item for free. Chat will arrive with online play.</p>`,
 log:`<h3>UPDATE LOG</h3>
-<b>Update 3 \u00b7 Fire, Smoke and Real Models</b><ul><li><i>3.8</i> Online server list: pick a server, join mid round, make private servers with a code, see other players with their real gun and skin, chat with bubbles over heads, a real players only scoreboard, and dead players now fall as ragdolls</li><li><i>3.7</i> Online fighting: shoot other players on the other team, bots shoot you too, and kills count for blue and red. First to 50 or the 10 minute clock ends the round. Players who leave vanish from the game</li><li><i>3.6</i> Early online test: JOIN ONLINE on the home page puts you in a live room with other players. Pick blue or red, see other players move, and bots fill the empty spots. Shooting other players is coming next</li><li><i>3.5</i> Brand new solid walls with brand new brick and plaster textures. Walls, corners, window frames and roofs no longer overlap, so the flickering is gone. Sniper tower rails fixed too</li><li><i>3.4</i> Weapon skins: 33 detailed skins (three per weapon) with patterns, glowing parts and new shapes, in a new SKINS tab in the shop with CAMO now its own tab. Windows now shatter with a proper animation and leave an empty slot you can shoot through. Fixed flickering where walls overlapped</li><li><i>3.3</i> Map overhaul: sharper, smoother textures, real procedural ground, crisper shadows, thick building walls with deep window frames, thicker broken walls, two climbable sniper towers on every map (stairs up to a high platform), and extra cover</li><li><i>3.2</i> New minigun and taco models. Smoke bombs fully block the bots\u2019 shots. Fires burn you, with flames around your screen. New elimination screen. Step up onto pallets and planks, shoot through broken walls and windows, wave freeze fixed, lean moved to Q and E and ammo crates to F</li><li><i>3.1</i> Sliding: sprint, then crouch for a fast slide with a pose, a camera dip and a slightly higher jump after it. The Next Goal box updates as you level up</li><li><i>3.0</i> New home layout with a map pop-up for each mode, the I key to aim on laptops, and harder weapon unlocks (Machete level 4 up to Sniper level 20)</li></ul>
+<b>Update 4 \u00b7 Six New Maps</b><ul><li><i>4.3</i> Map voting, random pick and every game mode now use only the six new maps.</li><li><i>4.2</i> Bots know every new map: doors, paths, and climbing stairs and ramps to roofs and decks.</li><li><i>4.1</i> Every map has a small PvP version and a large version. PvP loads the small one, everything else loads the large one.</li><li><i>4.0</i> New maps: Arena, Dockyard, Metro, Neon District, Frostpoint and Outpost, with rooftops, stairs, ramps, bridges and interiors.</li></ul><b>Update 3 \u00b7 Fire, Smoke and Real Models</b><ul><li><i>3.8</i> Online server list: pick a server, join mid round, make private servers with a code, see other players with their real gun and skin, chat with bubbles over heads, a real players only scoreboard, and dead players now fall as ragdolls</li><li><i>3.7</i> Online fighting: shoot other players on the other team, bots shoot you too, and kills count for blue and red. First to 50 or the 10 minute clock ends the round. Players who leave vanish from the game</li><li><i>3.6</i> Early online test: JOIN ONLINE on the home page puts you in a live room with other players. Pick blue or red, see other players move, and bots fill the empty spots. Shooting other players is coming next</li><li><i>3.5</i> Brand new solid walls with brand new brick and plaster textures. Walls, corners, window frames and roofs no longer overlap, so the flickering is gone. Sniper tower rails fixed too</li><li><i>3.4</i> Weapon skins: 33 detailed skins (three per weapon) with patterns, glowing parts and new shapes, in a new SKINS tab in the shop with CAMO now its own tab. Windows now shatter with a proper animation and leave an empty slot you can shoot through. Fixed flickering where walls overlapped</li><li><i>3.3</i> Map overhaul: sharper, smoother textures, real procedural ground, crisper shadows, thick building walls with deep window frames, thicker broken walls, two climbable sniper towers on every map (stairs up to a high platform), and extra cover</li><li><i>3.2</i> New minigun and taco models. Smoke bombs fully block the bots\u2019 shots. Fires burn you, with flames around your screen. New elimination screen. Step up onto pallets and planks, shoot through broken walls and windows, wave freeze fixed, lean moved to Q and E and ammo crates to F</li><li><i>3.1</i> Sliding: sprint, then crouch for a fast slide with a pose, a camera dip and a slightly higher jump after it. The Next Goal box updates as you level up</li><li><i>3.0</i> New home layout with a map pop-up for each mode, the I key to aim on laptops, and harder weapon unlocks (Machete level 4 up to Sniper level 20)</li></ul>
 <b>Update 2 \u00b7 Progression and Accounts</b><ul><li><i>2.3</i> Realistic muzzle flash, enemy muzzle flashes and a muzzle flash setting</li><li><i>2.2</i> Accounts and cloud saves, checked by the server so impossible progress is rejected</li><li><i>2.1</i> New home page, daily login streak, daily challenges, Next Goal tracker and mode pictures</li><li><i>2.0</i> Prestige 1 to 10 with emblems, a new level curve, double XP, Career Stats, and the Sniper one-shot rules</li></ul>
 <b>Update 1 \u00b7 The Foundations</b><ul><li><i>1.3</i> PvE modes (Campaign, Special Ops, Extraction, Wave Survival), unlimited levels, five more weapons, the Machete, sprint stamina, breakable windows and barrels, blood on walls, a shooting range and a mode menu</li><li><i>1.2</i> Smarter bots that flank, take cover and search, rebuilt maps and real building, road and prop models, a new soldier, grenades, smoke bombs, weapon slots and a command center</li><li><i>1.1</i> Three maps, a minimap, ammo crates, speed, jump and health pads, missiles and craters</li><li><i>1.0</i> First release: first-person movement, five weapons, 10 vs 10 bots, touch controls, ragdolls, upgrades and a shop</li></ul>
 <p>Coming next: multiplayer improvements, more maps, game modes and characters.</p>`};
@@ -740,17 +740,17 @@ let LEAN=0,LT=0;addEventListener('keydown',e=>{if(e.code==='KeyQ')LT=-.12;if(e.c
 let MI=null,MODE='tdm',OBJ=[],gT=0,prevAlive=true,failT=0,ml=performance.now();const marks=[];
 const OPEN={ind:[[2,20],[-12,-2],[30,2],[0,-34],[-36,-12],[38,12],[-18,40]],des:[[0,-26],[0,26],[-34,-8],[34,8],[-8,-8],[10,12],[-12,-30]],cit:[[0,0],[-14,0],[14,0],[0,-14],[0,14],[-34,0],[34,0]]};
 const MIS=[
-{id:'c1',mode:'campaign',n:'OP 1 \u00b7 CLEAN SWEEP',map:'ind',lives:3,allies:3,time:420,par:240,max:7,xp:250,coins:120,steps:[{t:'kill',n:20}],brief:'Eliminate 20 hostiles in the industrial district.'},
+{id:'c1',mode:'campaign',n:'OP 1 \u00b7 CLEAN SWEEP',map:'ind',lives:3,allies:3,time:420,par:240,max:7,xp:250,coins:120,steps:[{t:'kill',n:20}],brief:'Eliminate 20 hostiles in the dockyard.'},
 {id:'c2',mode:'campaign',n:'OP 2 \u00b7 HOLD THE LINE',map:'des',lives:3,allies:3,time:0,par:100,max:8,xp:300,coins:150,steps:[{t:'hold',s:75,r:9}],brief:'Defend the beacon for 75 seconds. Keep hostiles away from it.'},
-{id:'c3',mode:'campaign',n:'OP 3 \u00b7 SEIZE THE CITY',map:'cit',lives:3,allies:3,time:540,par:300,max:8,xp:350,coins:180,steps:[{t:'zones',n:1,r:8,s:45,l:'CAPTURE'},{t:'kill',n:12}],brief:'Capture the intersection, then clear the area.'},
+{id:'c3',mode:'campaign',n:'OP 3 \u00b7 SEIZE THE DISTRICT',map:'cit',lives:3,allies:3,time:540,par:300,max:8,xp:350,coins:180,steps:[{t:'zones',n:1,r:8,s:45,l:'CAPTURE'},{t:'kill',n:12}],brief:'Capture the intersection, then clear the area.'},
 {id:'c4',mode:'campaign',n:'OP 4 \u00b7 HIGH VALUE TARGET',map:'ind',lives:3,allies:2,time:540,par:300,max:5,xp:450,coins:220,steps:[{t:'boss'}],brief:'Find and eliminate the enemy commander.'},
 {id:'c5',mode:'campaign',n:'OP 5 \u00b7 LAST STAND',map:'des',lives:3,allies:3,time:0,par:420,max:8,xp:600,coins:300,steps:[{t:'waves',n:5}],brief:'Survive five waves of attackers.'},
 {id:'s1',mode:'special',n:'BLACK SITE \u00b7 DEMOLITION',map:'cit',lives:2,allies:0,time:420,par:260,max:7,xp:500,coins:260,steps:[{t:'zones',n:3,r:3.5,s:5,l:'PLANT CHARGE'}],brief:'Plant 3 charges. Stay on each marker until it arms.'},
 {id:'s2',mode:'special',n:'ARMS CACHE \u00b7 SABOTAGE',map:'des',lives:2,allies:0,time:420,par:280,max:7,xp:550,coins:280,steps:[{t:'zones',n:2,r:3.5,s:6,l:'PLANT CHARGE'},{t:'kill',n:15}],brief:'Rig two cache sites, then clear the survivors.'},
 {id:'s3',mode:'special',n:'KINGPIN \u00b7 STRIKE',map:'cit',lives:2,allies:0,time:480,par:300,max:6,xp:650,coins:320,steps:[{t:'boss'}],brief:'Take down the kingpin and his guards.'},
-{id:'e1',mode:'extract',n:'EXTRACTION \u00b7 INDUSTRIAL',map:'ind',lives:3,allies:0,time:480,par:300,max:7,xp:450,coins:230,steps:[{t:'zones',n:1,r:3,s:4,l:'GRAB INTEL'},{t:'zones',n:1,r:7,s:20,l:'HOLD FOR EXTRACTION',surge:1}],brief:'Grab the intel, then hold the landing zone until the chopper arrives.'},
-{id:'e2',mode:'extract',n:'EXTRACTION \u00b7 DESERT',map:'des',lives:3,allies:0,time:480,par:300,max:7,xp:500,coins:250,steps:[{t:'zones',n:1,r:3,s:4,l:'GRAB INTEL'},{t:'zones',n:1,r:7,s:20,l:'HOLD FOR EXTRACTION',surge:1}],brief:'Recover the documents and escape by chopper.'},
-{id:'e3',mode:'extract',n:'EXTRACTION \u00b7 CITY',map:'cit',lives:3,allies:0,time:540,par:330,max:8,xp:600,coins:300,steps:[{t:'zones',n:2,r:3,s:4,l:'GRAB INTEL'},{t:'zones',n:1,r:7,s:25,l:'HOLD FOR EXTRACTION',surge:1}],brief:'Collect two intel drops, then survive until extraction.'}];
+{id:'e1',mode:'extract',n:'EXTRACTION \u00b7 DOCKYARD',map:'ind',lives:3,allies:0,time:480,par:300,max:7,xp:450,coins:230,steps:[{t:'zones',n:1,r:3,s:4,l:'GRAB INTEL'},{t:'zones',n:1,r:7,s:20,l:'HOLD FOR EXTRACTION',surge:1}],brief:'Grab the intel, then hold the landing zone until the chopper arrives.'},
+{id:'e2',mode:'extract',n:'EXTRACTION \u00b7 OUTPOST',map:'des',lives:3,allies:0,time:480,par:300,max:7,xp:500,coins:250,steps:[{t:'zones',n:1,r:3,s:4,l:'GRAB INTEL'},{t:'zones',n:1,r:7,s:20,l:'HOLD FOR EXTRACTION',surge:1}],brief:'Recover the documents and escape by chopper.'},
+{id:'e3',mode:'extract',n:'EXTRACTION \u00b7 NEON DISTRICT',map:'cit',lives:3,allies:0,time:540,par:330,max:8,xp:600,coins:300,steps:[{t:'zones',n:2,r:3,s:4,l:'GRAB INTEL'},{t:'zones',n:1,r:7,s:25,l:'HOLD FOR EXTRACTION',surge:1}],brief:'Collect two intel drops, then survive until extraction.'}];
 const SURV={id:'sv',mode:'survival',n:'WAVE SURVIVAL',map:null,lives:1,allies:0,time:0,max:9,steps:[{t:'waves',n:999}],xp:0,coins:0,par:0};
 const snap=(x,z)=>{const[i,j]=nearestFree(cell(x),cell(z));return[-49.5+i,-49.5+j]};
 function clearMarks(){marks.forEach(o=>sc.remove(o));marks.length=0;OBJ=[]}
@@ -2368,6 +2368,490 @@ function glassClean(){try{WSH.forEach(d=>sc.remove(d.m));WSH.length=0;WSPK.forEa
 {const _s=setMap;setMap=function(k){glassClean();_s(k)}}
 setInterval(()=>{try{for(let i=WSH.length-1;i>=0;i--){const d=WSH[i],y=d.m.position.y;if(d.T>7||!(y===y)||y>40||y<-40){sc.remove(d.m);WSH.splice(i,1)}}
  WSPK.forEach((w,o)=>{if(!w.broken){sc.remove(o);WSPK.delete(o)}})}catch(e){}},1500);
+
+/* map kit is private to this block */;(function(){
+
+/* ======================================================================
+   ---- 26: UPDATE 4 · SIX NEW MAPS (Arena, Dockyard, Metro, Neon District, Frostpoint, Outpost)
+   each has a large PvE layout and a compact PvP layout, built from the same kit ----
+   ====================================================================== */
+const MZ={sg:1,sz:1,dry:false,rec:[],B:{},bl:[],id:'',spawn:[],T:null};
+const MZH=n=>{n=Math.sin(n*127.1+311.7)*43758.5453;return n-Math.floor(n)};
+const MZC=h=>{if(typeof h==='string')h=parseInt(h.slice(1),16);return[(h>>16&255)/255,(h>>8&255)/255,(h&255)/255]};
+const MZUS={win:.06,brick:.5,metal:.5,tile:.5,wood:.5,snow:.25,sand:.2,asph:.25,grate:.5,panel:.5,conc:.35,rock:.3,rug:.5};
+const MZPT={};
+function mzTex(kind){if(MZPT[kind])return MZPT[kind];const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');let s=kind.length*977;const r=()=>{s=(s*16807+11)%2147483647;return s/2147483647};
+ const base={conc:'#d6d6d4',brick:'#d9d0c8',metal:'#d0d3d6',tile:'#e2e2e0',wood:'#d9cdb8',snow:'#f6f9fc',sand:'#eadfc6',asph:'#c8c8c8',grate:'#bfc3c7',win:'#9aa3ad',panel:'#dcdedf',rock:'#cfcac2',rug:'#d8d4cc'}[kind]||'#ddd';
+ g.fillStyle=base;g.fillRect(0,0,128,128);
+ const sp=(n,a)=>{for(let i=0;i<n;i++){const l=r()>.5;g.fillStyle=`rgba(${l?255:0},${l?255:0},${l?255:0},${r()*a})`;g.fillRect(r()*128,r()*128,1+r()*4,1+r()*4)}};
+ if(kind==='conc'){sp(500,.1);g.strokeStyle='rgba(0,0,0,.14)';g.lineWidth=1;g.strokeRect(.5,.5,127,127);g.beginPath();g.moveTo(64,0);g.lineTo(64,128);g.stroke()}
+ else if(kind==='brick'){sp(250,.07);g.fillStyle='rgba(60,50,45,.5)';for(let y=0;y<128;y+=16){g.fillRect(0,y,128,2);for(let x=(y/16%2)*16;x<128;x+=32)g.fillRect(x,y,2,16)}}
+ else if(kind==='metal'){for(let x=0;x<128;x+=8){g.fillStyle=(x/8)%2?'rgba(0,0,0,.14)':'rgba(255,255,255,.18)';g.fillRect(x,0,4,128)}sp(200,.06)}
+ else if(kind==='tile'){sp(200,.06);g.fillStyle='rgba(0,0,0,.22)';for(let i=0;i<128;i+=32){g.fillRect(i,0,1.5,128);g.fillRect(0,i,128,1.5)}}
+ else if(kind==='wood'){for(let y=0;y<128;y+=16){g.fillStyle='rgba(0,0,0,.2)';g.fillRect(0,y,128,1.5);for(let k=0;k<5;k++){g.fillStyle='rgba(80,50,20,.08)';g.fillRect(r()*128,y+2+r()*12,10+r()*40,1)}}}
+ else if(kind==='snow'){sp(400,.05);for(let i=0;i<30;i++){g.fillStyle='rgba(170,200,235,.18)';g.fillRect(r()*128,r()*128,3+r()*7,2)}}
+ else if(kind==='sand'){sp(300,.06);g.strokeStyle='rgba(150,110,60,.09)';for(let i=0;i<10;i++){g.beginPath();g.moveTo(0,i*13+r()*6);g.quadraticCurveTo(64,i*13+r()*14,128,i*13+r()*6);g.stroke()}}
+ else if(kind==='asph'){sp(900,.2)}
+ else if(kind==='grate'){g.strokeStyle='rgba(0,0,0,.4)';g.lineWidth=2;for(let i=-128;i<256;i+=16){g.beginPath();g.moveTo(i,0);g.lineTo(i+128,128);g.stroke();g.beginPath();g.moveTo(i+128,0);g.lineTo(i,128);g.stroke()}}
+ else if(kind==='win'){g.fillStyle='#7d8691';g.fillRect(0,0,128,128);for(let y=6;y<124;y+=14)for(let x=5;x<124;x+=16){const v=r();g.fillStyle=v<.3?'#ffe6a0':v<.4?'#9fe0ff':'#26303c';g.fillRect(x,y,9,8)}}
+ else if(kind==='panel'){sp(150,.05);g.strokeStyle='rgba(0,0,0,.25)';g.strokeRect(2,2,124,124);g.fillStyle='rgba(0,0,0,.25)';[[8,8],[116,8],[8,116],[116,116]].forEach(p=>g.fillRect(p[0],p[1],3,3))}
+ else if(kind==='rock'){sp(500,.14);g.strokeStyle='rgba(0,0,0,.16)';for(let i=0;i<8;i++){g.beginPath();g.moveTo(r()*128,r()*128);g.lineTo(r()*128,r()*128);g.stroke()}}
+ else sp(300,.08);
+ const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=2;return MZPT[kind]=t}
+const MZM={};
+function mzMat(key){if(MZM[key])return MZM[key];const[k,f]=key.split('|');let m;
+ if(f==='em')m=new THREE.MeshBasicMaterial({vertexColors:true,fog:true});
+ else if(f==='gl')m=new THREE.MeshStandardMaterial({vertexColors:true,transparent:true,opacity:.4,roughness:.12,metalness:.5,depthWrite:false,side:THREE.DoubleSide});
+ else m=new THREE.MeshStandardMaterial({vertexColors:true,map:mzTex(k),roughness:k==='metal'||k==='panel'?.55:.9,metalness:k==='metal'?.35:0});
+ return MZM[key]=m}
+function mzBat(kind,fl){const key=fl?kind+'|'+fl:kind;let b=MZ.B[key];if(!b||b.p.length>190000){if(b)MZ.bl.push(b);b=MZ.B[key]={p:[],n:[],c:[],u:[],i:[],key,fl}}return b}
+function mzFace(B,v,cm,col,us){const a=v[0],b=v[1],c=v[2],ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],vx=c[0]-a[0],vy=c[1]-a[1],vz=c[2]-a[2];
+ let nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;const l=Math.hypot(nx,ny,nz)||1;nx/=l;ny/=l;nz/=l;const o=B.p.length/3;
+ for(let k=0;k<4;k++){const q=v[k],m=cm[k];B.p.push(q[0],q[1],q[2]);B.n.push(nx,ny,nz);B.c.push(col[0]*m,col[1]*m,col[2]*m);let u,w;if(Math.abs(ny)>.7){u=q[0];w=q[2]}else if(Math.abs(nx)>Math.abs(nz)){u=q[2];w=q[1]}else{u=q[0];w=q[1]}B.u.push(u*us,w*us)}
+ B.i.push(o,o+1,o+2,o,o+2,o+3)}
+function mzBoxG(B,x0,y0,z0,x1,y1,z1,col,us){const t=1.05,a=y0<.06?1:.78,s=[a,a,1,1];
+ mzFace(B,[[x1,y0,z1],[x1,y0,z0],[x1,y1,z0],[x1,y1,z1]],s,col,us);mzFace(B,[[x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0]],s,col,us);
+ mzFace(B,[[x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0]],[t,t,t,t],col,us);if(y0>.06)mzFace(B,[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],[.55,.55,.55,.55],col,us);
+ mzFace(B,[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],s,col,us);mzFace(B,[[x1,y0,z0],[x0,y0,z0],[x0,y1,z0],[x1,y1,z0]],s,col,us)}
+/* the theme colours: a name, a hex number or '#rrggbb', plus the pattern it is printed with */
+function mzCol(m){const T=MZ.T;let e=m;if(typeof m==='string'&&T&&T[m])e=T[m];if(Array.isArray(e))return{c:e[0],k:e[1]||'conc',f:e[2]};return{c:e,k:'conc'}}
+function mzJ(x,y,z){return .96+MZH(x*3.1+y*7.7+z*5.3)*.08}
+/* mirror helpers: layouts are written for one quarter and repeated for the others */
+const mxr=(a,b)=>{a*=MZ.sg;b*=MZ.sg;return a<b?[a,b]:[b,a]},mzr=(a,b)=>{a*=MZ.sz;b*=MZ.sz;return a<b?[a,b]:[b,a]};
+const mdir=d=>(MZ.sg<0&&d<2)?1-d:(MZ.sz<0&&d>=2)?5-d:d;
+const mside=s=>{if(MZ.sg<0)s=s==='e'?'w':s==='w'?'e':s;if(MZ.sz<0)s=s==='n'?'s':s==='s'?'n':s;return s};
+/* core box: corners are given before mirroring, so one part can describe all the mirrored parts */
+function B(x0,z0,x1,z1,y0,y1,mat,o){o=o||{};[x0,x1]=mxr(x0,x1);[z0,z1]=mzr(z0,z1);
+ if(MZ.dry){if(!o.nc||o.rec)MZ.rec.push([x0,z0,x1,z1,y0,y1,mzCol(mat).c,o.cat||'b']);return}
+ const m=mzCol(mat),h=MZC(m.c),j=mzJ(x0,y0,z0),col=[h[0]*j,h[1]*j,h[2]*j];
+ if(!o.nv){const B_=mzBat(m.k,o.fl||m.f);mzBoxG(B_,x0,y0,z0,x1,y1,z1,col,MZUS[m.k]||.5)}
+ if(!o.nc)prox((x0+x1)/2,y0,(z0+z1)/2,x1-x0,y1-y0,z1-z0);
+ MZ.rec.push([x0,z0,x1,z1,y0,y1,m.c,o.cat||'b'])}
+const Bn=(x0,z0,x1,z1,y0,y1,mat,o)=>B(x0,z0,x1,z1,y0,y1,mat,Object.assign({nc:1},o||{}));  /* looks only, no collision */
+const Bg=(x0,z0,x1,z1,y0,y1,col)=>B(x0,z0,x1,z1,y0,y1,[col,'conc','gl'],{nc:1,cat:'g'});  /* glass */
+const Be=(x0,z0,x1,z1,y0,y1,col)=>B(x0,z0,x1,z1,y0,y1,[col,'conc','em'],{nc:1,cat:'e'});  /* glowing */
+const Bc=(x0,z0,x1,z1,y0,y1)=>{if(MZ.dry)return;[x0,x1]=mxr(x0,x1);[z0,z1]=mzr(z0,z1);prox((x0+x1)/2,y0,(z0+z1)/2,x1-x0,y1-y0,z1-z0)};  /* collision only */
+/* make a face point away from a centre point, whatever order the corners were given in */
+function mzFO(B_,v,cm,col,us,c){const a=v[0],b=v[1],d=v[2],ux=b[0]-a[0],uy=b[1]-a[1],uz=b[2]-a[2],vx=d[0]-a[0],vy=d[1]-a[1],vz=d[2]-a[2],nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;
+ if(nx*(a[0]-c[0])+ny*(a[1]-c[1])+nz*(a[2]-c[2])<0){v=[v[0],v[3],v[2],v[1]];cm=[cm[0],cm[3],cm[2],cm[1]]}mzFace(B_,v,cm,col,us)}
+/* round things: a frustum with n sides (cylinders, cones, pyramids, rocks) */
+function mzFrus(B_,cx,y0,cz,r0,r1,h,n,rot,col,us){const P=[],Q=[],c=[cx,y0+h/2,cz];for(let i=0;i<n;i++){const a=rot+i/n*6.2832;P.push([cx+Math.cos(a)*r0,y0,cz+Math.sin(a)*r0]);Q.push([cx+Math.cos(a)*r1,y0+h,cz+Math.sin(a)*r1])}
+ for(let i=0;i<n;i++){const j=(i+1)%n;mzFO(B_,[P[j],P[i],Q[i],Q[j]],[.78,.78,1,1],col,us,c)}
+ if(r1>.05)for(let i=1;i<n-1;i++)mzFO(B_,[Q[0],Q[i],Q[i+1],Q[i+1]],[1.05,1.05,1.05,1.05],col,us,c)}
+function Cy(x,z,r,y0,y1,mat,o){o=o||{};x*=MZ.sg;z*=MZ.sz;const n=o.n||10;
+ if(MZ.dry){MZ.rec.push([x-r,z-r,x+r,z+r,y0,y1,mzCol(mat).c,o.cat||'b']);return}
+ const m=mzCol(mat),h=MZC(m.c),j=mzJ(x,y0,z),col=[h[0]*j,h[1]*j,h[2]*j];mzFrus(mzBat(m.k,o.fl||m.f),x,y0,z,r,o.r1===undefined?r:o.r1,y1-y0,n,o.rot||0,col,MZUS[m.k]||.5);
+ if(!o.nc)prox(x,y0,z,r*1.7,y1-y0,r*1.7);MZ.rec.push([x-r,z-r,x+r,z+r,y0,y1,m.c,o.cat||'b'])}
+function Rk(x,z,r,h,mat,sd){x*=MZ.sg;z*=MZ.sz;const k=sd||0;
+ if(MZ.dry){MZ.rec.push([x-r,z-r,x+r,z+r,0,h,mzCol(mat).c,'r']);return}
+ const m=mzCol(mat),hh=MZC(m.c),j=mzJ(x,h,z),col=[hh[0]*j,hh[1]*j,hh[2]*j],B_=mzBat(m.k,m.f),rot=MZH(k+x)*3;
+ mzFrus(B_,x,0,z,r,r*.72,h*.62,6,rot,col,MZUS[m.k]||.3);mzFrus(B_,x+MZH(k)*.3*r,h*.62,z,r*.7,r*.28,h*.38,6,rot+.5,[Math.min(1,col[0]*1.08),Math.min(1,col[1]*1.08),Math.min(1,col[2]*1.08)],MZUS[m.k]||.3);
+ prox(x,0,z,r*1.5,h,r*1.5);MZ.rec.push([x-r,z-r,x+r,z+r,0,h,m.c,'r'])}
+function mzFlush(){const L=Object.values(MZ.B).concat(MZ.bl);MZ.B={};MZ.bl=[];const out=[];
+ L.forEach(b=>{if(!b.p.length)return;const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(b.p),3));g.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(b.n),3));g.setAttribute('color',new THREE.BufferAttribute(new Float32Array(b.c),3));g.setAttribute('uv',new THREE.BufferAttribute(new Float32Array(b.u),2));g.setIndex(new THREE.BufferAttribute(new Uint16Array(b.i),1));
+  try{g.computeBoundingSphere()}catch(e){}const m=new THREE.Mesh(g,mzMat(b.key));const fl=b.fl;m.castShadow=!fl;m.receiveShadow=!fl||fl==='ce';m.frustumCulled=false;sc.add(m);out.push(m)});return out}
+/* text on a flat panel (signs, platform numbers, shop names) */
+const MZSG={};
+function Sg(txt,x,y,z,ry,w,h,fg,bg,o){if(MZ.dry)return;x*=MZ.sg;z*=MZ.sz;ry=(ry||0)*MZ.sg*MZ.sz;const key=txt+fg+bg;let t=MZSG[key];if(!t){const c=document.createElement('canvas');c.width=256;c.height=Math.max(32,Math.round(256*h/w));const g=c.getContext('2d');g.fillStyle=bg;g.fillRect(0,0,c.width,c.height);g.strokeStyle=fg;g.lineWidth=4;g.strokeRect(3,3,c.width-6,c.height-6);g.fillStyle=fg;g.font='bold '+Math.floor(c.height*.5)+'px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(txt,c.width/2,c.height/2+2);t=MZSG[key]=new THREE.CanvasTexture(c)}
+ const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:t,side:THREE.DoubleSide,transparent:!!(o&&o.tr)}));m.position.set(x,y,z);m.rotation.y=ry||0;sc.add(m)}
+/* ---------- floors, rails, stairs and ramps ---------- */
+function Dk(x0,z0,x1,z1,y,mat,th,o){th=th||.4;B(x0,z0,x1,z1,y-th,y,mat,Object.assign({cat:'d'},o||{}));
+ if(y>1.2&&!(o&&o.np)){const p=.5;[[x0,z0],[x1-p,z0],[x0,z1-p],[x1-p,z1-p]].forEach(c=>B(c[0],c[1],c[0]+p,c[1]+p,0,y-th,'dark',{cat:'p'}))}}
+function Rl(x0,z0,x1,z1,y,h,mat){h=h||1.05;B(x0,z0,x1,z1,y,y+h,mat||'rail',{cat:'l'})}
+/* run along an axis: dir 0:+x 1:-x 2:+z 3:-z.  returns where the climb begins and ends */
+function mzFoot(sx,sz,dir,len,w){const dx=dir===0?1:dir===1?-1:0,dz=dir===2?1:dir===3?-1:0;return{dx,dz,ex:sx+dx*len,ez:sz+dz*len,hw:w/2}}
+function St(sx,sz,dir,y0,y1,w,mat,o){const H=y1-y0,n=Math.ceil(H/.44),rise=H/n,run=.55,len=n*run,f=mzFoot(sx,sz,dir,len,w);mat=mat||'step';
+ for(let k=0;k<n;k++){const a=k*run,b=a+run,h=y0+rise*(k+1);let x0,x1,z0,z1;
+  if(f.dx){x0=Math.min(sx+f.dx*a,sx+f.dx*b);x1=Math.max(sx+f.dx*a,sx+f.dx*b);z0=sz-f.hw;z1=sz+f.hw}else{z0=Math.min(sz+f.dz*a,sz+f.dz*b);z1=Math.max(sz+f.dz*a,sz+f.dz*b);x0=sx-f.hw;x1=sx+f.hw}
+  B(x0,z0,x1,z1,y0,h,mat,{cat:'s'})}
+ return{bx:sx*MZ.sg,bz:sz*MZ.sz,tx:f.ex*MZ.sg,tz:f.ez*MZ.sz,y0,y1,dir:mdir(dir),len,w}}
+/* ramp: small hidden steps for walking, a smooth sloped surface for looking at */
+function Rp(sx,sz,dir,y0,y1,w,mat,o){const H=y1-y0,n=Math.ceil(H/.28),rise=H/n,run=.5,len=n*run,f=mzFoot(sx,sz,dir,len,w);mat=mat||'ramp';
+ for(let k=0;k<n;k++){const a=k*run,b=a+run,h=y0+rise*(k+1);let x0,x1,z0,z1;
+  if(f.dx){x0=Math.min(sx+f.dx*a,sx+f.dx*b);x1=Math.max(sx+f.dx*a,sx+f.dx*b);z0=sz-f.hw;z1=sz+f.hw}else{z0=Math.min(sz+f.dz*a,sz+f.dz*b);z1=Math.max(sz+f.dz*a,sz+f.dz*b);x0=sx-f.hw;x1=sx+f.hw}
+  Bc(x0,z0,x1,z1,y0,h)}
+ if(!MZ.dry){const m=mzCol(mat),h_=MZC(m.c),B_=mzBat(m.k,m.f),us=MZUS[m.k]||.5,sg=MZ.sg,ax=sx*sg,bx=f.ex*sg,az=sz*MZ.sz,bz=f.ez*MZ.sz;
+  const dx=f.dx*sg,dz=f.dz*MZ.sz,px=-dz,pz=dx,hw=f.hw,yA=y0+rise*.5,yB=y1,c=[(ax+bx)/2,(y0+y1)/2,(az+bz)/2];
+  const L=(x,z)=>[x+px*hw,z+pz*hw],R=(x,z)=>[x-px*hw,z-pz*hw],la=L(ax,az),lb=L(bx,bz),ra=R(ax,az),rb=R(bx,bz),V=(p,y)=>[p[0],y,p[1]],one=[1,1,1,1],col=h_;
+  mzFO(B_,[V(la,yA),V(lb,yB),V(rb,yB),V(ra,yA)],one,col,us,[c[0],c[1]-5,c[2]]);
+  mzFO(B_,[V(la,y0),V(lb,y0),V(lb,yB),V(la,yA)],one,col,us,c);mzFO(B_,[V(ra,y0),V(rb,y0),V(rb,yB),V(ra,yA)],one,col,us,c);
+  mzFO(B_,[V(lb,y0),V(rb,y0),V(rb,yB),V(lb,yB)],one,col,us,c)}
+ {const a=mxr(Math.min(sx,f.ex)-(f.dx?0:f.hw),Math.max(sx,f.ex)+(f.dx?0:f.hw)),b=mzr(Math.min(sz,f.ez)-(f.dx?f.hw:0),Math.max(sz,f.ez)+(f.dx?f.hw:0));MZ.rec.push([a[0],b[0],a[1],b[1],y0,y1,mzCol(mat).c,'s'])}
+ return{bx:sx*MZ.sg,bz:sz*MZ.sz,tx:f.ex*MZ.sg,tz:f.ez*MZ.sz,y0,y1,dir:mdir(dir),len,w}}
+/* tell the bots how to climb to a deck: a list of stairs/ramps (in order) and the deck they end on */
+function Cl(chain,deck,rad,end){if(MZ.dry)return;const pts=[];chain.forEach((s,i)=>{const ux=s.dir===0?1:s.dir===1?-1:0,uz=s.dir===2?1:s.dir===3?-1:0;if(i===0)pts.push([s.bx,s.bz,s.y0]);else if(Math.abs(pts[pts.length-1][2]-s.y0)>.01||Math.hypot(pts[pts.length-1][0]-s.bx,pts[pts.length-1][1]-s.bz)>.2){pts.push([s.bx-ux*1.6,s.bz-uz*1.6,s.y0]);pts.push([s.bx,s.bz,s.y0])}pts.push([s.tx,s.tz,s.y1])});
+ const L=chain[chain.length-1],dx=L.dir===0?1:L.dir===1?-1:0,dz=L.dir===2?1:L.dir===3?-1:0;let[x0,z0,x1,z1,y]=deck;[x0,x1]=mxr(x0,x1);[z0,z1]=mzr(z0,z1);
+ pts.push(end?[end[0]*MZ.sg,end[1]*MZ.sz,L.y1]:[L.tx+dx*1.3,L.tz+dz*1.3,L.y1]);const F=chain[0],fx=F.dir===0?-1:F.dir===1?1:0,fz=F.dir===2?-1:F.dir===3?1:0;
+ STR.push({pts,lv:[{y:L.y1,i:pts.length-1}],hub:[F.bx+fx*2.4,F.bz+fz*2.4],cx:(x0+x1)/2,cz:(z0+z1)/2,r:Math.max(x1-x0,z1-z0)*.5+(rad||16),zone:{x0:x0+.6,x1:x1-.6,z0:z0+.6,z1:z1-.6},holes:[],kind:'b'})}
+
+/* ---------- shared pieces: mirrored halves, shells with doors, parapets, props ---------- */
+const MD={};
+function half(fn){MZ.sg=1;MZ.sz=1;fn(0);MZ.sg=-1;fn(1);MZ.sg=1}
+function quad(fn){let q=0;for(const a of[1,-1])for(const b of[1,-1]){MZ.sg=a;MZ.sz=b;fn(q++)}MZ.sg=1;MZ.sz=1}
+/* a room with a roof: doors are [side,centre,width] with side n,s,e,w (n is -z) */
+function Rm(x0,z0,x1,z1,h,wm,rm,doors,o){o=o||{};const t=o.t||.4,dh=o.dh||2.7,ds=(doors||[]).map(d=>[mside(d[0]),(d[0]==='n'||d[0]==='s')?d[1]*MZ.sg:d[1]*MZ.sz,d[2]]);
+ const X=mxr(x0,x1),Z=mzr(z0,z1),X0=X[0],X1=X[1],Z0=Z[0],Z1=Z[1],sg=MZ.sg,sz=MZ.sz;MZ.sg=1;MZ.sz=1;
+ const seg=(side,a0,a1,fixed,vert)=>{const gs=ds.filter(d=>d[0]===side).map(d=>[d[1]-d[2]/2,d[1]+d[2]/2]).sort((p,q)=>p[0]-q[0]);let c=a0;const put=(u0,u1,lo,hi,mm)=>{if(u1-u0<.05)return;if(vert)B(fixed,u0,fixed+t,u1,lo,hi,mm);else B(u0,fixed,u1,fixed+t,lo,hi,mm)};
+  gs.forEach(g=>{put(c,g[0],0,h,wm);if(h>dh+.3)put(g[0],g[1],dh,h,wm);c=g[1]});put(c,a1,0,h,wm)};
+ seg('n',X0,X1,Z0,0);seg('s',X0,X1,Z1-t,0);seg('w',Z0,Z1,X0,1);seg('e',Z0,Z1,X1-t,1);
+ B(X0-(o.ov||0),Z0-(o.ov||0),X1+(o.ov||0),Z1+(o.ov||0),h-.35,h,rm,{cat:'d',fl:o.fl});
+ if(o.floor)B(X0,Z0,X1,Z1,0,.05,o.floor,{nc:1,cat:'f'});MZ.sg=sg;MZ.sz=sz}
+/* low wall round a roof edge, with gaps where stairs, ramps and bridges join */
+function Pa(x0,z0,x1,z1,y,m,gaps,h){h=h||.9;const t=.3,G=(gaps||[]).map(g=>[mside(g[0]),(g[0]==='n'||g[0]==='s')?g[1]*MZ.sg:g[1]*MZ.sz,g[2]]);
+ const X=mxr(x0,x1),Z=mzr(z0,z1),X0=X[0],X1=X[1],Z0=Z[0],Z1=Z[1],sg=MZ.sg,sz=MZ.sz;MZ.sg=1;MZ.sz=1;
+ const run=(side,a0,a1,fixed,vert)=>{const gs=G.filter(g=>g[0]===side).map(g=>[g[1]-g[2]/2,g[1]+g[2]/2]).sort((p,q)=>p[0]-q[0]);let c=a0;const put=(u0,u1)=>{if(u1-u0<.05)return;if(vert)B(fixed,u0,fixed+t,u1,y,y+h,m,{cat:'l'});else B(u0,fixed,u1,fixed+t,y,y+h,m,{cat:'l'})};gs.forEach(g=>{put(c,g[0]);c=g[1]});put(c,a1)};
+ run('n',X0,X1,Z0,0);run('s',X0,X1,Z1-t,0);run('w',Z0,Z1,X0,1);run('e',Z0,Z1,X1-t,1);MZ.sg=sg;MZ.sz=sz}
+/* the outer wall of a map: low and good looking, tall and invisible for the collision */
+function Perim(hx,hz,m,h){const t=1.4;[[-hx-t,-hz-t,hx+t,-hz],[-hx-t,hz,hx+t,hz+t],[-hx-t,-hz,-hx,hz],[hx,-hz,hx+t,hz]].forEach(r=>{B(r[0],r[1],r[2],r[3],0,h,m,{nc:1,cat:'w'});if(!MZ.dry)prox((r[0]+r[2])/2,0,(r[1]+r[3])/2,r[2]-r[0],11,r[3]-r[1])})}
+/* a skyline of tall buildings (or mountains) outside the walls, for looks only */
+function Sky(kind,n,r0,r1,hmin,hmax,cols,sd){if(MZ.dry)return;for(let i=0;i<n;i++){const a=i/n*6.2832+MZH(i+sd)*.25,r=r0+MZH(i*3+sd)*(r1-r0),x=Math.cos(a)*r,z=Math.sin(a)*r,h=hmin+MZH(i*7+sd)*(hmax-hmin),w=6+MZH(i*5+sd)*9,d=6+MZH(i*11+sd)*9,c=cols[i%cols.length];
+  if(kind==='mtn'){const B_=mzBat('rock'),h_=MZC(c),w2=w*3,col=[h_[0],h_[1],h_[2]];mzFrus(B_,x,-2,z,w2,w2*.05,h*1.1,5+(i%3),MZH(i)*3,col,.04);const sn=MZC('#f2f6fb');mzFrus(B_,x,h*.62,z,w2*.4,w2*.04,h*.48,5+(i%3),MZH(i)*3,sn,.04)}
+  else{const cc=mzCol(c),h_=MZC(cc.c),B_=mzBat(cc.k,cc.f);mzBoxG(B_,x-w/2,-1,z-d/2,x+w/2,h,z+d/2,[h_[0],h_[1],h_[2]],MZUS[cc.k]||.1);if(i%3===0)mzBoxG(B_,x-w*.25,h,z-d*.25,x+w*.25,h+3+MZH(i)*5,z+d*.25,[h_[0]*.8,h_[1]*.8,h_[2]*.8],.1)}}}
+/* props */
+function AC(x,z,y,m){y=y||0;B(x-1.1,z-.7,x+1.1,z+.7,y,y+1.25,m||'hv',{cat:'c'});Cy(x-.45,z,.42,y+1.25,y+1.4,'dark',{nc:1,n:8});Cy(x+.45,z,.42,y+1.25,y+1.4,'dark',{nc:1,n:8});Bn(x-1.12,z-.5,x-1.1,z+.5,y+.2,y+1,'dark')}
+function Vt(x,z,y,m){y=y||0;Cy(x,z,.5,y,y+2.1,m||'met',{n:8,cat:'c'});Cy(x,z,.7,y+2.1,y+2.3,'dark',{nc:1,n:8})}
+function Ant(x,z,y,h){y=y||0;h=h||5;Bn(x-.06,z-.06,x+.06,z+.06,y,y+h,'dark');Bn(x-.5,z-.04,x+.5,z+.04,y+h*.7,y+h*.7+.08,'dark');Be(x-.1,z-.1,x+.1,z+.1,y+h,y+h+.2,'#ff3030')}
+function Cr(x,z,y,s,m){y=y||0;s=s||1.2;B(x-s/2,z-s/2,x+s/2,z+s/2,y,y+s,m||'crate',{cat:'c'})}
+function Lw(x0,z0,x1,z1,y,h,m){B(x0,z0,x1,z1,y,y+(h||1.2),m||'cover',{cat:'c'})}
+function Lp(x,z,y,h,col){y=y||0;h=h||4;Bn(x-.1,z-.1,x+.1,z+.1,y,y+h,'dark');Be(x-.45,z-.1,x+.45,z+.1,y+h,y+h+.14,col||'#fff3c8')}
+
+function Pd(x,z,t){if(MZ.dry)return;pad(x*MZ.sg,z*MZ.sz,t)}
+
+/* ===== MAP 1 · ARENA — rooftops ===== */
+MD.arena={n:'ARENA',d:'Rooftops, AC units, jumpable gaps, ramps and walkways high above the city.',gc:'#80858b',gk:'conc',
+ sky:['#5c91c9','#a9cbe6','#e8e2d2'],fog:0xbdd0e2,fn:40,ff:150,sun:[0xfff1d6,1.25,[40,70,25]],hemi:[0xcfe3ff,0x6a6a66,.82],
+ T:{dark:'#33373c',rail:['#c4c9ce','metal'],step:['#9aa1a8','conc'],ramp:['#8c949b','conc'],wall:['#dde0e4','conc'],wall2:['#3f464d','panel'],roof:['#adb3b9','tile'],acc:['#e8742a','panel'],teal:['#2fa8a3','panel'],met:['#8d969d','metal'],hv:['#c9cdd1','metal'],para:['#eceef0','conc'],crate:['#d58a2e','panel'],cover:['#9fa6ad','conc'],cb:['#7a828a','conc'],gl:['#9fd6e8','conc','gl']},
+ pve(){const T=MZ.T;
+  Perim(49,49,'wall2',3.2);Sky('b',46,64,120,26,90,['#9aa6b4','#8791a0','#aeb7c2','#7a8696','#b8b1a6'],3);
+  /* centre tower: a roof with a machine room on top, ramps up from east and west */
+  B(-9,-9,9,9,0,3.6,'wall');Pa(-9,-9,9,9,3.6,'para',[['e',0,3.6],['w',0,3.6],['e',-7.9,3],['w',-7.9,3]]);
+  B(-3,-1,3,5,3.6,7.2,'wall2');Pa(-3,-1,3,5,7.2,'para',[['n',0,2.4]]);
+  const s1=St(0,-5.95,2,3.6,7.2,2.2,'step');
+  AC(-6.5,5,3.6);AC(6.5,-5.5,3.6);AC(5.5,6,3.6);Vt(-6,-5.5,3.6);Vt(7,2.5,3.6);Ant(0,2,7.2,5);Cr(-6,0,3.6,1.2);
+  Sg('CENTRAL',0,5.7,5.02,0,4.4,1.1,'#ffffff','#e8742a');
+  half(()=>{
+   const r=Rp(15.5,0,1,0,3.6,3.2,'ramp');Cl([r],[-9,-9,9,9,3.6],24);Cl([r,s1],[-3,-1,3,5,7.2],24);
+   /* east and west rooftops, linked by a walkway over the north street */
+   B(19,-14,29,-4,0,3.6,'wall');Pa(19,-14,29,-4,3.6,'para',[['s',21,2.6],['w',-8.2,3.2]]);
+   const a=St(21,1.0,3,0,3.6,2.4,'step');Cl([a],[19,-14,29,-4,3.6],22);
+   AC(25.5,-11,3.6);AC(27,-6.5,3.6);Vt(21,-12,3.6);Cr(27.5,-12.5,3.6,1.1);Ant(28,-5,3.6,4);
+   B(19,4,29,14,0,3.6,'wall');Pa(19,4,29,14,3.6,'para',[['n',27,2.6]]);
+   const b=St(27,-1.0,2,0,3.6,2.4,'step');Cl([b],[19,4,29,14,3.6],22);
+   AC(22,11,3.6);AC(26,7,3.6);Vt(27,12,3.6);Cr(21,6,3.6,1.1);
+   Dk(9,-9.6,19,-6.8,3.6,'roof',.4,{np:1});Rl(9,-9.6,19,-9.3,3.6,1.05);Rl(9,-7.1,19,-6.8,3.6,1.05);
+   [[11,-9.6],[15,-9.6],[18.5,-9.6]].forEach(p=>B(p[0],p[1],p[0]+.4,p[1]+.4,0,3.2,'dark',{cat:'p'}));
+   /* maintenance buildings with rooms inside */
+   Rm(33,-30,41,-22,3.6,'wall','roof',[['n',37,2.4],['s',36,2.4]],{floor:'dark'});Pa(33,-30,41,-22,3.6,'para',[['w',-26,2.6]]);
+   const c=St(28,-26,0,0,3.6,2.4,'step');Cl([c],[33,-30,41,-22,3.6],20);AC(38,-27,3.6);Vt(35,-24,3.6);
+   Rm(33,22,41,30,3.6,'wall','roof',[['n',36,2.4],['s',37,2.4]],{floor:'dark'});Pa(33,22,41,30,3.6,'para',[['w',26,2.6]]);
+   const d=St(28,26,0,0,3.6,2.4,'step');Cl([d],[33,22,41,30,3.6],20);AC(38,27,3.6);Vt(35,28,3.6);
+   /* the lower deck: cover, walls, pads, crates */
+   Lw(36,-12,40,-11,0,1.3);Lw(36,11,40,12,0,1.3);Lw(36,-3,37,3,0,1.3);Lw(12,-26,18,-25,0,1.3);Lw(12,25,18,26,0,1.3);
+   AC(13,-32,0);AC(13,32,0);AC(24,-40,0);AC(24,40,0);Vt(35,-17,0);Vt(35,17,0);
+   Cr(10,-17,0,1.4);Cr(11.5,-17.4,0,1.4);Cr(10.6,-17.2,1.4,1.2);Cr(10,17,0,1.4);Cr(11.5,17.4,0,1.4);
+   B(20,-44,26,-41,0,1.8,'cb',{cat:'c'});B(20,41,26,44,0,1.8,'cb',{cat:'c'});B(2,-44,6,-42,0,1.2,'cover',{cat:'c'});B(2,42,6,44,0,1.2,'cover',{cat:'c'});
+   Lp(15,-12,0,4);Lp(15,12,0,4);Lp(33,0,0,4);Lp(30,-36,0,4);Lp(30,36,0,4);
+   Pd(24,0,1);Pd(30,-17,2);Pd(30,17,2);Pd(8,-30,0);Pd(8,30,0)});
+  /* north and south roofs across a jumpable gap from the centre */
+  B(-6,-22,6,-13,0,3.6,'wall');Pa(-6,-22,6,-13,3.6,'para',[['n',0,2.6],['s',0,3.4]]);const n1=St(0,-26.95,2,0,3.6,2.4,'step');Cl([n1],[-6,-22,6,-13,3.6],24);AC(-3,-18,3.6);AC(3,-16,3.6);Cr(4,-20.5,3.6,1.1);
+  B(-6,13,6,22,0,3.6,'wall');Pa(-6,13,6,22,3.6,'para',[['s',0,2.6],['n',0,3.4]]);const s2=St(0,26.95,3,0,3.6,2.4,'step');Cl([s2],[-6,13,6,22,3.6],24);AC(3,18,3.6);AC(-3,16,3.6);Cr(-4,20.5,3.6,1.1);
+  Lw(-14,-36,-8,-35,0,1.3);Lw(8,-36,14,-35,0,1.3);Lw(-14,35,-8,36,0,1.3);Lw(8,35,14,36,0,1.3);
+  },
+ crt:[[-14,-14],[14,14],[0,-33],[0,33]],zones:[[-24,-24],[24,24],[-24,24],[24,-24],[-6,-30],[-6,30],[-14,6],[14,6]],bar:[[16,-20,1],[-16,20,1],[40,-6,0],[-40,6,0],[26,-34,1],[-26,34,1]],
+ pvp:{hx:20,hz:17,sp:[[-17.5,0],[17.5,0]],
+ build(){Perim(20,17,'wall2',2.6);Sky('b',34,38,70,24,80,['#9aa6b4','#8791a0','#aeb7c2','#7a8696'],5);
+  B(-5,-4,5,4,0,3.6,'wall');Pa(-5,-4,5,4,3.6,'para',[['n',0,3.2],['s',0,3.2]]);AC(-2.5,0,3.6);Vt(3,-2.5,3.6);Cr(3,2.5,3.6,1.1);
+  const n=Rp(0,-10.5,2,0,3.6,3.2,'ramp'),s=Rp(0,10.5,3,0,3.6,3.2,'ramp');
+  half(()=>{B(9,-13,15,5,0,3.6,'wall');Pa(9,-13,15,5,3.6,'para',[['s',12,2.6],['w',-12.5,3.6]]);St(12,10,3,0,3.6,2.4,'step');AC(12,-8,3.6);AC(13,-2.5,3.6);Vt(10.5,-11.5,3.6);Cr(14,2.5,3.6,1.1);
+   Dk(0,-14,9,-11,3.6,'roof',.4,{np:1});Rl(0,-14,9,-13.7,3.6,1.05);Rl(0,-11.3,9,-11,3.6,1.05);
+   Lw(5,8,9,9,0,1.3);Lw(14,-8,18,-7.2,0,1.3);Lw(16,7,19,8,0,1.3);Lw(15.5,-6.5,17.2,-5.5,0,1.3);Cr(8,13,0,1.4);Cr(9.5,13.3,0,1.4);Cr(8.6,13.1,1.4,1.2);AC(3,14,0);B(5,-8,7,-7,0,1.8,'cb',{cat:'c'})})}}};
+
+/* ===== MAP 2 · DOCKYARD — shipping port ===== */
+{const CC=['red','blue','grn','org','yel','gry'];
+ const Ct=(x0,z0,x1,z1,y,c)=>{B(x0,z0,x1,z1,y,y+2.6,c,{cat:'k'});Bn(x0-.02,z0+.2,x0+.02,z1-.2,y+.3,y+2.3,'dark');Bn(x1-.02,z0+.2,x1+.02,z1-.2,y+.3,y+2.3,'dark')};
+ const Tk=(x,z,r,h)=>{Cy(x,z,r,0,h,'tank',{n:12,cat:'c'});Cy(x,z,r*1.02,h,h+.25,'dark',{nc:1,n:12})};
+ const Crane=(x,z0,z1,h)=>{[z0,z1].forEach(z=>{B(x-.7,z-.7,x+.7,z+.7,0,h,'cr',{cat:'p'});B(x-1.1,z-1.1,x+1.1,z+1.1,0,.5,'dark',{cat:'p'})});Bn(x-.9,z0-1,x+.9,z1+1,h,h+1.5,'cr');Bn(x-1.4,(z0+z1)/2-1.4,x+1.4,(z0+z1)/2+1.4,h-2.4,h,'cr');Bn(x-.04,(z0+z1)/2-.04,x+.04,(z0+z1)/2+.04,h-9,h-2.4,'dark');B(x-.6,(z0+z1)/2-.6,x+.6,(z0+z1)/2+.6,0.5,1.4,'dark',{nc:1})};
+ MD.dock={n:'DOCKYARD',d:'Containers, warehouses, cranes and metal stairways in a busy shipping port.',gc:'#8f918f',gk:'conc',
+ sky:['#5b7188','#aeb0a8','#e6c79a'],fog:0xaaa89f,fn:34,ff:135,sun:[0xffd9a8,1.15,[-50,55,30]],hemi:[0xcfd9e4,0x6a625a,.78],
+ T:{wallm:['#66788a','metal'],roofm:['#48535e','metal'],rack:['#2f5f8f','metal'],cr:['#dfb41f','panel'],red:['#a8392f','metal'],blue:['#2f5f8f','metal'],grn:['#3f7a4d','metal'],yel:['#d3a42a','metal'],org:['#c9652a','metal'],gry:['#8d98a0','metal'],wht:['#cfd4d8','metal'],conc2:['#a7a9a8','conc'],plat:['#9a9d9c','grate'],grate:['#7e868d','grate'],step:['#7e868d','grate'],tank:['#d0d3d4','panel'],hull:['#2f3b47','metal'],para:['#b9bbba','conc']},
+ pve(){Perim(49,49,'wallm',3.4);Sky('b',40,66,110,18,50,['#7c8794','#69747f','#8a929a'],7);
+  /* a ship moored beyond the north wall */
+  Bn(-34,-78,40,-58,0,10,'hull');Bn(-34,-78,40,-58,10,10.5,'dark');Bn(18,-72,38,-62,10,22,'wht');Bn(20,-70,36,-64,22,26,'gry');
+  /* big warehouse in the middle with a mezzanine inside and a loading platform on the south side */
+  Rm(-14,-9,14,9,6,'wallm','roofm',[['n',-9,3.6],['n',0,3.6],['n',9,3.6],['s',-9,3.6],['s',0,3.6],['s',9,3.6],['e',0,4.4],['w',0,4.4]],{dh:3.8,floor:'conc2'});
+  B(-14,9,14,11.6,0,1.2,'conc2',{cat:'d'});
+  Dk(-13.6,-8.6,13.6,-5.6,3.2,'grate',.3,{np:1});Rl(-13.6,-5.9,-7.1,-5.6,3.2,1);Rl(-4.9,-5.9,4.9,-5.6,3.2,1);Rl(7.1,-5.9,13.6,-5.6,3.2,1);
+  [-12,-6,0,6,12].forEach(x=>B(x-.25,-5.9,x+.25,-5.4,0,2.9,'dark',{cat:'p'}));
+  B(-3,2.5,3,4.9,0,2.6,'org',{cat:'k'});Cr(0,-2,0,1.3);Cr(1.4,-2.2,0,1.3);Lw(-2,6,2,6.6,0,1.2);
+  half(()=>{const r=Rp(16.5,10.3,1,0,1.2,2.6,'ramp');
+   const s=St(6,-1.2,3,0,3.2,2.2,'step');Cl([s],[-13.6,-8.6,13.6,-5.6,3.2],18);
+   B(8,2,13,3.4,0,2.4,'rack',{cat:'c'});B(8,5,13,6.4,0,2.4,'rack',{cat:'c'});Cr(11,-2,0,1.3);Lp(12.8,-8.3,3.2,3,'#ffe9b0');B(8.5,-8.2,13.4,-6.4,3.2,4.8,'rack',{cat:'c'});
+   Crane(40,-10,10,16);Lp(24,12.5,0,5);Lp(24,-12.5,0,5)});
+  /* the container yards, one in every corner with its own look */
+  quad(q=>{const c1=CC[q%4],c2=CC[(q+1)%4],c3=CC[(q+2)%6];
+   Ct(18,24,30,26.4,0,c1);Ct(18,26.4,30,28.8,0,c2);Ct(18,24,24,28.8,2.6,c3);
+   const a=St(27,20.7,2,0,2.6,2.2,'step');Cl([a],[24,24,30,28.8,2.6],20);
+   const b=St(27.3,27.4,1,2.6,5.2,2.2,'step');Cl([a,b],[18,24,24,28.8,5.2],20);
+   Pa(24,24,30,28.8,2.6,'para',[['n',27,2.6],['w',26.4,4.8]],.9);
+   Ct(32,14,38,16.4,0,c2);Ct(32,19.6,38,22,0,c1);B(32,14,38,22,2.6,2.9,'plat',{cat:'d'});Pa(32,14,38,22,2.9,'para',[['n',35,2.6],['s',35,2.6]],.9);
+   const t=St(35,10.15,2,0,2.9,2.2,'step');Cl([t],[32,14,38,22,2.9],18);
+   Dk(30,25.4,35.2,27.2,2.6,'plat',.3,{np:1});Dk(34,22,35.4,25.4,2.6,'plat',.3,{np:1});Rl(30,25.4,34,25.7,2.6,1);Rl(30,26.9,35.2,27.2,2.6,1);Rl(33.7,22,34,25.4,2.6,1);Rl(35.4,22,35.7,26.9,2.6,1);
+   Cr(20,35,0,1.4);Cr(21.5,35.3,0,1.4);Cr(20.7,35.1,1.4,1.2);Cr(24,40,0,1.4);Lw(26,34,31,34.7,0,1.3);Lw(14,38,19,38.7,0,1.3);
+   Tk(34,40,1.8,4.5);Tk(38.5,41,1.8,4.5);Lw(10,22,14,22.7,0,1.3);Lw(14,16,18,16.7,0,1.3);
+   Ct(2,36,8,38.4,0,c3);Ct(12,44,18,46.4,0,c1);Ct(24,43,30,45.4,0,c2);Cr(5,28,0,1.3);Lp(21,18,0,5);Lp(30,32,0,5);
+   if(q===0)Pd(8,22,2);if(q===3)Pd(8,-22,2);if(q===1)Pd(8,-22,0);if(q===2)Pd(8,22,0);Pd(30,6,1)});
+  /* cargo piles on the open centre line */
+  [[-4,-24],[4,-24],[-6,-34],[6,-34],[0,-42]].forEach((p,i)=>{Cr(p[0],p[1],0,1.4);Cr(p[0]+1.5,p[1]+.2,0,1.4);Cr(p[0]+.7,p[1]+.1,1.4,1.2)});
+  Cr(-3,24,0,1.4);Cr(-1.6,24.3,0,1.4);Cr(3,30,0,1.4)},
+ crt:[[-18,4],[18,-4],[-6,-14],[6,14]],zones:[[-26,-16],[26,16],[-26,16],[26,-16],[-10,-28],[-10,30],[20,2],[-20,-2]],bar:[[-20,-14,1],[20,14,1],[-10,24,0],[10,-24,0],[28,-6,1],[-28,6,1],[0,-18,0]],
+ pvp:{hx:21,hz:17,sp:[[-18,0],[18,0]],
+ build(){Perim(21,17,'wallm',3);Sky('b',30,40,70,16,44,['#7c8794','#69747f','#8a929a'],9);Bn(-30,-48,30,-30,0,9,'hull');Bn(8,-44,24,-36,9,18,'wht');
+  Rm(-8,-6,8,6,5,'wallm','roofm',[['n',0,3.4],['s',0,3.4],['e',0,3.4],['w',0,3.4]],{dh:3.4,floor:'conc2'});
+  Dk(-7.6,-5.6,7.6,-3,3,'grate',.3,{np:1});Rl(-7.6,-3.3,3.9,-3,3,1);Rl(6.1,-3.3,7.6,-3,3,1);St(5,.85,3,0,3,2.2,'step');St(-5,.85,3,0,3,2.2,'step');Rl(-6.1,-3.3,-3.9,-3,3,1);
+  B(-3,1.5,3,2.7,0,2.2,'rack',{cat:'c'});Cr(0,-1,0,1.3);
+  half(()=>{Ct(11,-14,17,-11.6,0,'red');Ct(11,-11.6,17,-9.2,0,'blue');B(11,-14,17,-9.2,2.6,2.9,'plat',{cat:'d'});Pa(11,-14,17,-9.2,2.9,'para',[['s',14,2.6]],.9);St(14,-5.9,3,0,2.9,2.2,'step');
+   Ct(11,5,17,7.4,0,'gry');Ct(11,10.6,17,13,0,'yel');B(11,5,17,13,2.6,2.9,'plat',{cat:'d'});Pa(11,5,17,13,2.9,'para',[['n',14,2.6]],.9);St(14,1.15,2,0,2.9,2.2,'step');
+   Ct(3,10,5.4,16,0,'org');Cr(8,13,0,1.4);Cr(9.4,13.2,0,1.4);Lw(8,-6,12,-5.3,0,1.3);Lw(15.5,-7.4,17.2,-6.6,0,1.3);Lw(16,5.4,19,6.1,0,1.3);Cr(7,-13,0,1.4);Cr(5.6,-13.2,0,1.4);Lw(18,9,20,9.7,0,1.3);Lp(19,-9,0,4);Lp(9.5,15,0,4)})}}};
+}
+
+/* ===== MAP 5 · FROSTPOINT — snowy mountain research facility ===== */
+{const Pn=(x,z,s)=>{s=s||1;Cy(x,z,.28*s,0,1.5*s,'bark',{n:5});Cy(x,z,1.7*s,1.1*s,3.3*s,'pine',{r1:.9*s,n:7,nc:1});Cy(x,z,1.3*s,2.8*s,4.9*s,'pine',{r1:.5*s,n:7,nc:1});Cy(x,z,.8*s,4.4*s,6.2*s,'pine',{r1:.05,n:7,nc:1})};
+ MD.frost={n:'FROSTPOINT',d:'A snowbound research station: labs, metal bridges, observation decks and tunnels under the peaks.',gc:'#e2eaf2',gk:'snow',
+ sky:['#8fb2d6','#d3e2ef','#f3f7fb'],fog:0xdde8f1,fn:28,ff:118,sun:[0xeaf2ff,1.25,[30,65,-30]],hemi:[0xdce9ff,0x9aa8ba,.95],
+ T:{panel:['#dce4ec','panel'],roofw:['#f1f5f9','snow'],snowd:['#eef3f8','snow'],srock:['#b4bec8','rock'],pine:['#2e5a46','conc'],bark:['#5a4636','wood'],met:['#8a96a2','metal'],bench:['#c8d0d8','panel'],gen:['#d9622b','metal'],teal:['#2a8fa8','panel'],wlk:['#f4f8fb','snow'],para:['#e6edf3','snow'],step:['#9aa6b2','grate'],ramp:['#cfd8e0','snow'],rail:['#7b8794','metal'],mtn:['#7d8794','rock'],cover:['#c3ccd5','snow']},
+ pve(){Perim(49,49,'panel',3);Sky('mtn',16,70,115,60,115,['#7d8794','#6f7a87','#8a94a0'],4);
+  /* the central research hub: labs inside, a radar dome on the roof */
+  Rm(-12,-10,12,10,4.4,'panel','roofw',[['n',0,3.6],['s',0,3.6],['e',0,3.6],['w',0,3.6]],{dh:3.4,floor:'dark'});
+  B(-9,-6,-4,-4.6,0,1.1,'bench',{cat:'c'});B(4,-6,9,-4.6,0,1.1,'bench',{cat:'c'});B(-9,4.6,-4,6,0,1.1,'bench',{cat:'c'});B(4,4.6,9,6,0,1.1,'bench',{cat:'c'});B(-1,-1,1,1,0,1.6,'dark',{cat:'c'});
+  Pa(-12,-10,12,10,4.4,'para',[['n',6,2.4],['n',-6,2.4],['s',6,2.4],['s',-6,2.4]],.9);Cy(7,-5,2.4,4.4,6.4,'panel',{r1:1.1,n:8});
+  half(()=>{const a=St(11,-11.0,1,0,4.4,1.8,'step');Cl([a],[-12,-10,12,10,4.4],22,[6,-8.5]);const b=St(11,11.0,1,0,4.4,1.8,'step');Cl([b],[-12,-10,12,10,4.4],22,[6,8.5])});
+  quad(q=>{
+   /* lab, a tunnel and a storage building */
+   Rm(16,12,28,24,3.6,'panel','roofw',[['w',18,2.6],['n',22,2.6],['e',18,2.4]],{floor:'dark'});Pa(16,12,28,24,3.6,'para',[['s',20.5,3.4]],.9);B(18,14,24,15.4,0,1.1,'bench',{cat:'c'});B(18,20,22,21.4,0,1.1,'bench',{cat:'c'});AC(22,18,3.6,'met');Be(16.1,17,16.2,19,2.4,2.9,'#6cf0ff');
+   Rm(28,16,34,20,3.2,'panel','roofw',[['w',18,2.4],['e',18,2.4]],{floor:'dark'});
+   Rm(34,10,42,26,3.6,'gen','roofw',[['w',18,2.4],['n',38,2.6],['s',38,2.6]],{floor:'dark'});Cr(37,14,0,1.3);Cr(38.6,14.2,0,1.3);Cr(37,22,0,1.3);
+   /* observation deck reached by a metal bridge from the lab roof */
+   Dk(16,30,26,38,3.6,'snowd',.4,{np:0});Rl(16,30,26,30.3,3.6,1.05,'rail');Rl(16,37.7,19.6,38,3.6,1.05,'rail');Rl(22.4,37.7,26,38,3.6,1.05,'rail');Rl(16,30,16.3,38,3.6,1.05,'rail');Rl(25.7,30,26,38,3.6,1.05,'rail');
+   Dk(19,24,22,30,3.6,'met',.3,{np:1});Rl(19,24,19.3,30,3.6,1.05,'rail');Rl(21.7,24,22,30,3.6,1.05,'rail');
+   const c=St(21,42.95,3,0,3.6,2.4,'step');Cl([c],[16,30,26,38,3.6],22);
+   Be(17,31,17.4,31.4,3.6,6,'#ff7a2a');Cy(26.2,34,.5,0,3,'met',{nc:1});
+   Rk(30,4,2.2,2.6,'srock',q);Rk(39,2.5,1.6,2,'srock',q+3);Rk(8,34,2.2,2.8,'srock',q+5);Rk(2,44,2.4,3,'srock',q+7);Rk(33,40,1.8,2.2,'srock',q+9);
+   Pn(10,28,1.2);Pn(12,33,1);Pn(7,40,1.3);Pn(30,34,1.1);Pn(36,44,1.2);Pn(24,45,1);Pn(4,18,1);Pn(2,26,1.1);Pn(40,32,1.3);
+   Lp(14,10,0,5,'#bfe9ff');Lp(30,12,0,5,'#bfe9ff');Lp(14,28,0,5,'#bfe9ff');Lp(32,30,0,5,'#bfe9ff');Ant(38,6,0,9);B(30,28,32.5,30,0,1.4,'gen',{cat:'c'});
+   Lw(8,12,12,12.7,0,1.2,'cover');Lw(10,16,14,16.7,0,1.2,'cover');Lw(2,30,6,30.7,0,1.2,'cover');
+   Bn(12,-1,36,1,0,.04,'wlk');Bn(-1,12,1,36,0,.04,'wlk');Bn(36,18,38,19,0,.04,'wlk');
+   if(q===0||q===3)Pd(6,26,2);if(q===1)Pd(30,6,1);if(q===2)Pd(-30,6,0)})},
+ crt:[[-16,6],[16,-6],[0,-18],[0,18]],zones:[[-22,-28],[22,28],[-22,28],[22,-28],[0,-34],[0,34],[-18,0],[16,0]],bar:[[-8,16,1],[8,-16,0],[24,10,1],[-24,-10,1],[20,36,0],[-20,-36,1]],
+ pvp:{hx:21,hz:17,sp:[[-18.5,0],[18.5,0]],
+ build(){Perim(21,17,'panel',3);Sky('mtn',12,38,64,34,70,['#7d8794','#6f7a87','#8a94a0'],6);
+  B(-4,-4,4,4,0,3.6,'panel');Pa(-4,-4,4,4,3.6,'para',[['e',-2.2,2.6],['w',-2.2,2.6],['e',2.2,2.6],['w',2.2,2.6]],.9);Cy(0,0,1.6,3.6,5.4,'panel',{r1:.7,n:8});
+  quad(q=>{
+   Rm(8,-9,15,-1,3.6,'panel','roofw',[['w',-5,2.6],['s',11.5,2.6],['n',11.5,2.6],['e',-5,2.4]],{floor:'dark'});Pa(8,-9,15,-1,3.6,'para',[['n',8.6,2.4],['w',-2.2,2.6]],.9);
+   const a=St(13,-10.0,1,0,3.6,1.8,'step');
+   Dk(4,-3,8,-1.4,3.6,'met',.3,{np:1});Rl(4,-3,8,-2.7,3.6,1.05,'rail');Rl(4,-1.7,8,-1.4,3.6,1.05,'rail');
+   B(9.5,-6,12.5,-4.6,0,1.1,'bench',{cat:'c'});Cr(13,-2.4,0,1.2);Rk(17,-8.5,1.5,1.8,'srock',q);Rk(5.5,-11,1.6,2,'srock',q+2);Lw(1,-8,5,-7.3,0,1.2,'cover');Lw(16.5,-12.5,19.5,-11.8,0,1.2,'cover');
+   Pn(19,-13.5,1.1);Pn(2,-14.5,1);Lp(7,-9.8,0,5,'#bfe9ff');Lp(16,-1.5,0,5,'#bfe9ff');Ant(19,-6,0,7)})}}};
+}
+
+/* ===== MAP 3 · METRO — underground station ===== */
+{const Cg=(x0,z0,x1,z1)=>{const zc=(z0+z1)/2;Rm(x0,z0,x1,z1,3.7,'trn','trnr',[['n',x0+3.5,2.2],['n',x1-3.5,2.2],['s',x0+3.5,2.2],['s',x1-3.5,2.2],['e',zc,2.2],['w',zc,2.2]],{dh:2.7,floor:'dark'});
+  Bn(x0+.2,z0-.04,x1-.2,z0,.9,1.2,'stripe');Bn(x0+.2,z1,x1-.2,z1+.04,.9,1.2,'stripe');
+  Bg(x0+1.2,z0-.05,x0+5,z0,1.4,2.7,'#9fd6e8');Bg(x0+8.8,z0-.05,x1-1.2,z0,1.4,2.7,'#9fd6e8');Bg(x0+1.2,z1,x0+5,z1+.05,1.4,2.7,'#9fd6e8');Bg(x0+8.8,z1,x1-1.2,z1+.05,1.4,2.7,'#9fd6e8');
+  Be(x0+2,z0+.4,x1-2,z0+.6,3.3,3.4,'#fff6d8');Be(x0+2,z1-.6,x1-2,z1-.4,3.3,3.4,'#fff6d8')};
+ const Tr=(x0,x1,z)=>{[z-.75,z+.75].forEach(r=>Bn(x0,r-.07,x1,r+.07,.02,.14,'dark'));for(let x=x0;x<x1;x+=1.6)Bn(x,z-1.3,x+.4,z+1.3,.02,.1,'sleeper')};
+ MD.metro={n:'METRO',d:'An underground station: platforms, trains, escalators, a ticket hall and maintenance passages.',gc:'#9ba1a3',gk:'tile',
+ sky:['#161a1e','#232a30','#2f383f'],fog:0x2a3238,fn:30,ff:125,sun:[0xfff0d8,.55,[20,60,10]],hemi:[0xe6f0f8,0x5a626a,1.05],
+ T:{tilew:['#cfd2c6','tile'],plat:['#b7bbbd','tile'],col:['#7b8186','conc'],ceil:['#3c4247','panel'],ceil2:['#464c52','panel'],roofd:['#50565c','conc'],conc:['#8a9096','conc'],wall:['#c9ccbf','tile'],roof:['#5d6369','panel'],trn:['#aeb8c0','metal'],trnr:['#8e98a0','metal'],stripe:['#2a6fc1','metal'],yel:['#e1c21f','panel'],tm:['#2b66b0','panel'],esc:['#4a5056','grate'],step:['#9c9fa2','grate'],sleeper:['#5a4c40','wood'],para:['#c6c9cc','tile'],tile:['#c9ccc2','tile']},
+ pve(){Perim(49,49,'tilew',5);B(-50,-50,50,50,6.9,7.3,'ceil',{nc:1,fl:'ce'});
+  [-6,6].forEach(z=>{Bn(47.6,z-1.6,49,z+1.6,0,4.4,'#050607');Bn(-49,z-1.6,-47.6,z+1.6,0,4.4,'#050607')});Sg('TUNNEL',48.4,4.9,-5.9,-1.5708,3,.7,'#fff','#222');Sg('TUNNEL',-48.4,4.9,5.9,1.5708,3,.7,'#fff','#222');
+  Tr(-48,48,-5.9);Tr(-48,48,5.9);
+  /* two trains with open doors, one on each track */
+  Cg(-30,-7.4,-16,-4.4);Cg(-16,-7.4,-2,-4.4);Cg(-2,-7.4,12,-4.4);Cg(-12,4.4,2,7.4);Cg(2,4.4,16,7.4);Cg(16,4.4,30,7.4);
+  Be(-40,-.2,40,.2,6.8,6.9,'#fff6d8');
+  quad(q=>{
+   B(0,8.4,38,20,0,1.1,'plat',{cat:'d'});Bn(0,8.4,38,9,1.1,1.14,'yel');
+   [8,24].forEach(x=>B(x-.45,13.6,x+.45,14.5,0,6.9,'col',{cat:'p'}));
+   Sg(q%2?'PLATFORM 1':'PLATFORM 2',16,5.2,13.55,0,3.4,.8,'#ffffff','#1d4f8c');Sg(q%2?'PLATFORM 1':'PLATFORM 2',32,5.2,13.55,0,3.4,.8,'#ffffff','#1d4f8c');
+   Rp(16,14.6,2,1.1,4.4,2.4,'esc');
+   Dk(0,20,30,30,4.4,'tile',.4,{np:1});Rl(0,29.7,2.7,30,4.4,1);Rl(5.3,29.7,18.7,30,4.4,1);Rl(21.3,29.7,30,30,4.4,1);Rl(29.7,20,30,30,4.4,1);
+   B(13.6,24,14.4,24.8,0,4,'col',{cat:'p'});B(28,24,28.8,24.8,0,4,'col',{cat:'p'});B(2,26,2.8,26.8,0,4,'col',{cat:'p'});
+   const a=St(20,35.5,3,0,4.4,2.6,'step'),b=St(4,35.5,3,0,4.4,2.6,'step');Cl([a],[0,20,30,30,4.4],22);Cl([b],[0,20,30,30,4.4],22);
+   Sg('EXIT',20,4.6,35.4,0,2,.6,'#35ff6a','#06280f');Sg('TICKETS',9,3.4,48.9,0,4,.8,'#ffffff','#c0392b');
+   Lw(6,37.3,17.6,37.7,0,1.1,'para');Lw(22.4,37.3,36,37.7,0,1.1,'para');
+   B(8,40,9.6,41,0,1.9,'tm',{cat:'c'});B(11.5,40,13.1,41,0,1.9,'tm',{cat:'c'});B(25,38.6,26.6,39.6,0,1.9,'tm',{cat:'c'});
+   Rm(24,41,32,47,3.4,'wall','roof',[['w',44,2.4],['n',28,2.4]],{floor:'dark'});Sg('KIOSK',28,3.0,40.9,0,2.6,.6,'#ffffff','#e67e22');Cr(28,44,0,1.1);
+   Rm(2,43.5,20,48,3.6,'conc','roofd',[['n',6,2.4],['n',16,2.4],['e',45.8,2.2],['w',45.8,2.2]],{floor:'dark'});Cr(10,46,0,1.2);Cr(12,46.2,0,1.2);
+   B(30,34,31,35,0,6.9,'col',{cat:'p'});B(36,44,37,45,0,6.9,'col',{cat:'p'});B(22,30,23,31,0,6.9,'col',{cat:'p'});Lw(14,33,17,33.5,0,1.0,'para');Lw(33,28,36,28.5,0,1.0,'para');
+   Be(4,22,28,22.3,4.0,4.05,'#fff6d8');Be(4,40,24,40.3,6.8,6.9,'#fff6d8');Be(30,40,40,40.3,6.8,6.9,'#fff6d8');
+   Lw(40,16,41,22,0,1.2,'para');Lw(38.2,24,41,24.6,0,1.2,'para');
+   if(q===0||q===3)Pd(32,30,2);if(q===1||q===2)Pd(32,-30,0)});
+  Cr(-8,-14,1.1,1.1);Cr(8,14,1.1,1.1);Lw(-8,-4.2,-4,-3.8,0,1.1,'para');Lw(4,3.8,8,4.2,0,1.1,'para')},
+ crt:[[-20,0],[20,0],[0,-40],[0,40]],zones:[[-24,-24],[24,24],[-24,24],[24,-24],[-10,-34],[-10,34],[-14,0],[14,0]],bar:[[-35,2,1],[35,-2,0],[-14,40,1],[14,-40,1],[40,10,1],[-40,-10,1]],
+ pvp:{hx:22,hz:17,sp:[[-18.5,0],[18.5,0]],
+ build(){Perim(22,17,'tilew',5);B(-23,-18,23,18,5,5.4,'ceil',{nc:1,fl:'ce'});
+  Tr(-22,22,-.01);Cg(-9,-1.8,9,1.8);
+  Dk(-1.5,-5,1.5,5,4.4,'tile',.4,{np:1});Rl(-1.5,-5,-1.2,5,4.4,1);Rl(1.2,-5,1.5,5,4.4,1);
+  quad(q=>{B(0,5,22,11,0,1.1,'plat',{cat:'d'});Bn(0,5,22,5.6,1.1,1.14,'yel');
+   Rm(0,11,22,17,5,'tilew','ceil2',[['n',4,3],['n',15,3],['w',14,3]],{dh:3.6,floor:'dark'});
+   St(0,9.4,3,1.1,4.4,2.6,'step');
+   B(11.6,7.6,12.4,8.4,0,5,'col',{cat:'p'});B(4,9,5,10,0,5,'col',{cat:'p'});Lw(15,6.4,19,7,1.1,1.0,'para');Lw(7,9.6,10,10.2,1.1,1.0,'para');
+   Cr(8,14,0,1.2);Cr(18.5,15.5,0,1.2);Lw(10,12.2,13,12.8,0,1.2,'para');
+   Sg(q%2?'PLATFORM 1':'PLATFORM 2',12,4.4,7.8,0,3,.7,'#ffffff','#1d4f8c');Be(2,7,20,7.3,4.9,4.95,'#fff6d8');Be(2,14,20,14.3,4.9,4.95,'#fff6d8');
+   Lw(13,-3.4,14,-2.8,0,1.2,'para');Lw(13,2.8,14,3.4,0,1.2,'para')})}}};
+}
+
+/* ===== MAP 4 · NEON DISTRICT — futuristic city at night ===== */
+{const NC=['#ff2fb8','#18e6ff','#ffb02a','#6cff4a','#9a5bff'];
+ const Car=(x,z,c,ry)=>{const w=ry?4.2:2,d=ry?2:4.2;B(x-w/2,z-d/2,x+w/2,z+d/2,.25,1.1,c||'car',{cat:'c'});B(x-w*.3,z-d*.3,x+w*.3,z+d*.3,1.1,1.6,'car2',{cat:'c'});Bg(x-w*.28,z-d*.28,x+w*.28,z+d*.28,1.12,1.58,'#7fd4ff');Be(x-w/2-.02,z-.7,x-w/2+.02,z+.7,.5,.7,'#ff3030')};
+ const Ns=(t,x,y,z,ry,w,h,i)=>{Sg(t,x,y,z,ry,w,h,NC[i%5],'#080812')};
+ MD.neon={n:'NEON DISTRICT',d:'Narrow streets, shops, balconies, sky bridges and glowing signs after dark.',gc:'#3c3f47',gk:'asph',
+ sky:['#080a1a','#1b1844','#4a2160'],fog:0x1a1a3c,fn:20,ff:105,sun:[0x8ea2ff,.7,[-30,60,-20]],hemi:[0x8896e8,0x2c2238,1.0],
+ T:{brick:['#7b5052','brick'],brick2:['#4d5b74','brick'],pan:['#3d4352','panel'],roofn:['#2f333d','conc'],walk:['#6d727a','conc'],car:['#2b3a63','metal'],car2:['#222a44','metal'],awn:['#8a2d5a','panel'],para:['#4a505c','conc'],step:['#808690','grate'],ramp:['#6d727a','conc'],wb:['#8a93a1','win'],wb2:['#76808f','win'],wb3:['#9aa1ad','win'],met:['#5c6470','metal'],dum:['#2d6a4f','metal']},
+ pve(){Perim(49,49,'pan',4);Sky('b',54,66,125,24,95,['wb','wb2','wb3'],11);
+  /* wide cross streets with sidewalks and four city blocks */
+  Bn(-49,-6,49,6,0,.03,'#2a2c33');Bn(-6,-49,6,49,0,.03,'#2a2c33');
+  [-5.7,5.7].forEach(z=>Bn(-49,z-.15,49,z+.15,.03,.05,'#e8e0a8'));
+  quad(q=>{
+   /* shop building with a roof you can reach from the street */
+   Rm(6,6,22,22,4.4,'brick','roofn',[['n',10,2.8],['w',14,2.8],['e',18,2.4],['s',14,2.4]],{floor:'dark'});Pa(6,6,22,22,4.4,'para',[['n',12,2.8],['n',8.5,3.4],['w',13.5,3.4]],.9);
+   Lw(8,10,14,10.7,0,1.1,'para');Lw(15,16,20,16.7,0,1.1,'para');B(17,8,21,9.2,0,1.1,'awn',{cat:'c'});
+   const a=St(17.5,4.9,1,0,4.4,1.8,'step');Cl([a],[6,6,22,22,4.4],22,[12.3,7.8]);
+   AC(18,18,4.4);AC(10,19,4.4);Vt(20,10,4.4);Ant(9,8,4.4,6);
+   Dk(0,12,6,15,4.4,'walk',.4,{np:1});Rl(0,12,6,12.3,4.4,1);Rl(0,14.7,6,15,4.4,1);Dk(7.2,0,10,6,4.4,'walk',.4,{np:1});Rl(7.2,0,7.5,6,4.4,1);Rl(9.7,0,10,6,4.4,1);
+   /* tall block with a balcony and stairs along the alley */
+   B(26,6,42,22,0,9.4,'brick2');Be(25.9,7,26,21,8.9,9.1,NC[q%5]);Ns(['HOTEL','RAMEN','ARCADE','BAR'][q],26.02,6.4,14,-1.5708,5,1.3,q);Ns('24H',34,4.4,5.95,0,3,1,q+2);
+   Dk(24,8,26,16.05,3.6,'walk',.35,{np:1});Rl(24,8,24.3,16.05,3.6,1);Rl(24,8,26,8.3,3.6,1);
+   const b=St(24.9,21,3,0,3.6,1.8,'step');Cl([b],[24,8,26,16.05,3.6],18);
+   /* the second shop block and a small plaza */
+   Rm(6,26,22,42,3.6,'brick2','roofn',[['n',14,2.8],['w',34,2.4],['e',34,2.4]],{floor:'dark'});Pa(6,26,22,42,3.6,'para',[],.9);AC(12,36,3.6);AC(18,30,3.6);Ns(['SUSHI','NOODLE','PIZZA','CAFE'][q],14,3.2,25.94,0,3.4,.9,q+1);
+   B(27,27,31,31,0,1.0,'walk',{cat:'c'});Cy(29,29,.3,1,4.2,'met',{nc:1,n:6});Be(28,28,30,30,4.2,4.4,NC[(q+2)%5]);Lw(34,30,40,30.6,0,1.1,'para');Lw(34,37,40,37.6,0,1.1,'para');Cr(38,34,0,1.2);
+   Car(2.8,19,'car',0);Car(-2.5-0,31,'car',0);Car(14,2.5,'car',1);Lp(5.2,9,0,5,NC[q%5]);Lp(5.2,25,0,5,NC[(q+1)%5]);Lp(24,5.2,0,5,NC[(q+2)%5]);Lp(24,24,0,5,NC[(q+3)%5]);Lp(42.5,24,0,5,NC[q%5]);
+   B(37.5,23,40,24.4,0,1.2,'dum',{cat:'c'});
+   if(q===0||q===3)Pd(2,36,2);if(q===1)Pd(34,2,0);if(q===2)Pd(-34,2,0);Pd(28,44,1)});
+  /* neon in the middle of the crossing */
+  Be(-1,-1,1,1,.03,.08,'#18e6ff')},
+ crt:[[-16,0],[16,0],[0,-16],[0,16]],zones:[[0,0],[-34,-26],[34,26],[-34,26],[34,-26],[0,-38],[0,38],[-20,0]],bar:[[-12,3,1],[12,-3,0],[3,30,1],[-3,-30,1],[26,3,1],[-26,-3,0]],
+ pvp:{hx:21,hz:17,sp:[[-18.5,0],[18.5,0]],
+ build(){Perim(21,17,'pan',4);Sky('b',34,40,75,22,80,['wb','wb2','wb3'],13);Bn(-21,-5,21,5,0,.03,'#2a2c33');
+  quad(q=>{
+   Rm(4,6,12,16,4.4,'brick','roofn',[['w',11,2.6],['e',11,2.6]],{floor:'dark'});Pa(4,6,12,16,4.4,'para',[['n',5.2,2.6],['n',10.8,2.8],['e',10.5,3.6]],.9);
+   Rm(16,6,21,16,4.4,'brick2','roofn',[['w',11,2.6]],{floor:'dark'});Pa(16,6,21,16,4.4,'para',[['w',10.5,3.6]],.9);
+   St(9.5,4.9,1,0,4.4,1.8,'step');Dk(12,9,16,12,4.4,'walk',.4,{np:1});Rl(12,9,16,9.3,4.4,1);Rl(12,11.7,16,12,4.4,1);
+   Dk(9.6,0,12,6,4.4,'walk',.4,{np:1});Rl(9.6,0,9.9,6,4.4,1);Rl(11.7,0,12,6,4.4,1);
+   AC(7,13.5,4.4);AC(18.5,9,4.4);Vt(10,8,4.4);Ant(19,14.5,4.4,5);
+   Ns(['HOTEL','RAMEN','ARCADE','BAR'][q],8,3.4,5.9,0,3,.9,q);Ns(['SUSHI','NOODLE','PIZZA','CAFE'][q],18.5,3.4,5.94,0,2.8,.8,q+2);
+   Car(14,2.8,'car',1);Lw(6,2.2,8.6,2.8,0,1.1,'para');Lw(14.5,-0.0+.0,15.2,.6,0,1.1,'para');
+   B(13.5,14.4,15.7,15.8,0,1.2,'dum',{cat:'c'});Cr(12.6,7.2,0,1.2);Lw(1,9,3.4,9.6,0,1.1,'para');Lw(-3.4,13,-1,13.6,0,1.1,'para');
+   Lp(4.6,7.5,0,5,NC[q%5]);Lp(20.4,6.6,0,5,NC[(q+2)%5]);Be(4.1,6.2,4.2,15.8,4.0,4.2,NC[(q+1)%5])});
+  Rm(-2.5,-2.5,2.5,2.5,3.4,'brick2','roofn',[['n',0,2.2],['s',0,2.2],['e',0,2.2],['w',0,2.2]],{floor:'dark'});Be(-1.5,-1.5,1.5,1.5,3.4,3.6,'#18e6ff');Ns('NEON',0,3.0,-2.55,0,2.4,.8,1);Lw(-1,-4.4,1,-3.8,0,1.1,'para');Lw(-1,3.8,1,4.4,0,1.1,'para')}}};
+}
+
+/* ===== MAP 6 · OUTPOST — desert research outpost ===== */
+{const Tw=(x,z,rot)=>{const X=x*MZ.sg,Z=z*MZ.sz;if(MZ.dry){MZ.rec.push([X-4,Z-4,X+4,Z+6,0,7.2,0x8c6a4a,'b']);return}tower(X,Z,rot)};
+ const Sb=(x0,z0,x1,z1)=>Lw(x0,z0,x1,z1,0,1.2,'sandbag');
+ MD.outpost={n:'OUTPOST',d:'A desert research outpost: concrete labs, watchtowers, metal bridges and rock tunnels.',gc:'#d6bc86',gk:'sand',
+ sky:['#5f93d0','#e4d3a4','#f0cf98'],fog:0xe0c898,fn:40,ff:150,sun:[0xffe2b0,1.45,[60,60,10]],hemi:[0xe9dcc0,0x8a6e48,.74],
+ T:{ss:['#cdb083','brick'],concb:['#a2a29b','conc'],roofc:['#8b8b85','conc'],roofs:['#8a6b4a','panel'],metal:['#7e8a90','metal'],rust:['#a8553a','metal'],rockw:['#a67c52','rock'],roofr:['#8c6a4a','rock'],rock:['#a67c52','rock'],rock2:['#8c6a4a','rock'],sandbag:['#b9a577','brick'],para:['#b4b1a6','conc'],step:['#8c8f8e','grate'],ramp:['#a8a59a','conc'],rail:['#6e7a80','metal'],cover:['#a8a59a','conc'],crate:['#7a6a46','wood'],solar:['#27415f','panel'],tank:['#c9cdcf','panel']},
+ pve(){Perim(49,49,'rock',7);Sky('mtn',14,75,120,40,90,['#b08a62','#a07c56','#bf9a70'],8);
+  /* the central compound: rooms inside, a roof you can fight on */
+  Rm(-10,-8,10,8,4.4,'concb','roofc',[['n',0,3.2],['s',0,3.2],['e',0,3.2],['w',0,3.2]],{dh:3.2,floor:'dark'});Pa(-10,-8,10,8,4.4,'para',[['n',4.5,2.4],['n',-4.5,2.4],['s',4.5,2.4],['s',-4.5,2.4]],.9);
+  B(-7,-5,-3,-3.6,0,1.1,'cover',{cat:'c'});B(3,3.6,7,5,0,1.1,'cover',{cat:'c'});Cr(-7,4,0,1.3);Cr(7,-4,0,1.3);B(-1.5,-1.5,1.5,1.5,0,1.5,'rust',{cat:'c'});
+  B(-6,-3,-2,0,4.4,4.5,'solar',{nc:1});B(2,-3,6,0,4.4,4.5,'solar',{nc:1});Ant(0,0,4.4,7);Cy(-7.5,1.5,1.4,4.4,6.4,'tank',{n:8});
+  half(()=>{const a=St(9,-9.0,1,0,4.4,1.8,'step');Cl([a],[-10,-8,10,8,4.4],22,[4.5,-6.5]);const b=St(9,9.0,1,0,4.4,1.8,'step');Cl([b],[-10,-8,10,8,4.4],22,[4.5,6.5])});
+  quad(q=>{
+   /* research building, maintenance corridor, raised platform joined by a bridge */
+   Rm(14,10,26,22,3.6,'ss','roofs',[['w',12,2.6],['n',20,2.6],['e',14,2.4],['s',20,2.4]],{floor:'dark'});Pa(14,10,26,22,3.6,'para',[['w',16,2.4],['e',20.2,3.4]],.9);B(16,13,22,14.4,0,1.1,'cover',{cat:'c'});Cr(23,19,0,1.2);AC(20,18,3.6,'metal');
+   const a=St(12.9,21,3,0,3.6,1.8,'step');Cl([a],[14,10,26,22,3.6],22,[15.5,16]);
+   Rm(30,8,42,12,3.2,'concb','roofc',[['w',10,2.4],['n',34,2.4],['n',40,2.4],['s',37,2.4],['e',10,2.4]],{floor:'dark'});
+   Dk(30,18,40,28,3.6,'metal',.4,{np:0});Rl(30,18,40,18.3,3.6,1.05,'rail');Rl(30,27.7,32.6,28,3.6,1.05,'rail');Rl(37.4,27.7,40,28,3.6,1.05,'rail');Rl(39.7,18,40,28,3.6,1.05,'rail');Rl(30,18,30.3,19,3.6,1.05,'rail');Rl(30,21.4,30.3,28,3.6,1.05,'rail');
+   Dk(26,19,30,21.4,3.6,'metal',.3,{np:1});Rl(26,19,30,19.3,3.6,1.05,'rail');Rl(26,21.1,30,21.4,3.6,1.05,'rail');
+   const b=St(35,32.95,3,0,3.6,2.4,'step');Cl([b],[30,18,40,28,3.6],22);B(33,21,36,23,3.6,4.4,'cover',{cat:'c'});Cy(38,25,.9,3.6,5.6,'tank',{n:8});
+   /* a sheltered passage through the rock */
+   Rm(2,34,16,40,3.2,'rockw','roofr',[['w',37,2.6],['e',37,2.6],['n',6,2.4],['n',12,2.4],['s',9,2.4]],{floor:'dark'});Rk(6,32,2.2,3.4,'rock2',q);Rk(12,43,2.6,4,'rock',q+3);Rk(2,42,2,3,'rock2',q+5);
+   Tw(23,37,q%4);
+   Rk(32,2,1.8,2.2,'rock',q+7);Rk(40,3,1.5,1.8,'rock2',q+9);Rk(5,16,1.6,1.8,'rock',q+11);Rk(30,44,3,4.4,'rock2',q+13);Rk(45.5,44,3.4,6,'rock',q+15);
+   Sb(8,12,12,12.8);Sb(10,24,15,24.8);Sb(28,30,29,34);Sb(18,2.6,23,3.4);Sb(34,14,36.4,15);Cr(3,22,0,1.3);Cr(4.5,22.3,0,1.3);Cr(28,3,0,1.3);
+   Lp(13,8,0,5,'#fff0c8');Lp(28,16,0,5,'#fff0c8');Lp(12,30,0,5,'#fff0c8');
+   Bn(10,-1,40,1,0,.04,'#c4a974');Bn(-1,10,1,40,0,.04,'#c4a974');
+   if(q===0||q===3)Pd(6,26,2);if(q===1)Pd(30,6,1);if(q===2)Pd(-30,6,0)})},
+ crt:[[-18,4],[18,-4],[0,-20],[0,20]],zones:[[-26,-26],[26,26],[-26,26],[26,-26],[0,-30],[0,30],[0,-14],[14,0]],bar:[[-12,18,1],[12,-18,0],[26,4,1],[-26,-4,1],[8,34,0],[-8,-34,1]],
+ pvp:{hx:21,hz:17,sp:[[-18.5,0],[18.5,0]],
+ build(){Perim(21,17,'rock',6);Sky('mtn',10,38,62,26,60,['#b08a62','#a07c56','#bf9a70'],10);
+  Rm(-5,-4,5,4,3.6,'concb','roofc',[['n',0,2.6],['s',0,2.6],['e',0,2.6],['w',0,2.6]],{floor:'dark'});Pa(-5,-4,5,4,3.6,'para',[['e',-2.2,2.6],['w',-2.2,2.6]],.9);Ant(0,0,3.6,5);Rp(0,10.5,3,0,3.6,3.2,'ramp');Rp(0,-10.5,2,0,3.6,3.2,'ramp');
+  half(()=>{Dk(9,-8,15,0,3.6,'metal',.4,{np:0});Rl(9,-8,9.3,0,3.6,1.05,'rail');Rl(15,-8,15.3,0,3.6,1.05,'rail');Rl(9,-8,11,-7.7,3.6,1.05,'rail');Rl(13,-8,15,-7.7,3.6,1.05,'rail');Rl(9,-.3,15,0,3.6,1.05,'rail');
+   Dk(5,-3,9,-1.4,3.6,'metal',.3,{np:1});Rl(5,-3,9,-2.7,3.6,1.05,'rail');Rl(5,-1.7,9,-1.4,3.6,1.05,'rail');St(12,-12.95,2,0,3.6,2.4,'step');
+   Rm(8,7,18,12,3.2,'rockw','roofr',[['w',9.5,2.6],['e',9.5,2.6],['n',13,2.6]],{floor:'dark'});
+   Rk(14,-12.5,1.8,2.2,'rock',1);Rk(5.5,14,1.6,2,'rock2',2);Rk(18,14.5,2,2.6,'rock',3);Sb(5,-8,9,-7.2);Sb(16,5,19,5.8);Sb(16.5,-6.5,19,-5.7);Sb(1.5,6,5,6.8);Cr(7,-5,0,1.3);Cr(8.4,-5.2,0,1.3);Lp(7,-12,0,5,'#fff0c8');Lp(15,13.5,0,5,'#fff0c8')})}}};
+}
+
+/* ---------- build, lighting, selection and thumbnails for the six maps ---------- */
+const MK=['arena','dock','metro','neon','frost','outpost'].filter(k=>MD[k]),LEGM={ind:'dock',des:'outpost',cit:'neon'};
+const MZCOM={dark:'#33373c',rail:['#c4c9ce','metal'],step:['#9aa1a8','conc'],ramp:['#8c949b','conc'],crate:['#b88a4a','wood'],cover:['#9fa6ad','conc']};
+const mzNorm=k=>{k=LEGM[k]||k;return MD[k]?k:'arena'};
+const mzBase=k=>String(k).replace(/_p$/,'');
+let MZLT0=null;
+function mzSeed(){let h=2166136261;const k=MZ.id;for(const ch of k){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}let s=(h>>>0)||1;return function(){s=(s+0x6D2B79F5)|0;let t=Math.imul(s^(s>>>15),1|s);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}}
+function mzRun(key,dry){const base=mzBase(key),pv=key!==base,d=MD[base];MZ.id=key;MZ.dry=!!dry;MZ.rec=[];MZ.B={};MZ.bl=[];MZ.sg=1;MZ.sz=1;MZ.T=Object.assign({},MZCOM,d.T);
+ const R0=Math.random;Math.random=mzSeed();try{if(pv)d.pvp.build();else d.pve()}finally{Math.random=R0;MZ.sg=1;MZ.sz=1}}
+{const _b=buildMap;buildMap=function(key){const base=mzBase(key);if(!MD[base])return _b(key);
+ const before=new Set(sc.children),m=MAPS[key],d=MD[base],pv=key!==base;cols.length=0;solids.length=0;pads.length=0;solids.push(ground);STR.length=0;
+ const tx=mzTex(d.gk||'conc').clone();tx.needsUpdate=true;const rep=130*(MZUS[d.gk||'conc']||.35);tx.repeat.set(rep,rep);
+ ground.material=m.gm=new THREE.MeshStandardMaterial({map:tx,color:new THREE.Color(d.gc),roughness:1});m.gm.userData.k=1;
+ const sv0=smN;smN=0;mzRun(key,false);const meshes=mzFlush();
+ const R0=Math.random;Math.random=mzSeed();try{if(!pv){mkCrates(m,d.crt||[]);(d.bar||[]).forEach(b=>barrel(b[0],b[1],b[2]))}else m.crates=[]}finally{Math.random=R0}
+ smN=sv0;m.o=sc.children.filter(x=>!before.has(x));m.cols=cols.slice();m.solids=solids.slice();m.pads=pads.slice();m.st=STR.slice();m.sky=skyT(...d.sky)}}
+/* lighting and the look of each map */
+function mzLight(key){const hm=sc.children.find(o=>o.isHemisphereLight),d=MD[mzBase(key)];if(!MZLT0)MZLT0={sc:sun.color.getHex(),si:sun.intensity,sp:sun.position.clone(),hc:hm&&hm.color.getHex(),hg:hm&&hm.groundColor.getHex(),hi:hm&&hm.intensity,fn:sc.fog.near,ff:sc.fog.far,fc:sc.fog.color.getHex()};
+ if(d){sun.color.setHex(d.sun[0]);sun.intensity=d.sun[1];sun.position.set(...d.sun[2]);if(hm){hm.color.setHex(d.hemi[0]);hm.groundColor.setHex(d.hemi[1]);hm.intensity=d.hemi[2]}sc.fog.color.setHex(d.fog);sc.fog.near=d.fn;sc.fog.far=d.ff;if(MAPS[key]&&MAPS[key].sky)sc.background=MAPS[key].sky}
+ else{const L=MZLT0;sun.color.setHex(L.sc);sun.intensity=L.si;sun.position.copy(L.sp);if(hm){hm.color.setHex(L.hc);hm.groundColor.setHex(L.hg);hm.intensity=L.hi}sc.fog.near=L.fn;sc.fog.far=L.ff}}
+{const _s=setMap;setMap=function(k){k=LEGM[k]||k;if(!MAPS[k])k='arena';const kk=(MD[k]&&MP.on&&MP.pvp)?k+'_p':k;
+ Object.getOwnPropertyNames(MAPS).forEach(n=>{const mm=MAPS[n];if(mm&&mm.o&&n!==kk)mm.o.forEach(o=>o.visible=false)});
+ _s(kk);mzLight(kk);STAIRS=(MAPS[kk]&&MAPS[kk].st)||[];try{mzFx(kk)}catch(e){}}}
+function mzFx(){}
+/* registry: only the six new maps are real maps; the PvP layouts are hidden twins; the old names point at the new maps so old saves still load */
+MK.forEach(k=>{const d=MD[k];MAPS[k]={n:d.n,d:d.d,gc:d.gc,fog:d.fog};Object.defineProperty(MAPS,k+'_p',{value:{n:d.n,d:d.d,gc:d.gc,fog:d.fog},enumerable:false,writable:true,configurable:true})});
+/* thumbnails drawn from the real layout */
+function mzArt(base,pvp){const key='mz|'+base+(pvp?'|p':'');if(ART[key])return ART[key];const d=MD[base];mzRun(pvp?base+'_p':base,true);const rec=MZ.rec.slice();MZ.dry=false;
+ const W=480,H=270,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d'),gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,d.sky[0]);gr.addColorStop(.6,d.sky[1]);gr.addColorStop(1,d.sky[2]);g.fillStyle=gr;g.fillRect(0,0,W,H);
+ const hx=pvp?d.pvp.hx:49,hz=pvp?d.pvp.hz:49,s=Math.min((W-60)/(2*hx),(H-60)/(2*hz)),X=x=>W/2+x*s,Z=z=>H/2+14+z*s,col=n=>'#'+(n>>>0).toString(16).padStart(6,'0'),CS=v=>typeof v==='string'?v:col(v);
+ g.fillStyle='rgba(0,0,0,.35)';g.fillRect(X(-hx)+5,Z(-hz)+7,2*hx*s,2*hz*s);g.fillStyle=d.gc;g.fillRect(X(-hx),Z(-hz),2*hx*s,2*hz*s);
+ const L=rec.filter(r=>r[7]!=='w'&&r[7]!=='g'&&r[7]!=='e'&&r[7]!=='f').sort((a,b)=>(a[3]+a[5]*.35)-(b[3]+b[5]*.35));
+ L.forEach(r=>{const x0=X(r[0]),z0=Z(r[1]),w=(r[2]-r[0])*s,dd=(r[3]-r[1])*s,hh=r[5]*s*.62;if(w<.5||dd<.5)return;const c0=CS(r[6]);g.fillStyle='rgba(0,0,0,.22)';g.fillRect(x0+hh*.5,z0+hh*.5,w,dd);g.fillStyle=c0;g.fillRect(x0,z0+dd-hh,w,hh);g.fillStyle='rgba(0,0,0,.4)';g.fillRect(x0,z0+dd-hh,w,hh);g.fillStyle=c0;g.fillRect(x0,z0-hh,w,dd);g.fillStyle='rgba(255,255,255,'+Math.min(.35,r[5]*.05)+')';g.fillRect(x0,z0-hh,w,dd);g.strokeStyle='rgba(0,0,0,.35)';g.lineWidth=1;g.strokeRect(x0,z0-hh,w,dd)});
+ g.strokeStyle='rgba(255,255,255,.8)';g.lineWidth=3;g.strokeRect(X(-hx),Z(-hz),2*hx*s,2*hz*s);
+ const dot=(x,z,cl)=>{g.fillStyle=cl;g.beginPath();g.arc(X(x),Z(z),6,0,7);g.fill();g.strokeStyle='#fff';g.lineWidth=2;g.stroke()};
+ if(pvp){dot(d.pvp.sp[0][0],d.pvp.sp[0][1]-2,'#3a78d8');dot(d.pvp.sp[0][0],d.pvp.sp[0][1]+2,'#3a78d8');dot(d.pvp.sp[1][0],d.pvp.sp[1][1]-2,'#d8433a');dot(d.pvp.sp[1][0],d.pvp.sp[1][1]+2,'#d8433a')}else{dot(-45,0,'#3a78d8');dot(45,0,'#d8433a')}
+ g.fillStyle='rgba(0,0,0,.6)';g.fillRect(0,0,W,30);g.fillStyle='#fff';g.font='bold 18px sans-serif';g.fillText(d.n+'  ·  '+(pvp?'PvP · 1v1 · 2v2 · 3v3':'large map'),12,21);
+ return ART[key]=c.toDataURL('image/jpeg',.85)}
+{const _ma=mapArt;mapArt=function(map,kind){if(MD[map]){try{return mzArt(map,false)}catch(e){console.error('mzArt',e)}}return _ma(map,kind)}}
+mpVCards=function(){const box=$('mpvc');if(!box||!MP.vote)return;box.innerHTML='';
+ MK.forEach(k=>{let a='';try{a=mzArt(k,!!MP.pvp)}catch(e){}
+  const c=document.createElement('div'),n=(MP.vote.counts&&MP.vote.counts[k])|0;
+  c.style.cssText='width:min(210px,42vw);height:140px;border-radius:12px;border:3px solid '+(MP.vote.mine===k?'#35ff6a':'#777')+';background:#222 center/cover url('+a+');cursor:pointer;position:relative;overflow:hidden';
+  const t=document.createElement('div');t.style.cssText='position:absolute;left:0;right:0;bottom:0;padding:6px;background:rgba(0,0,0,.72);font:800 12px sans-serif;letter-spacing:.06em;display:flex;justify-content:space-between';
+  const nm=document.createElement('span');nm.textContent=MAPS[k].n;const v=document.createElement('span');v.textContent=n+(n===1?' VOTE':' VOTES');v.style.color='#ffd400';t.append(nm,v);c.appendChild(t);
+  c.onclick=()=>{if(!MP.vote)return;MP.vote.mine=k;mpSend({t:'vote',m:k});mpVCards()};box.appendChild(c)})}
+/* PvP spawns come from the compact layout */
+{const _sp=spawnPt;spawnPt=function(){if(MP.on&&MP.pvp&&MD[mzNorm(SV.map)]){const s=MD[mzNorm(SV.map)].pvp.sp[MP.my?1:0];return[s[0]+rnd(-1.2,1.2),s[1]+rnd(-4,4)]}return _sp()}}
+
+/* ---------- take the old maps out of the game ---------- */
+['ind','des','cit','pv1','pv2','pv3'].forEach(k=>{const m=MAPS[k];if(m&&m.o)m.o.forEach(o=>sc.remove(o));try{delete MAPS[k]}catch(e){}try{delete PVM[k]}catch(e){}});
+try{fires.length=0;smk.forEach(o=>sc.remove(o.s));smk.length=0;smN=99;crN=99}catch(e){}
+/* old names still resolve (to a new map) so an old save or an old server message cannot break anything, but they never appear in a list */
+Object.keys(LEGM).forEach(k=>Object.defineProperty(MAPS,k,{value:MAPS[LEGM[k]],enumerable:false,writable:true,configurable:true}));
+try{SV.map=mzNorm(SV.map)}catch(e){}
+/* missions and objective spots use the new maps */
+Object.keys(LEGM).forEach(k=>{});
+MK.forEach(k=>{OPEN[k]=MD[k].zones});OPEN.ind=OPEN.dock;OPEN.des=OPEN.outpost;OPEN.cit=OPEN.neon;
+const MIS_MAP={c1:'dock',c2:'outpost',c3:'neon',c4:'arena',c5:'frost',s1:'metro',s2:'frost',s3:'neon',e1:'dock',e2:'outpost',e3:'neon'};
+MIS.forEach(m=>{if(m.map)m.map=mzNorm(MIS_MAP[m.id]||m.map)});
+MODEMAP.campaign=()=>'dock';MODEMAP.special=()=>'metro';MODEMAP.extract=()=>'outpost';
+{const _st=start;start=function(){try{SV.map=mzNorm(SV.map);if(MI&&MI.map)MI.map=mzNorm(MI.map)}catch(e){}return _st.apply(this,arguments)}}
+{const _mb=mapBtn;mapBtn=function(){try{SV.map=mzNorm(SV.map)}catch(e){}return _mb()}}
+{const _mp=mapP;mapP=function(){try{SV.map=mzNorm(SV.map)}catch(e){}return _mp()}}
+curMap='none';setMap(mzNorm(SV.map));
+
+try{window.__MD=MD}catch(e){}
+})();
 
 applyGfx();requestAnimationFrame(frame);
 </script></body></html>
