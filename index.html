@@ -252,7 +252,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
  const w=W[cur],eye=P.y+(P.alive?1.7-P.crouch*.5-SL.k*.26:.4);const sw=Math.sin(bob)*.03*(S.gfx==='low'?0:1);
  cam.position.set(P.x,eye+Math.abs(sw),P.z);rk=Math.max(0,rk);const r=Math.min(rk,dt*.08);rk-=r;P.pitch-=r;
  shk*=.9;if(P.ground&&(Math.abs(P.vx)+Math.abs(P.vz))>5)shk=Math.max(shk,.002);cam.rotation.set(P.pitch+(Math.random()-.5)*shk*S.shk,P.yaw+(Math.random()-.5)*shk*S.shk,(P.alive?0:.9)+LEAN+SL.k*SL.side*.07+(Math.random()-.5)*shk*.7*S.shk);
- const tf=(ads>0&&w.zoom>0)?(S.fov+((S.sfov||S.fov)-S.fov)*ads)/(1+(w.zoom-1)*ads):S.fov;cam.fov=tf+SL.k*8;cam.updateProjectionMatrix();
+ const tf=(ads>0&&w.zoom>0)?S.fov/(1+(w.zoom-1)*ads):S.fov;cam.fov=tf+SL.k*8;cam.updateProjectionMatrix();
  swing=Math.max(0,swing-dt*6);fl=Math.max(0,fl-dt);
  GM.forEach((m,i)=>m.visible=i===cur);{const cc=SV.eq.camo?CAMO[SV.eq.camo]:0;GM[cur].userData.cm.forEach(x=>x.material.color.setHex(cc||x.userData.c))}
  gun.position.set(.22*(1-ads)+sw,-.22+(1-ads)*0+(rel>0?-.15:0)+Math.abs(sw)*.5-ads*.0-ads*((W[cur]&&W[cur].snp)?.2:.0)+ads*.07*0,-.45+swing*.12+(w.melee?-swing*.3:0));
@@ -273,7 +273,7 @@ log:`<h3>UPDATE LOG</h3>
 <b>Update 1 \u00b7 The Foundations</b><ul><li><i>1.3</i> PvE modes (Campaign, Special Ops, Extraction, Wave Survival), unlimited levels, five more weapons, the Machete, sprint stamina, breakable windows and barrels, blood on walls, a shooting range and a mode menu</li><li><i>1.2</i> Smarter bots that flank, take cover and search, rebuilt maps and real building, road and prop models, a new soldier, grenades, smoke bombs, weapon slots and a command center</li><li><i>1.1</i> Three maps, a minimap, ammo crates, speed, jump and health pads, missiles and craters</li><li><i>1.0</i> First release: first-person movement, five weapons, 10 vs 10 bots, touch controls, ragdolls, upgrades and a shop</li></ul>
 <p>Coming next: multiplayer improvements, more maps, game modes and characters.</p>`};
 $('bPlay').onclick=start;
-document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{const p=$('panel'),k=b.dataset.p;if(k==='set'){p.innerHTML=`<h3>SETTINGS</h3><label>Mouse sensitivity<input id="s1" type="range" min=".2" max="3" step=".1" value="${S.sens}"></label><label>Field of view<input id="s2" type="range" min="60" max="110" value="${S.fov}"></label><label>Scope FOV (when aiming, lower = more zoom)<input id="s8" type="range" min="20" max="110" value="${S.sfov||S.fov}"></label><label>Volume<input id="s3" type="range" min="0" max="1" step=".05" value="${S.vol}"></label><label>Graphics<select id="s4"><option value="low">Low</option><option value="med">Medium</option><option value="high">High</option></select></label><label>Blood effects<select id="s5"><option value="on">On</option><option value="off">Off</option></select></label><label>Camera shake when shooting<input id="s6" type="range" min="0" max="1" step=".05" value="${S.shk}"></label><label>Muzzle flash<select id="s7"><option value="full">Full</option><option value="low">Low</option><option value="off">Off</option></select></label>`;$('s4').value=S.gfx;$('s5').value=S.noBlood?"off":"on";$('s5').onchange=e=>{S.noBlood=e.target.value==='off';save()};$('s6').oninput=e=>{S.shk=+e.target.value;save()};$('s7').value=S.mfl||'full';$('s7').onchange=e=>{S.mfl=e.target.value;save()};$('s1').oninput=e=>{S.sens=+e.target.value;save()};$('s2').oninput=e=>{S.fov=+e.target.value;save()};$('s8').oninput=e=>{S.sfov=+e.target.value;save()};$('s3').oninput=e=>{S.vol=+e.target.value;save();snd(300,.1,'sine',.3)};$('s4').onchange=e=>{S.gfx=e.target.value;save();applyGfx()}}else p.innerHTML=PANELS[k]+'<br><button id="pc">CLOSE</button>';p.classList.remove('h');$('btns').classList.add('h');const c=$('pc');if(c)c.onclick=closeP;if(k==='set')p.insertAdjacentHTML('beforeend','<button id="pc">CLOSE</button>'),$('pc').onclick=closeP});
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{const p=$('panel'),k=b.dataset.p;if(k==='set'){p.innerHTML=`<h3>SETTINGS</h3><label>Mouse sensitivity<input id="s1" type="range" min=".2" max="3" step=".1" value="${S.sens}"></label><label>Field of view<input id="s2" type="range" min="60" max="110" value="${S.fov}"></label><label>Volume<input id="s3" type="range" min="0" max="1" step=".05" value="${S.vol}"></label><label>Graphics<select id="s4"><option value="low">Low</option><option value="med">Medium</option><option value="high">High</option></select></label><label>Blood effects<select id="s5"><option value="on">On</option><option value="off">Off</option></select></label><label>Camera shake when shooting<input id="s6" type="range" min="0" max="1" step=".05" value="${S.shk}"></label><label>Muzzle flash<select id="s7"><option value="full">Full</option><option value="low">Low</option><option value="off">Off</option></select></label>`;$('s4').value=S.gfx;$('s5').value=S.noBlood?"off":"on";$('s5').onchange=e=>{S.noBlood=e.target.value==='off';save()};$('s6').oninput=e=>{S.shk=+e.target.value;save()};$('s7').value=S.mfl||'full';$('s7').onchange=e=>{S.mfl=e.target.value;save()};$('s1').oninput=e=>{S.sens=+e.target.value;save()};$('s2').oninput=e=>{S.fov=+e.target.value;save()};$('s3').oninput=e=>{S.vol=+e.target.value;save();snd(300,.1,'sine',.3)};$('s4').onchange=e=>{S.gfx=e.target.value;save();applyGfx()}}else p.innerHTML=PANELS[k]+'<br><button id="pc">CLOSE</button>';p.classList.remove('h');$('btns').classList.add('h');const c=$('pc');if(c)c.onclick=closeP;if(k==='set')p.insertAdjacentHTML('beforeend','<button id="pc">CLOSE</button>'),$('pc').onclick=closeP});
 function close(){$('panel').classList.add('h');$('btns').classList.remove('h')}
 /* ===== v0.2 ===== */
 const TK=[0,0],TOUCH=matchMedia('(pointer:coarse)').matches||('ontouchstart' in window&&!matchMedia('(any-pointer:fine)').matches),TJ={x:0,y:0,m:0};if(TOUCH)document.body.classList.add('t');
@@ -1155,7 +1155,7 @@ function discoToggle(){DISCO?discoOff():discoOn()}
 /* ---- per-frame hook ---- */
 let ADT=performance.now(),SPV=0;
 function adminTick(){const now=performance.now(),dt=Math.min(.1,(now-ADT)/1000);ADT=now;
- const cb=$('cmdbtn');if(cb){cb.style.display=state==='play'&&(AX.admin)?'':'none';cb.textContent=AX.admin?(TOUCH?'CMD':'CMD  /'):(TOUCH?'GUNS':'GUNS  /')}
+ const cb=$('cmdbtn');if(cb){cb.style.display=state==='play'&&(AX.admin||RANGE)?'':'none';cb.textContent=AX.admin?(TOUCH?'CMD':'CMD  /'):(TOUCH?'GUNS':'GUNS  /')}
  if(state!=='play'){if(DISCO)discoOff();return}
  for(let i=DROPS.length-1;i>=0;i--){const d=DROPS[i];d.t+=dt;d.g.rotation.y+=dt*2.2;d.g.position.y=d.y+Math.sin(d.t*3)*.12;if(P.alive&&cp.style.display==='none'&&Math.hypot(P.x-d.g.position.x,P.z-d.g.position.z)<1.7&&Math.abs(P.y+.9-d.y)<2.6){sc.remove(d.g);DROPS.splice(i,1);pickup(d)}}
  for(let i=TACOS.length-1;i>=0;i--){const t=TACOS[i];t.t+=dt/t.dur;t.m.position.lerpVectors(t.f,t.to,Math.min(1,t.t));t.m.rotation.z+=dt*14;if(t.t>=1){sc.remove(t.m);TACOS.splice(i,1);if(t.hit){spark(t.to,0xf0c04a);spark(t.to,0x4aa63a);spark(t.to,0xd83a2a)}}}
@@ -3602,29 +3602,104 @@ setInterval(()=>{try{if(!TTOK||document.visibilityState==='visible')ttlLoad()}ca
 setInterval(()=>{if(!TTOK)ttlLoad()},4000);setInterval(ttlLoad,30000);
 {const st=document.createElement('style');st.textContent='.lr span.n{display:flex;align-items:center;min-width:0;overflow:hidden}.lr .nn{min-width:2.4em;flex:0 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lr .tpill{flex:0 0 auto}';document.head.appendChild(st)}
 /* ===== V83 fixes: admin lock, map bounds, big-weapon hold, preview fit ===== */
-/* only the real admin account can ever be admin on this client, whatever the server or a stale flag says */
-{let _a=false;try{Object.defineProperty(AX,'admin',{configurable:true,enumerable:true,get(){return !!_a&&String(AX.user||'').toLowerCase()==='alphang7'},set(v){_a=!!v}})}catch(e){}}
-{const _o=openCmd;openCmd=function(){if(!AX.admin)return;return _o.apply(this,arguments)}}
 {const _c=runCmd;runCmd=function(t){if(!AX.admin)return;return _c.apply(this,arguments)}}
-setInterval(()=>{try{const cb=$('cmdbtn');if(cb&&!AX.admin){cb.style.display='none';if(cp.style.display!=='none'){cp.style.display='none';try{closeCmd()}catch(e){}}}}catch(e){}},400);
+setInterval(()=>{try{const cb=$('cmdbtn');if(cb&&!AX.admin&&!RANGE){cb.style.display='none';if(cp.style.display!=='none'){cp.style.display='none';try{closeCmd()}catch(e){}}}}catch(e){}},400);
 /* maps without a Perim wall list still get a hard outer limit (inner face of the wall) */
 {const _sm2=setMap;setMap=function(k){const r=_sm2.apply(this,arguments);try{const kk=typeof curMap!=='undefined'?curMap:k;if(!MZ.phx){const d={rng:[13.7,49.7],arena:[49,49]}[kk];if(d){MZ.phx=d[0];MZ.phz=d[1]}}}catch(e){}return r}}
 /* big guns are held lower so they cover less of the screen (more when aiming) */
 {const _m=mfUpd;mfUpd=function(){_m();try{const w=W[cur];if(!w||w.melee||!(w.len>.45))return;
   let d=Math.min(.09,(w.len-.45)*.25);if(w.cls==='smg'||w.cls==='sg')d+=.015;if(w.cls==='sn'||w.snp)d=Math.min(d,.07);
   gun.position.y-=d*(1+ads*.4)}catch(e){}}}
-/* character preview: fit the whole character inside the box, centred */
-{window.__prevFit=function(g,cam,aspect){const b=new THREE.Box3().setFromObject(g),mn=b.min,mx=b.max;const cx=(mn.x+mx.x)/2,cz=(mn.z+mx.z)/2;
-  let r=0;const hx=Math.max(Math.abs(mx.x-cx),Math.abs(mn.x-cx)),hz=Math.max(Math.abs(mx.z-cz),Math.abs(mn.z-cz));r=Math.hypot(hx,hz);
-  const h=Math.max(.5,mx.y-mn.y),t=Math.tan(cam.fov*Math.PI/360);
-  const dist=Math.max(h/2*1.12/t,r*1.12/(t*aspect))+r;return{cx,cz,cy:(mn.y+mx.y)/2,dist}};
+
+/* ===== V83 fixes 2: range weapon menu, mobile weapon bar, preview fit, ban/reset, PvP round banners ===== */
+/* ---- big banners ---- */
+const BNR=document.createElement('div');BNR.style.cssText='position:fixed;left:50%;top:20%;transform:translateX(-50%);z-index:90;pointer-events:none;text-align:center;font-family:sans-serif;display:none;width:96vw';document.body.appendChild(BNR);let bnT=0;
+function bigMsg(t,col,sub,ms){BNR.innerHTML='<div style="font:900 clamp(30px,8vw,64px) sans-serif;letter-spacing:.12em;color:'+col+';text-shadow:0 0 18px '+col+'88,0 3px 0 #000">'+t+'</div>'+(sub?'<div style="font:700 clamp(13px,3vw,20px) sans-serif;color:#fff;margin-top:6px;text-shadow:0 2px 0 #000">'+sub+'</div>':'');BNR.style.display='block';clearTimeout(bnT);bnT=setTimeout(()=>{BNR.style.display='none'},ms||2600)}
+const TMB=document.createElement('div');TMB.style.cssText='position:fixed;left:50%;top:13%;transform:translateX(-50%);z-index:90;pointer-events:none;text-align:center;font:900 clamp(15px,3.6vw,24px) sans-serif;letter-spacing:.1em;color:#ff5a4a;text-shadow:0 2px 0 #000,0 0 12px #000;display:none;white-space:nowrap';document.body.appendChild(TMB);let tmT=0;
+function tmMsg(p){TMB.textContent='TEAMMATE '+String(p.n||'PLAYER').toUpperCase()+' DIED';TMB.style.display='block';try{snd(180,.18,'sawtooth',.12)}catch(e){}clearTimeout(tmT);tmT=setTimeout(()=>{TMB.style.display='none'},2600)}
+/* PvP: round result banner, final VICTORY / DEFEAT, teammate deaths */
+{const _m=mpMsg;mpMsg=function(m){try{if(m&&m.t==='end'&&MP.pvp&&MP.on&&!m.fin){const me=MP.my,w=m.win,sc=m.sc||MP.sc||[0,0];
+  bigMsg(w<0?'ROUND DRAW':(w===me?'ROUND WON!':'ROUND LOST'),w<0?'#ffd400':(w===me?'#35ff6a':'#ff4a3a'),'ROUND SCORE: YOU '+(sc[me]|0)+' - '+(sc[1-me]|0)+' ENEMY',3400)}}catch(e){}return _m(m)}}
+{const _e=end;end=function(){const r=_e.apply(this,arguments);try{if(window.MP&&MP.on&&MP.pvp){const w=TK[0]>TK[1]?1:TK[0]<TK[1]?-1:0,h=$('res').querySelector('h1');if(h){h.textContent=w>0?'VICTORY':w<0?'DEFEAT':'DRAW';h.style.color=w>0?'#35ff6a':w<0?'#ff4a3a':'#ffd400'}}}catch(e){}return r}}
+const TMA={};
+setInterval(()=>{try{if(!(window.MP&&MP.on)||state!=='play'||MP.spec){for(const k in TMA)delete TMA[k];return}
+ const live=MP.pvp?(!MP.ph||MP.ph==='play'):true;
+ for(const k in TMA)if(!MP.pl[k])delete TMA[k];
+ for(const id in MP.pl){const p=MP.pl[id];if(!p||!p.init)continue;if(MP.pvp&&p.tm!==MP.my)continue;
+  const was=TMA[id];TMA[id]=!!p.al&&!p.rag;if(live&&was&&!TMA[id])tmMsg(p)}}catch(e){}},150);
+/* ---- shooting range: weapon menu for everyone (no admin powers) ---- */
+const RGO=document.createElement('div');RGO.style.cssText='position:fixed;left:0;top:0;right:0;bottom:0;z-index:120;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;font-family:sans-serif;color:#fff';
+RGO.innerHTML='<div style="width:min(720px,96vw);max-height:92vh;overflow:auto;background:#10151b;border:1px solid #4a5568;border-radius:14px;padding:12px 14px 16px;-webkit-overflow-scrolling:touch"><div style="position:sticky;top:-12px;z-index:2;background:#10151b;padding:6px 0 8px;display:flex;align-items:center;gap:10px"><b style="font:900 16px sans-serif;letter-spacing:.1em;color:#ffd400;flex:1">SHOOTING RANGE: PICK ANY WEAPON</b><button id="rgx" type="button" style="min-width:0;margin:0;padding:9px 18px;font:900 14px sans-serif">CLOSE</button></div><div id="rgl"></div><div style="margin-top:10px"><button id="rgq" type="button" style="min-width:0;margin:0;padding:10px 16px;font:900 13px sans-serif;background:#6a2a22;color:#fff">EXIT RANGE</button></div></div>';
+document.body.appendChild(RGO);
+function rgBuild(){const L=$('rgl');L.innerHTML='';const groups={},order=[];
+ W.forEach((w,i)=>{if(w.tmp)return;let g='OTHER';try{g=WCAT(i)||'OTHER'}catch(e){}if(!groups[g]){groups[g]=[];order.push(g)}groups[g].push(i)});
+ order.forEach(g=>{const h=document.createElement('div');h.textContent=g;h.style.cssText='font:900 12px sans-serif;letter-spacing:.15em;color:#9fb0c0;margin:10px 0 4px';L.appendChild(h);
+  const row=document.createElement('div');row.style.cssText='display:flex;flex-wrap:wrap;gap:6px';
+  groups[g].forEach(i=>{const b=document.createElement('button');b.type='button';b.textContent=W[i].n;b.style.cssText='min-width:0;margin:0;padding:11px 12px;font:800 12px sans-serif;letter-spacing:.04em;'+(i===cur?'border-color:#35ff6a;color:#35ff6a':'');b.onclick=()=>{try{selW(i)}catch(e){}rgClose()};row.appendChild(b)});L.appendChild(row)})}
+function rgOpen(){if(state!=='play')return;rgBuild();RGO.style.display='flex';mb[0]=mb[2]=0;keys.Space=0;try{TJ.x=TJ.y=TJ.m=0}catch(e){}keys.ShiftLeft=0;try{document.exitPointerLock()}catch(e){}}
+function rgClose(){RGO.style.display='none';if(!TOUCH){try{lock()}catch(e){}}}
+$('rgx').onclick=rgClose;$('rgq').onclick=()=>{RGO.style.display='none';try{$('bMenu').onclick()}catch(e){}};
+['mousedown','mouseup','touchstart','touchend'].forEach(ev=>RGO.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+addEventListener('keydown',e=>{if(RGO.style.display!=='none'&&(e.key==='/'||e.key==='Escape')){e.preventDefault();e.stopImmediatePropagation();RGO.style.display='none';if(!TOUCH){try{lock()}catch(x){}}}},true);
+{const _o=openCmd;openCmd=function(){if(RANGE&&!AX.admin&&state==='play'){if(RGO.style.display==='none')rgOpen();return}return _o.apply(this,arguments)}}
+window.__rg={rgOpen,rgClose,RGO};
+/* ---- weapon bar: tap a weapon to switch to it; the swap button cycles through the bar ---- */
+{const st=document.createElement('style');st.textContent='#wbar>div{pointer-events:auto;cursor:pointer;touch-action:manipulation;flex:1 1 0;min-width:40px;max-width:92px;width:auto!important}#wbar img{width:100%!important;max-width:62px}';document.head.appendChild(st)}
+function wbPick(e){const d=e.target&&e.target.closest?e.target.closest('[data-wid]'):null;if(!d)return;e.stopPropagation();if(e.cancelable)e.preventDefault();if(state==='play'&&P.alive&&cp.style.display==='none')selW(+d.dataset.wid)}
+WB.addEventListener('touchstart',wbPick,{passive:false});WB.addEventListener('mousedown',wbPick);WB.addEventListener('click',e=>e.stopPropagation());
+swapW=function(){if(!P.alive)return;const l=wbList();if(l.length<2){return}const k=l.indexOf(cur);selW(l[(k+1)%l.length])};
+/* ---- character preview: always fit and centred inside its box ---- */
+{window.__prevFit=function(g,cam,aspect){const b=new THREE.Box3().setFromObject(g),mn=b.min,mx=b.max,cx=(mn.x+mx.x)/2,cz=(mn.z+mx.z)/2;
+  const hx=Math.max(Math.abs(mx.x-cx),Math.abs(mn.x-cx)),hz=Math.max(Math.abs(mx.z-cz),Math.abs(mn.z-cz)),r=Math.hypot(hx,hz),h=Math.max(.5,mx.y-mn.y),t=Math.tan(cam.fov*Math.PI/360);
+  return{cx,cz,cy:(mn.y+mx.y)/2,dist:Math.min(14,Math.max(2.8,Math.max(h/2*1.18/t,r*1.18/(t*aspect))+r))}};
  prev=function(i){const el=$('pv');if(!el)return;
   if(!PRr){PRr=new THREE.WebGLRenderer({antialias:true,alpha:true});PRr.setSize(190,240);PRs=new THREE.Scene();PRs.add(new THREE.HemisphereLight(0xffffff,0x444444,1.3));const d=new THREE.DirectionalLight(0xffffff,1);d.position.set(2,3,3);PRs.add(d);PRc=new THREE.PerspectiveCamera(35,190/240,.1,40);PRc.position.set(0,1.05,4.3)}
   PRs.children.filter(o=>o.userData.pc).forEach(o=>PRs.remove(o));
   const m=buildChar(CH[i]),pg=new THREE.Group();pg.userData.pc=1;pg.add(m.g);PRs.add(pg);
-  try{const f=window.__prevFit(m.g,PRc,190/240);m.g.position.x-=f.cx;m.g.position.z-=f.cz;PRc.position.set(0,f.cy,f.dist);PRc.lookAt(0,f.cy,0)}catch(e){}
-  const cv=PRr.domElement;cv.style.cssText='display:block;width:100%;height:100%';el.style.cssText+=';overflow:hidden;position:relative;box-sizing:border-box';
+  try{const f=window.__prevFit(m.g,PRc,190/240);m.g.position.x-=f.cx;m.g.position.z-=f.cz;PRc.position.set(0,f.cy,f.dist);PRc.lookAt(0,f.cy,0)}catch(e){PRc.position.set(0,1.05,4.3)}
+  const cv=PRr.domElement;try{['position:absolute','left:0','top:0','width:100%','height:100%','display:block','max-width:100%'].forEach(s=>{const[a,b]=s.split(':');cv.style.setProperty(a,b,'important')});
+  el.style.setProperty('position','relative');el.style.setProperty('overflow','hidden');el.style.setProperty('flex','0 0 190px');el.style.setProperty('width','190px');el.style.setProperty('height','240px')}catch(e){}
   el.innerHTML='';el.appendChild(cv);const id=++pvId;(function lp(){if(id!==pvId||!el.isConnected)return;pg.rotation.y+=.02;PRr.render(PRs,PRc);requestAnimationFrame(lp)})()}}
+/* ---- ban screen + account reset stamp ---- */
+const BAN={on:0,el:null};
+function showBan(){BAN.on=1;try{localStorage.setItem('szban','1')}catch(e){}
+ if(!BAN.el){const el=document.createElement('div');el.style.cssText='position:fixed;left:0;top:0;right:0;bottom:0;z-index:100000;background:#0a0405;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;font-family:sans-serif;padding:20px';
+  el.innerHTML='<div style="font:900 clamp(34px,9vw,72px) sans-serif;letter-spacing:.1em;color:#ff3b30;text-shadow:0 0 24px #ff3b3088">YOU HAVE BEEN BANNED</div><div style="font:600 clamp(14px,3.4vw,20px) sans-serif;max-width:560px;opacity:.85">This account has been banned from STRIKEZONE. If you think this is a mistake, contact the owner.</div><button id="banR" type="button" style="min-width:0;padding:12px 26px;font:900 14px sans-serif;margin-top:8px">CHECK AGAIN</button><div id="banM" style="font:13px sans-serif;opacity:.7"></div>';
+  document.body.appendChild(el);BAN.el=el;$('banR').onclick=async()=>{$('banM').textContent='Checking...';try{await acPull(false)}catch(e){}$('banM').textContent=BAN.on?'Still banned.':''}}
+ BAN.el.style.display='flex';try{document.exitPointerLock()}catch(e){}}
+function hideBan(){BAN.on=0;try{localStorage.removeItem('szban')}catch(e){}if(BAN.el)BAN.el.style.display='none'}
+let RSTW=0;
+try{const _si=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(RSTW&&k==='szsave')return;return _si.apply(this,arguments)}}catch(e){}
+{const _a=acall;acall=async function(method,path,body,keep){
+  if(path==='/api/save'&&method==='PUT'&&body){let rs='';try{rs=localStorage.getItem('szrst')||''}catch(e){}body=Object.assign({},body,{rst:rs})}
+  const r=await _a.call(this,method,path,body,keep);
+  try{
+   if(r.status===403&&r.j&&r.j.banned)showBan();
+   else if(r.ok&&BAN.on&&(path==='/api/save'||path==='/api/login'))hideBan();
+   if(path==='/api/save'&&r.j&&r.j.rst&&(r.status===409||(r.ok&&method==='GET'))){const st=String(r.j.rst);let c='';try{c=localStorage.getItem('szrst')||''}catch(e){}
+    if(st!==c&&!RSTW){RSTW=1;try{localStorage.setItem('szrst',st);localStorage.removeItem('szsave')}catch(e){}setTimeout(()=>location.reload(),150)}}
+  }catch(e){}
+  return r}}
+try{if(localStorage.getItem('szban')==='1'){if(AX.tok)showBan();else localStorage.removeItem('szban')}}catch(e){}
+/* ---- admin: players list with ban / unban / reset ---- */
+const PLO=document.createElement('div');PLO.style.cssText='position:fixed;left:0;top:0;right:0;bottom:0;z-index:140;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;font-family:sans-serif;color:#fff';
+PLO.innerHTML='<div style="width:min(520px,96vw);max-height:92vh;overflow:auto;background:#10151b;border:1px solid #4a5568;border-radius:14px;padding:12px 14px 16px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><b style="font:900 16px sans-serif;letter-spacing:.1em;color:#ff6a1a;flex:1">PLAYERS (ADMIN)</b><button id="plx" type="button" style="min-width:0;margin:0;padding:8px 16px">CLOSE</button></div><input id="plq" placeholder="Search a username (blank = top players)" style="width:100%;box-sizing:border-box;padding:10px;border-radius:8px;border:1px solid #4a5038;background:#12161a;color:#fff;font-size:15px"><div id="plm" style="font:13px sans-serif;opacity:.8;margin:8px 0;min-height:16px"></div><div id="pll"></div></div>';
+document.body.appendChild(PLO);let plT=0;
+async function plLoad(){const q=($('plq').value||'').trim().toLowerCase();$('plm').textContent='Loading...';const r=await acall('GET','/api/admin/users?q='+encodeURIComponent(q));
+ if(!r.ok){$('plm').textContent=r.error||'Could not load.';return}$('plm').textContent=r.j.users.length?'':'No players found.';const L=$('pll');L.innerHTML='';
+ r.j.users.forEach(u=>{const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid #222a33';
+  const nm=document.createElement('div');nm.style.cssText='flex:1;min-width:0;font:800 14px sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'+(u.b?'color:#ff5a4a':'');nm.textContent=u.n+(u.b?'  [BANNED]':'');
+  const pt=document.createElement('div');pt.style.cssText='font:12px sans-serif;opacity:.7';pt.textContent=(u.p|0).toLocaleString();
+  const bb=document.createElement('button');bb.type='button';bb.textContent=u.b?'UNBAN':'BAN';bb.style.cssText='min-width:0;margin:0;padding:8px 10px;font:900 12px sans-serif;border-color:'+(u.b?'#35ff6a':'#ff5a4a');
+  bb.onclick=async()=>{bb.disabled=true;const x=await acall('POST','/api/admin/ban',{user:u.n,banned:!u.b});$('plm').textContent=x.ok?(u.b?u.n+' unbanned.':u.n+' banned. They are hidden from the leaderboard.'):(x.error||'Failed.');plLoad.keep=$('plm').textContent;await plLoad();if(plLoad.keep)$('plm').textContent=plLoad.keep};
+  const rb=document.createElement('button');rb.type='button';rb.textContent='RESET';rb.style.cssText='min-width:0;margin:0;padding:8px 10px;font:900 12px sans-serif;border-color:#ffd400';let armed=0,at=0;
+  rb.onclick=async()=>{if(!armed){armed=1;rb.textContent='SURE?';at=setTimeout(()=>{armed=0;rb.textContent='RESET'},4000);return}clearTimeout(at);rb.disabled=true;const x=await acall('POST','/api/admin/reset',{user:u.n});plLoad.keep=x.ok?u.n+"'s account was reset.":(x.error||'Failed.');await plLoad();$('plm').textContent=plLoad.keep};
+  row.append(nm,pt,bb,rb);L.appendChild(row)})}
+function plOpen(){if(!AX.admin)return;PLO.style.display='flex';try{document.exitPointerLock()}catch(e){}plLoad()}
+$('plx').onclick=()=>{PLO.style.display='none'};$('plq').oninput=()=>{clearTimeout(plT);plT=setTimeout(plLoad,350)};
+['mousedown','mouseup','touchstart','touchend','keydown'].forEach(ev=>PLO.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+try{$('bAdm').insertAdjacentHTML('beforeend','<button id="bPly" style="border-color:#ff5a4a">PLAYERS: BAN / RESET (ADMIN)</button><br>');$('bPly').onclick=plOpen}catch(e){}
+window.__ply={plOpen,PLO,showBan,hideBan,BAN};
 })();
 
 applyGfx();requestAnimationFrame(frame);
