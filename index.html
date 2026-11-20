@@ -3485,7 +3485,7 @@ window.__melee={MAN,CDS,CDM,manPose,manStart,abTry,smashHit,DSH,SLK,dashStart};
 
 /* ===== V83: rival-style movement: slide in any direction and curve it, smoother handling ===== */
 slideStep=function(dt,sprint,ck){if(sprint)SL.lsp=performance.now();const edge=ck&&!SL.ck;SL.ck=ck;SL.cool=Math.max(0,SL.cool-dt);
- if(SL.t<=0&&edge&&P.ground&&SL.cool<=0&&!DSH.on&&performance.now()-(SL.lsp||0)<450){const sp=Math.hypot(P.vx,P.vz);
+ if(SL.t<=0&&edge&&P.ground&&SL.cool<=0&&!DSH.on&&(performance.now()-(SL.lsp||0)<450||keys.ShiftLeft||TJ.m>.92)){const sp=Math.hypot(P.vx,P.vz);
   if(sp>4.2){SL.t=SL.dur;SL.el=0;SL.v0=SL.sp?Math.max(13.5,sp*1.65):Math.max(10.5,sp*1.9);SL.dx=P.vx/sp;SL.dz=P.vz/sp;SL.cv=0;SL.py=P.yaw;
    const rx=Math.cos(P.yaw),rz=-Math.sin(P.yaw),fx=-Math.sin(P.yaw),fz=-Math.cos(P.yaw),lat=SL.dx*rx+SL.dz*rz,fw=SL.dx*fx+SL.dz*fz;
    SL.bk=fw<-.25?-1:1;SL.side=Math.abs(lat)>.3?(lat>0?-1:1):(Math.random()<.5?-1:1);snd(240,.4,'sawtooth',.1)}}
