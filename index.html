@@ -707,7 +707,7 @@ function kbuild(cx,cz,nx,nz,fl,st,door,ruin){fl=ruin?1:fl;const S=4,W_=nx*S,D=nz
  Object.keys(L).forEach(n=>KI(n,L[n],4));K('pallet',cx,cz,0,{solid:false});K('detail-dumpster-closed',x0+1.5,z0+1.5,0,{})}
 /* ===== v0.12: PvE modes, XP/levels, more weapons, combat polish ===== */
 SV.lvl=SV.lvl||1;SV.xp=SV.xp||0;SV.pts=SV.pts||0;SV.camp=SV.camp||{};SV.surv=SV.surv||0;
-const xpNeed=l=>{const k=((Math.max(1,l|0)-1)%100)+1;return Math.round(120+2380*Math.pow((k-1)/99,2))};
+const xpNeed=l=>{l=Math.max(1,l|0);const k=((l-1)%100)+1;return Math.round((120+2380*Math.pow((k-1)/99,2))*Math.min(2.5,Math.pow(1.006,l-1)))};
 function giveXP(n){n=Math.round(n);if(!(n>0))return;SV.xp+=n;let up=0;while(SV.xp>=xpNeed(SV.lvl)){SV.xp-=xpNeed(SV.lvl);SV.lvl++;SV.coins+=100;up++}if(up)toast('LEVEL UP! LEVEL '+SV.lvl+'  +'+(100*up)+' COINS');sv();updProg()}
 function updProg(){const e=$('prog');if(!e)return;const need=xpNeed(SV.lvl);e.innerHTML='<div class="pl">LEVEL <b>'+SV.lvl+'</b></div><div class="pb"><i style="width:'+Math.min(100,SV.xp/need*100)+'%"></i></div><div class="pt">XP '+SV.xp+' / '+need+' \u00b7 POINTS '+SV.pts+' \u00b7 COINS '+SV.coins+'</div>'}
 setInterval(updProg,1000);updProg();
