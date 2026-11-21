@@ -3855,7 +3855,7 @@ window.__v99in=function(down,code,mouse,e){
  else if(aim&&GL.on)glRelease()};
 /* ---------- 5. frag grenade launch ---------- */
 const GL={on:0,t:0,fly:0,ft:0,cd:0,h:null,cur:-1,vy:0,hx:0,hz:0,a0:0,safe:0,dots:null,cone:null,hud:null,lx:0,lz:0,lt:0,sp:1};
-const GLT=3,GLCD=10,GLSP=14;
+const GLT=3,GLCD=10,GLSP=22;
 function glMetro(){try{return(typeof curMap!=='undefined'?curMap:SV.map)==='metro'}catch(e){return false}}
 function glHud(txt){try{if(!GL.hud){const d=document.createElement('div');d.style.cssText='position:fixed;left:50%;bottom:150px;transform:translateX(-50%);z-index:60;pointer-events:none;font:900 15px sans-serif;letter-spacing:.12em;color:#ffb020;text-shadow:0 2px 0 #000,0 0 10px #000;display:none;text-align:center;white-space:nowrap';document.body.appendChild(d);GL.hud=d}
  GL.hud.style.display=txt?'block':'none';if(txt&&GL.hud.textContent!==txt)GL.hud.textContent=txt}catch(e){}}
@@ -3884,7 +3884,7 @@ function glRelease(){if(!GL.on)return;const early=GL.t<GLT;GL.on=0;glShow(false)
  const m=new THREE.Mesh(GRG,GRM),p=glPos(Math.min(GL.t,GLT*.6));p.y=P.y+.35;m.position.copy(p);sc.add(m);cd=Math.max(cd,.6);
  NADES.push({m,k:'gr',v:new V3(0,0,0),t:.18});snd(300,.1,'square',.15);
  if(MP.on)mpSend({t:'nd',k:'gr',x:p.x,y:p.y,z:p.z,vx:0,vy:0,vz:0})}
-function glLaunch(){GL.on=0;glShow(false);glHud('');glUse();GL.fly=1;GL.ft=0;GL.cd=GLCD;GL.vy=10.5;
+function glLaunch(){GL.on=0;glShow(false);glHud('');glUse();GL.fly=1;GL.ft=0;GL.cd=GLCD;GL.vy=15;
  GL.hx=-GL.h.x;GL.hz=-GL.h.z;GL.a0=Math.atan2(GL.hz,GL.hx);GL.lx=P.x;GL.lz=P.z;GL.lt=0;GL.sp=1;GL.safe=2;
  DSH.on=true;P.ground=false;snd(160,.35,'sawtooth',.2);snd(520,.15,'triangle',.12);try{shk=Math.min(.06,shk+.03)}catch(e){}
  try{spark(new V3(P.x,P.y+.1,P.z),0xffaa33)}catch(e){}}
@@ -3903,7 +3903,7 @@ function glFly(dt){if(!P.alive||dt<=0){glEnd(0);return}
  /* a wall stopped us? */
  GL.lt+=dt;if(GL.lt>=.25){if(Math.hypot(P.x-GL.lx,P.z-GL.lz)<.9)GL.sp=0;GL.lx=P.x;GL.lz=P.z;GL.lt=0}
  GL.vy=Math.max(-13,GL.vy-22*dt);
- const k=Math.min(1,GL.ft/1.1),sp=GLSP*(1-.25*k)*GL.sp;let vx=GL.hx*sp,vz=GL.hz*sp;
+ const k=Math.min(1,GL.ft/1.4),sp=GLSP*(1-.15*k)*GL.sp;let vx=GL.hx*sp,vz=GL.hz*sp;
  const L=dashLim();if(L[0]!=null){if((P.x+vx*dt>L[0]&&vx>0)||(P.x+vx*dt<-L[0]&&vx<0))vx=0;if((P.z+vz*dt>L[1]&&vz>0)||(P.z+vz*dt<-L[1]&&vz<0))vz=0}
  let vy=GL.vy;if(P.y>24&&vy>0)vy=GL.vy=0;
  P.vx=vx;P.vz=vz;P.vy=vy;P.ground=false;DSH.on=true;GL.safe=Math.max(GL.safe,.8);
