@@ -4145,7 +4145,7 @@ kCmdBtn.onclick=rcOpen;$('rcx').onclick=rcClose;
 addEventListener('keydown',e=>{if(state==='play'&&e.code==='Slash'&&rcp.style.display==='none'&&cp.style.display==='none'&&!AX.admin){const r=KX.role_();if(r==='tester'||r==='dev'){e.preventDefault();rcOpen()}}else if(e.code==='Escape'&&rcp.style.display!=='none')rcClose()});
 /* god mode stops while the panel is up, like the normal command center */
 setInterval(()=>{try{const r=KX.role_(),ro=(r==='tester'||r==='dev'),ok=ro||r==='admin';kTB.style.display=ok&&!MP.on?'':'none';if(kTB.br)kTB.br.style.display=kTB.style.display;
- kCmdBtn.style.display=(ro&&state==='play'&&!RANGE)?'':'none';
+ if(!TOUCH)kCmdBtn.style.display=(ro&&state==='play'&&!RANGE)?'':'none';
  if(!ro&&rcp.style.display!=='none'){rcp.style.display='none'}
  if(rcp.style.display!=='none'&&state==='play'){P.prot=Math.max(P.prot,1)}}catch(e){}},300);
 /* ===== admin power panel (the admin account only) ===== */
@@ -4186,14 +4186,27 @@ function apBuild(){const b=$('apb');b.innerHTML='<b style="color:#ffd400">ON THE
 KX.AP_N=AP_PLAYER.length+AP_ROOM.length;
 function apOpen(){if(state!=='play'||!AX.admin)return;apBuild();if(!KX.sel.size){KX.sel.add(MP.on?MP.id:-9)}apWho();ap.style.display='block';mb[0]=mb[2]=0;keys.Space=0;TJ.x=TJ.y=TJ.m=0;keys.ShiftLeft=0;try{document.exitPointerLock()}catch(e){}}
 function apClose(){ap.style.display='none';$('apt').blur();if(!TOUCH)try{lock()}catch(e){}}
-apBtn.onclick=apOpen;$('apx').onclick=apClose;$('apt').addEventListener('keydown',e=>e.stopPropagation());
+apBtn.onclick=apOpen;apBtn.textContent=TOUCH?'ADMIN+':'ADMIN+  \\';
+/* hotkey: backslash (the key above Enter) opens ADMIN+, admin accounts only; a button inside the / command center does the same */
+addEventListener('keydown',e=>{if(e.code==='Backslash'&&AX.admin&&state==='play'&&!e.repeat){const t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;e.preventDefault();ap.style.display==='none'?apOpen():apClose()}});
+try{const b=document.createElement('button');b.textContent='ADMIN+ POWERS  (key \\)';b.style.cssText='min-width:0;padding:8px 10px;margin:0 0 6px;font-size:12px;letter-spacing:.05em;border-color:#ff2a2a;color:#ff6a6a;display:none';b.onclick=()=>{try{closeCmd()}catch(e){}apOpen()};cp.insertBefore(b,$('cpb'));KX.apInCp=b;setInterval(()=>{b.style.display=AX.admin?'':'none'},400)}catch(e){}
+$('apx').onclick=apClose;$('apt').addEventListener('keydown',e=>e.stopPropagation());
 addEventListener('keydown',e=>{if(e.code==='Escape'&&ap.style.display!=='none')apClose()});
-setInterval(()=>{try{apBtn.style.display=(AX.admin&&state==='play')?'':'none';if(!AX.admin&&ap.style.display!=='none')ap.style.display='none';if(ap.style.display!=='none'&&state==='play')P.prot=Math.max(P.prot,1)}catch(e){}},300);
+setInterval(()=>{try{if(!TOUCH)apBtn.style.display=(AX.admin&&state==='play')?'':'none';if(!AX.admin&&ap.style.display!=='none')ap.style.display='none';if(ap.style.display!=='none'&&state==='play')P.prot=Math.max(P.prot,1)}catch(e){}},300);
 
 /* the test server shows in the ONLINE list as one line (no watch button) */
 {const _o=onRender;onRender=function(){_o.apply(this,arguments);try{const d=ON.d;if(!ON.open||!d||!(d.test>0))return;const box=$('oni'),row=document.createElement('div');row.className='onr';const b=document.createElement('b');b.textContent='TEST SERVER';const sm=document.createElement('small');sm.textContent=d.test+' player'+(d.test>1?'s':'')+' · testers and developers only';row.append(b,sm);box.appendChild(row)}catch(e){}}}
 
 Object.assign(KX,{apply:kApply,clear:kClear,snap:kSnap,restore:kRestore,build:apBuild,tick:kTick,rcOpen,apOpen,ap,rcp});
+/* touchscreens: real round buttons up by the pause button, wired into the touch controls; panels swallow their own touches so every button inside them can be tapped */
+if(TOUCH){try{
+ const st=document.createElement('style');st.textContent='#apbtn,#rcbtn{width:44px!important;height:44px!important;left:auto!important;right:56px!important;top:4px!important;padding:0!important;border-radius:50%!important;display:none;align-items:center;justify-content:center;font-size:9px!important;z-index:40!important;position:fixed!important;letter-spacing:.02em!important;line-height:1.1;text-align:center}';document.head.appendChild(st);
+ apBtn.classList.add('tb');kCmdBtn.classList.add('tb');kCmdBtn.textContent='CMD';apBtn.textContent='ADMIN+';
+ document.body.appendChild(apBtn);document.body.appendChild(kCmdBtn);
+ TB.apbtn=[()=>{ap.style.display==='none'?apOpen():apClose()},null];TB.rcbtn=[()=>{rcp.style.display==='none'?rcOpen():rcClose()},null];
+ [ap,rcp].forEach(el=>['touchstart','touchmove','touchend'].forEach(ev=>el.addEventListener(ev,e=>e.stopPropagation(),{passive:true})));
+ setInterval(()=>{apBtn.style.display=(AX.admin&&state==='play')?'flex':'none';kCmdBtn.style.display=(!AX.admin&&(KX.role_()==='tester'||KX.role_()==='dev')&&state==='play'&&!RANGE)?'flex':'none'},300);
+}catch(e){console.log('touch btn',e)}}
 })();
 
 applyGfx();requestAnimationFrame(frame);
