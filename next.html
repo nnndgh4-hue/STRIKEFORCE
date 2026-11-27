@@ -247,7 +247,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
    if(P.hp<100&&false)P.hp=100;
   }else{P.resp-=dt;deadUI();if(P.resp<=0)spawnP()}
   bots.forEach(b=>updBot(b,dt));
-  if(TK[0]>=50||TK[1]>=50||mt<=0)end();
+  if((!(window.CTFM&&CTFM())&&(TK[0]>=50||TK[1]>=50))||mt<=0)end();
  }
  const w=W[cur],eye=P.y+(P.alive?1.7-P.crouch*.5-SL.k*.26:.4);const sw=Math.sin(bob)*.03*(S.gfx==='low'?0:1);
  cam.position.set(P.x,eye+Math.abs(sw),P.z);rk=Math.max(0,rk);const r=Math.min(rk,dt*.08);rk-=r;P.pitch-=r;
@@ -1684,7 +1684,7 @@ function mpTick(dt){
  if(state==='menu'||(state==='end'&&!MP.stay)){mpLeave();return}if(state==='end')return;
  if(state!=='play')return;
  const now=performance.now();mt=600-(now-(MP.t0||now))/1000;TK[0]=TK[1]=0;
- if(now-MP.ls>66&&MP.ws&&MP.ws.readyState===1){MP.ls=now;MP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz),w:cur,k:(skId(cur)||''),sl:SL.k>.3?1:0}))}
+ if(now-MP.ls>66&&MP.ws&&MP.ws.readyState===1){MP.ls=now;MP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz),w:cur,h:Math.round(P.hp),k:(skId(cur)||''),sl:SL.k>.3?1:0}))}
  for(const id in MP.pl){const p=MP.pl[id];if(!p.init){p.g.visible=false;continue}
   const k=Math.min(1,dt*14);p.x+=(p.tx-p.x)*k;p.y+=(p.ty-p.y)*k;p.z+=(p.tz-p.z)*k;let dy=p.tyw-p.yw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));p.yw+=dy*k;
   p.mv+=(Math.min(1,(p.sp||0)/4.6)-p.mv)*Math.min(1,dt*8);p.ph+=dt*7*p.mv*((p.sp||0)>6?1.5:1);
@@ -3268,7 +3268,7 @@ window.__soc={onPoll,ON,pqRender,onRender,mpSpec,swClean,specLock};
 
 /* ===== V81: spectating (online PvP and online waves) ===== */
 const SP={id:null,pt:0,yw:0,x:0,y:0,z:0,last:null};
-{const _m=mpMsg;mpMsg=function(m){if(m&&m.t==='s'){const p=MP.pl[m.i];if(p&&typeof m.pt==='number')p.pt=m.pt}return _m(m)}}
+{const _m=mpMsg;mpMsg=function(m){if(m&&m.t==='s'){const p=MP.pl[m.i];if(p&&typeof m.pt==='number')p.pt=m.pt;if(p&&typeof m.w==='number')p.wi=m.w;if(p&&typeof m.h==='number')p.hp=m.h}return _m(m)}}
 function spOn(){return !!(window.MP&&MP.on&&(MP.pvp||MP.co||MP.spec)&&state==='play'&&!P.alive&&P.resp>1e6)}
 function spList(){const all=[];for(const id in MP.pl){const p=MP.pl[id];if(p&&p.al&&p.init&&!p.rag)all.push(p)}
  if(MP.pvp&&!MP.spec){const mine=all.filter(p=>p.tm===MP.my);if(mine.length)return mine.sort((a,b)=>a.id-b.id)}
@@ -3280,13 +3280,13 @@ spBar.style.cssText='position:absolute;left:50%;bottom:20px;transform:translateX
 const spBtn=t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.style.cssText='min-width:0;width:54px;height:46px;margin:0;padding:0;font:900 24px sans-serif;border-radius:12px;border:2px solid #ffd400;background:rgba(10,12,8,.85);color:#ffd400;cursor:pointer;touch-action:manipulation';return b};
 const spL=spBtn('\u25C0'),spR=spBtn('\u25B6'),spBub=document.createElement('div');
 spBub.style.cssText='min-width:150px;max-width:56vw;text-align:center;padding:5px 18px 7px;border:2px solid #ffd400;border-radius:24px;background:rgba(10,12,8,.85)';
-spBub.innerHTML='<div style="font:700 10px sans-serif;letter-spacing:.2em;opacity:.7">SPECTATING</div><div id="spn" style="font:900 17px sans-serif;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>';
+spBub.innerHTML='<div style="font:700 10px sans-serif;letter-spacing:.2em;opacity:.7">SPECTATING</div><div id="spn" style="font:900 17px sans-serif;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div><div style="margin-top:4px;height:10px;border-radius:6px;background:#1a2430;border:1px solid #000;overflow:hidden"><i id="sphb" style="display:block;height:100%;width:0;background:#4caf50;transition:width .15s"></i></div><div id="sphw" style="font:800 11px sans-serif;letter-spacing:.08em;margin-top:3px;opacity:.9"></div>';
 spBar.appendChild(spL);spBar.appendChild(spBub);spBar.appendChild(spR);
 $('hud').appendChild(spBar);
 const spB=[spL,spR];
 spL.onclick=()=>spStep(-1);spR.onclick=()=>spStep(1);
 ['mousedown','mouseup','touchstart','touchend'].forEach(ev=>spBar.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
-function spUI(){const on=spOn();spBar.style.display=on?'flex':'none';if(!on)return;const t=spTarget();$('spn').textContent=t?String(t.n||'PLAYER').toUpperCase():'NO ONE TO WATCH';spB.forEach(b=>{b.style.opacity=spList().length>1?1:.35})}
+function spUI(){const on=spOn();spBar.style.display=on?'flex':'none';if(!on)return;const t=spTarget();$('spn').textContent=t?String(t.n||'PLAYER').toUpperCase():'NO ONE TO WATCH';try{const mx=(window.MP&&MP.pvp)?500:100,hh=t&&typeof t.hp==='number'?Math.max(0,Math.min(1,t.hp/mx)):-1,hb=$('sphb');hb.parentNode.style.display=hh<0?'none':'block';if(hh>=0){hb.style.width=(hh*100)+'%';hb.style.background=hh>.5?'#4caf50':hh>.25?'#e0a020':'#d03030'}const wn=t&&typeof t.wi==='number'&&W[t.wi]?W[t.wi].n:'';$('sphw').textContent=(hh>=0?Math.ceil(t.hp)+' HP':'')+(wn?(hh>=0?'  \u00B7  ':'')+String(wn).toUpperCase():'')}catch(e){}spB.forEach(b=>{b.style.opacity=spList().length>1?1:.35})}
 setInterval(()=>{try{spUI()}catch(e){}},200);
 addEventListener('keydown',e=>{if(!spOn())return;const t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;if(e.code==='ArrowLeft'){e.preventDefault();spStep(-1)}else if(e.code==='ArrowRight'){e.preventDefault();spStep(1)}});
 addEventListener('mousedown',e=>{if(!spOn()||document.pointerLockElement!==R.domElement)return;if(e.button===0)spStep(1);else if(e.button===2)spStep(-1)});
@@ -3732,7 +3732,7 @@ setInterval(()=>{try{
  if(!RP.ws){if(now>=RP.next)rpOpen();return}
  if(!RP.ok||RP.ws.readyState!==1)return;
  if(now-RP.pg>10000){RP.pg=now;RP.ws.send('{"t":"ping"}')}
- if(now-RP.ls>=83){RP.ls=now;RP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz),w:cur,k:(skId(cur)||''),sl:SL.k>.3?1:0}))}
+ if(now-RP.ls>=83){RP.ls=now;RP.ws.send(JSON.stringify({t:'s',x:P.x,y:P.y,z:P.z,yw:P.yaw,pt:P.pitch,a:P.alive?1:0,c:P.crouch>.5?1:0,v:Math.hypot(P.vx,P.vz),w:cur,h:Math.round(P.hp),k:(skId(cur)||''),sl:SL.k>.3?1:0}))}
 }catch(e){}},50);
 {const _s=shoot;let lf=0;shoot=function(o,dir,w){try{if(RP.ok&&RP.ws&&RP.ws.readyState===1&&o===cam.position){const n=performance.now();if(n-lf>70){lf=n;RP.ws.send(JSON.stringify({t:'fx',w:cur}))}}}catch(e){}return _s.apply(this,arguments)}}
 window.__rp=RP;
@@ -4563,7 +4563,7 @@ DS.today=()=>{const k=DS.key(),R=mul(skHash('ds1'+k)),out={key:k,sk:[],wp:[],tx:
  const cand=SHOPW().filter(i=>WI[i]&&WI[i].p>=900&&W[i]),offs=pickN([30,40,50],3,R);
  pickN(cand,3,R).forEach((i,j)=>{const off=offs[j]||30,p0=WI[i].p;out.wp.push({i,off,p0,p1:Math.max(50,Math.round(p0*(100-off)/100/10)*10)})});
  pickN(TFXL,3,R).forEach(id=>out.tx.push({id,p:TFX[id].p}));
- const tt=pickN(TITLES,2,R);tt.forEach((t,j)=>out.ti.push({n:t[0],usd:t[1],sale:j===0?50:0}));
+ const tt=pickN(TITLES.filter(t=>t[0]!=='SUGGESTER'),1,R);tt.forEach(t=>out.ti.push({n:t[0],usd:t[1],sale:R()<.5?50:0}));const sg=TITLES.find(t=>t[0]==='SUGGESTER');out.ti.push({n:sg[0],usd:sg[1],sale:0,fixed:1});
  return out};
 const own=()=>{SV.own=SV.own||{};SV.own.skin=SV.own.skin||{};SV.own.wp=SV.own.wp||{};SV.own.tfx=SV.own.tfx||{};SV.eq=SV.eq||{};return SV.own};
 const fmt=n=>Number(n).toLocaleString('en-US');
@@ -4594,10 +4594,10 @@ function dsPanel(){const T=DS.today(),o=own();
  h+=`</div>`;
  const mine=TFXL.filter(id=>o.tfx[id]);
  if(mine.length){h+=`<b>MY NAME TAG EFFECTS</b><div style='display:flex;flex-wrap:wrap;gap:12px;margin:12px 0'>`;mine.forEach(id=>{const on=SV.eq.tfx===id;h+=card(`<div class='dsp' data-fx='${id}' style='min-height:54px'></div><div style='font:800 13px sans-serif'>${TFX[id].n}</div><button onclick='DSB("eq","${id}")' style='width:100%;margin:6px 0 0;${on?'border-color:#ffd400':''}'>${on?'EQUIPPED ✓':'EQUIP'}</button>`,on?'#ffd400':'#34414d')});h+=`</div>`}
- h+=`<b>TITLES</b><div style='font:600 12px sans-serif;opacity:.8'>Just for show: a title next to your name. These cost real money. Tap one to see how to get it.</div><div style='display:flex;flex-wrap:wrap;gap:12px;margin:12px 0'>`;
+ h+=`<style>@keyframes sgGlow{from{box-shadow:0 0 8px #c06bff88,0 0 18px #c06bff44}to{box-shadow:0 0 18px #c06bff,0 0 38px #c06bffaa,inset 0 0 14px #c06bff44}}</style><b>TITLES</b><div style='font:600 12px sans-serif;opacity:.8'>Just for show: a title next to your name. These cost real money. Tap one to see how to get it.</div><div style='display:flex;flex-wrap:wrap;gap:12px;margin:12px 0;justify-content:space-between;max-width:460px'>`;
  const mt=(typeof TIT!=='undefined'&&AX.user&&TIT[String(AX.user).toLowerCase()])||null;
  T.ti.forEach(x=>{const have=mt&&String(mt[0]).toUpperCase()===x.n,usd=x.usd*(x.sale?(100-x.sale)/100:1);
-  h+=card(`${tag(have?'OWNED':(x.sale?x.sale+'% OFF · NEW':'NEW'),have?'#4ade80':'#ffd400')}<div style='margin:10px 0 6px;display:inline-block;padding:6px 18px;border-radius:999px;background:#ffd400;color:#000;font:900 18px sans-serif;letter-spacing:.08em'>${x.n}</div><div style='font:800 14px sans-serif'>${x.sale?'<s style="opacity:.6">$'+x.usd.toFixed(2)+'</s> ':''}<b style='color:#7dff9a'>$${usd.toFixed(2)}</b> <small>REAL MONEY</small></div><button ${have?'disabled':''} onclick='DSB("ti","${x.n}")' style='width:100%;margin:6px 0 0'>${have?'OWNED':'HOW TO BUY'}</button>`,'#ffd400')});
+  const cd=card(`${x.fixed?(have?tag('OWNED','#4ade80'):'<div style="height:22px"></div>'):tag(have?'OWNED':(x.sale?x.sale+'% OFF · NEW':'NEW'),have?'#4ade80':'#ffd400')}<div style='margin:10px 0 6px;display:inline-block;padding:6px 18px;border-radius:999px;background:#ffd400;color:#000;font:900 18px sans-serif;letter-spacing:.08em'>${x.n}</div><div style='font:800 14px sans-serif'>${x.sale?'<s style="opacity:.6">$'+x.usd.toFixed(2)+'</s> ':''}<b style='color:#7dff9a'>$${usd.toFixed(2)}</b> <small>REAL MONEY</small></div><button ${have?'disabled':''} onclick='DSB("ti","${x.n}")' style='width:100%;margin:6px 0 0'>${have?'OWNED':'HOW TO BUY'}</button>`,x.fixed?'#c06bff':'#ffd400');h+=x.fixed?cd.replace('border-radius:14px','border-radius:14px;animation:sgGlow 1.8s ease-in-out infinite alternate;background:linear-gradient(160deg,#1a1030,#0d1217)'):cd});
  h+=`</div><small>Items you own can never be bought again, even if they come back on another day.</small>`;
  return h}
 function dsFill(){const p=$('panel');p.querySelectorAll('.dsp').forEach(e=>{if(e.firstChild)return;const c=window.tfxPreview(e.dataset.fx,AX.user||'YOU',0,190);e.appendChild(c)})}
@@ -5014,6 +5014,7 @@ $('ctfB').onclick=()=>{eSel.style.display='none';mpJoin(0,{ctf:1})};$('ctfR').on
 const bCtf=document.createElement('button');bCtf.id='bCtf';bCtf.textContent='CAPTURE THE FLAG';bCtf.style.cssText='display:none';document.body.appendChild(bCtf);
 bCtf.onclick=()=>{eSel.style.display='flex'};
 window.CTFRF=(x,z)=>CTF.map?ctfH(x,z)+.07:.07;
+window.CTFM=()=>!!CTF.map;
 window.__ctf={CTF,WTR,LDR,ctfH,ctfHost,ctfApply,ctfSnap,ctfBotThink};
 /* ===== V111: new home page. A layer on top of the old menu: every button here presses the real old button or opens the real old panel, so shop, skins, cases, keybinds, daily rewards, accounts, online and admin tools all stay exactly as they were. ===== */
 {
