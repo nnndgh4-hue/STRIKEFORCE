@@ -5849,8 +5849,11 @@ function crBtShow(){if(!crBt){crBt=document.createElement('div');crBt.id='crbt';
 /* ---- capture the flag: coins, XP and points at the end of a match, and no white box round the muzzle flash ---- */
 {const _e=ctfEnd;ctfEnd=function(s){_e(s);try{const k=P.k|0,win=(s.w>=0&&s.w===MP.my)?1:0,earn=k*10+(win?100:0);SV.coins+=earn;giveXP((win?100:0)+k*5);SV.pts+=k*100;SV.st.k+=k;SV.st.d+=(P.d|0);SV.st.m++;if(win)SV.st.w++;P.k=0;P.d=0;sv();eEnd.insertAdjacentHTML('afterbegin','<div style="font:800 16px sans-serif;color:#ffd400">+'+earn+' COINS · +'+((win?100:0)+k*5)+' XP · +'+(k*100)+' POINTS</div>')}catch(e){console.log('ctfpay',e)}}}
 {const _i=mfInit;mfInit=function(){_i.apply(this,arguments);try{if(MFS&&!MFS.__h){MFS.__h=1;Object.defineProperty(MFS,'visible',{get:()=>false,set(){}})}}catch(e){}}}
-/* ---- build label: so you can always see which copy of the game is running ---- */
-try{const bl=document.createElement('div');bl.id='bldlab';bl.textContent='UPDATE 9 · BUILD 129';bl.style.cssText='position:fixed;left:6px;bottom:4px;z-index:9999;font:800 10px sans-serif;letter-spacing:.1em;color:#ffffffaa;background:#000a;padding:2px 6px;border-radius:4px;pointer-events:none';document.body.appendChild(bl)}catch(e){}
+/* ---- build label: shows which copy is running, whether the server is the new one, and any error ---- */
+try{const bl=document.createElement('div');bl.id='bldlab';bl.style.cssText='position:fixed;left:6px;bottom:4px;z-index:9999;font:800 10px sans-serif;letter-spacing:.08em;color:#fffc;background:#000b;padding:2px 6px;border-radius:4px;pointer-events:none;max-width:92vw';document.body.appendChild(bl);
+ let sv0='SERVER: checking',er='';const up=()=>{bl.innerHTML='UPDATE 9 · BUILD 130 · '+sv0+(er?'<br><span style="color:#ff8a8a">ERROR: '+er+'</span>':'')};up();
+ addEventListener('error',e=>{if(!er){er=String(e.message||'').slice(0,90);up()}});addEventListener('unhandledrejection',e=>{});
+ const chk=async()=>{try{const r=await acall('GET','/api/rank/top');sv0=(r&&r.ok&&r.j)?'SERVER: NEW ✓':(r&&r.j?'SERVER: OLD (upload server.js + redeploy)':'SERVER: NOT REACHABLE (waking up? wait 1 min)')}catch(e){sv0='SERVER: NOT REACHABLE'}up()};setTimeout(chk,2500);setInterval(chk,60000)}catch(e){}
 /* ===== V111: new home page. A layer on top of the old menu: every button here presses the real old button or opens the real old panel, so shop, skins, cases, keybinds, daily rewards, accounts, online and admin tools all stay exactly as they were. ===== */
 {
 const NHM=['arena','dock','metro','neon','frost','outpost'];
@@ -6068,6 +6071,21 @@ setInterval(()=>{try{if(!menuUp())return;nlv();
 let fi=0,auto=true;setInterval(()=>{try{if(auto&&menuUp()&&S.page==='home'&&!panelUp()){fi=(fi+1)%6;feedShow(NHM[fi])}}catch(e){}},9000);
 feedShow(mkey());render();
 window.__nh={go,render,S,feedShow,lock:null};
+}
+/* ---------- COMING SOON lock (next.html only): soft lock, staff accounts get in ---------- */
+{
+const LK=document.createElement('div');LK.id='nlock';
+const st=document.createElement('style');st.textContent="#nlock{position:fixed;inset:0;z-index:25;background:radial-gradient(ellipse at 50% 40%,#141b20,#0b0e10 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:inherit;color:#e8ecee;padding:20px}#nlock .t{font-weight:900;font-size:clamp(44px,9vw,104px);line-height:1;letter-spacing:.05em}#nlock .t b{color:#ff6a1a}#nlock .q{color:#9aa4aa;margin:8px 0 26px;font-weight:700;letter-spacing:.08em}#nlock .c{font-weight:900;letter-spacing:.2em;font-size:clamp(18px,3vw,30px);color:#ff6a1a;border:2px solid #ff6a1a;border-radius:999px;padding:12px 30px;box-shadow:0 0 40px rgba(255,106,26,.3)}#nlock .s{margin-top:12px;color:#9aa4aa;font-weight:700}#nlock .l{margin-top:34px;font-weight:900;letter-spacing:.14em;font-size:13px;color:#e8ecee;border:2px solid #3a464d;border-radius:999px;padding:10px 24px;cursor:pointer;background:#10151a}#nlock .l:hover{border-color:#ff6a1a;color:#ff6a1a}#nlock .w{margin-top:10px;font-size:12px;color:#9aa4aa;min-height:16px}body.nhlock #ons,body.nhlock #lbs,body.nhlock #lvrow,body.nhlock #lvstrip{display:none!important}";
+document.head.appendChild(st);
+LK.innerHTML='<div class="t">STRIKE<b>ZONE</b></div><div class="q">The final battle is never the last.</div><div class="c">COMING SOON · UPDATE 9</div><div class="s">A big update is on the way. Check back soon.</div><div class="l" role="button" tabindex="0" id="nlk">STAFF LOG IN</div><div class="w" id="nlw"></div>';
+$('menu').appendChild(LK);document.body.classList.add('nhlock');
+const ok=()=>{try{const r=KX.role_();return r==='admin'||r==='tester'||r==='dev'}catch(e){return false}};
+LK.querySelector('#nlk').onclick=()=>$('bAcct').click();
+let was=true;
+const tick=()=>{const g=ok();if(g&&LK.parentNode){LK.remove();document.body.classList.remove('nhlock')}
+ if(!g&&!LK.parentNode){$('menu').appendChild(LK);document.body.classList.add('nhlock')}
+ LK.querySelector('#nlw').textContent=(!g&&AX.tok)?'Logged in as '+AX.user+' — this account is not on the early-access list.':''};
+setInterval(tick,700);
 }
 })();
 
