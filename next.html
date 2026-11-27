@@ -5849,6 +5849,8 @@ function crBtShow(){if(!crBt){crBt=document.createElement('div');crBt.id='crbt';
 /* ---- capture the flag: coins, XP and points at the end of a match, and no white box round the muzzle flash ---- */
 {const _e=ctfEnd;ctfEnd=function(s){_e(s);try{const k=P.k|0,win=(s.w>=0&&s.w===MP.my)?1:0,earn=k*10+(win?100:0);SV.coins+=earn;giveXP((win?100:0)+k*5);SV.pts+=k*100;SV.st.k+=k;SV.st.d+=(P.d|0);SV.st.m++;if(win)SV.st.w++;P.k=0;P.d=0;sv();eEnd.insertAdjacentHTML('afterbegin','<div style="font:800 16px sans-serif;color:#ffd400">+'+earn+' COINS · +'+((win?100:0)+k*5)+' XP · +'+(k*100)+' POINTS</div>')}catch(e){console.log('ctfpay',e)}}}
 {const _i=mfInit;mfInit=function(){_i.apply(this,arguments);try{if(MFS&&!MFS.__h){MFS.__h=1;Object.defineProperty(MFS,'visible',{get:()=>false,set(){}})}}catch(e){}}}
+/* ---- build label: so you can always see which copy of the game is running ---- */
+try{const bl=document.createElement('div');bl.id='bldlab';bl.textContent='UPDATE 9 · BUILD 129';bl.style.cssText='position:fixed;left:6px;bottom:4px;z-index:9999;font:800 10px sans-serif;letter-spacing:.1em;color:#ffffffaa;background:#000a;padding:2px 6px;border-radius:4px;pointer-events:none';document.body.appendChild(bl)}catch(e){}
 /* ===== V111: new home page. A layer on top of the old menu: every button here presses the real old button or opens the real old panel, so shop, skins, cases, keybinds, daily rewards, accounts, online and admin tools all stay exactly as they were. ===== */
 {
 const NHM=['arena','dock','metro','neon','frost','outpost'];
